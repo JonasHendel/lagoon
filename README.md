@@ -1,5 +1,4 @@
-# Lagoon
-## a lms for schools
+# Lagoon - LMS for Schools
 
 ### [Planning on Milanote](https://app.milanote.com/1LU1RR1i1AEg2Q/lagoon?p=TKSk1cTXmKa)
       
