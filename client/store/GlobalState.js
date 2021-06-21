@@ -1,16 +1,21 @@
-import { createContext, useReducer, useEffect } from 'react';
-import reducers from './Reducers';
+//Npm
+import { createContext, useReducer, useEffect } from 'react'
 
-export const DataContext = createContext();
+//Project files
+import reducers from './Reducers'
+import { getData } from '../utils/fetchData'
 
-export const DataProvider = ({ children }) => {
-	const initialState = { title: {} };
+export const DataContext = createContext()
 
-	const [state, dispatch] = useReducer(reducers, initialState);
+export const DataProvider = ({children}) => {
+  const initialState = {title: {}} 
+   
+  const [state, dispatch] = useReducer(reducers, initialState)
 
-	return (
-		<DataContext.Provider value={{ state, dispatch }}>
-			{children}
-		</DataContext.Provider>
-	);
-};
+  return(
+    <DataContext.Provider value={{state, dispatch}}>
+        {children}
+    </DataContext.Provider>
+  )
+}
+

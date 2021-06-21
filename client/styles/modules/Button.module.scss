@@ -1,0 +1,25 @@
+@import '../colors';
+
+.button {
+	padding: 5px 35px;
+	border-radius: 3px;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.primary {
+	background: lighten($lagoon, 10%);
+	color: darken($lagoon, 50%);
+}
+
+.secondary {
+	background: $black-20;
+	color: $black-70;
+}
+
+.danger {
+	background: $red-30;
+	color: darken($red-100, 30%);
+}

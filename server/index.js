@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const database = require('./config/database');
 const fs = require('fs');
 
@@ -15,6 +16,8 @@ db.once('open', function () {
 db.on('error', function (err) {
 	console.log(err);
 });
+
+app.use(cors());
 
 fs.readdir('./routes/', (err, files) => {
 	if (err) {

@@ -3,7 +3,7 @@ let mongoose = require('mongoose');
 let classSchema = mongoose.Schema({
 	class: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'class',
+		ref: 'Class',
 		required: true,
 	},
 	startTime: {
@@ -20,7 +20,7 @@ let classSchema = mongoose.Schema({
 	},
 	teacher: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'user',
+		ref: 'User',
 		required: true,
 	},
 	eventType: {
@@ -33,4 +33,6 @@ let classSchema = mongoose.Schema({
 	}
 });
 
-module.exports = mongoose.model('Event', classSchema);
+module.exports = mongoose.models.event || mongoose.model('Event', classSchema);
+
+

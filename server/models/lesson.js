@@ -3,7 +3,7 @@ let mongoose = require('mongoose');
 let lessonsSchema = mongoose.Schema({
 	course: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'course',
+		ref: 'Course',
 		required: true,
 	},
 	startTime: {
@@ -27,4 +27,6 @@ let lessonsSchema = mongoose.Schema({
 	},
 });
 
-module.exports = mongoose.model('Lesson', lessonsSchema);
+
+
+module.exports = mongoose.models.lesson || mongoose.model('Lesson', lessonsSchema);
