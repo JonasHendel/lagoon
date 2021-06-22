@@ -35,7 +35,7 @@ const Components = () => {
 				/>
 				<br />
 				<div className={styles.selectWrap}>
-					<Select list={['Week', 'Month', 'Year']} />
+					<Select list={['Week', 'Month', 'Year']} onChange={(selected) => {console.log(selected)}}/>
 				</div>
 			</div>
 		</>
