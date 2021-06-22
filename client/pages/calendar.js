@@ -15,7 +15,14 @@ const Calendar = () => {
 		setLessons(res);
 	}, []);
 
-	let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  let days= []
+
+  for(let i=1; i <= 5; i++){
+    days.push(moment().day(i).format('dd-DD'))
+  }
+
+
+	console.log(days)
 
 	const timeToPosition = (time) => {
 		switch (time) {
@@ -79,7 +86,6 @@ const Calendar = () => {
 		}
 	}, [lessons]);
 
-  console.log(timetable)
 	return (
 		<>
 			<div className={styles.container}>
@@ -108,7 +114,7 @@ const Calendar = () => {
 					</div>
 					{Object.keys(timetable).map((day, index) => (
 						<div className={styles.column}>
-							<h1 className={styles.day}>{`${day.slice(0, 3)}`}</h1>
+							<h1 className={styles.day}>{`${day}`}</h1>
 							{timetable[day] &&
 								timetable[day].map((lesson) => (
 									<div className={styles[lesson.position]}>
