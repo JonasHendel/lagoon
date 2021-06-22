@@ -19,7 +19,7 @@ const Calendar = () => {
   
 	useEffect(() => {
     let tempTimetable = {};
-		if (lessons !== undefined) {
+	  if (lessons !== undefined) {
       lessons.sort((a, b) => {return parseInt(a.startTime.split(":")[0]) - parseInt(b.startTime.split(":")[0])})
       days.map((day, index) => {
         tempTimetable[day] = [];
@@ -38,13 +38,13 @@ const Calendar = () => {
 
           console.log(lessonDateTime)
 
-					if (moment().diff(lessonDateTime) > 0) {
+					if(moment().diff(lessonDateTime) > 0) {
 						tempTimetable[day].push({
               ...lesson,
               day: moment().day(lesson.day).format('YYYY-MM-DD'),
               course: {...course, color: 'black'}
             });
-					}else {
+					} else {
             tempTimetable[day].push({
               ...lesson,
              day: moment().day(lesson.day).format('YYYY-MM-DD'),
@@ -85,9 +85,9 @@ const Calendar = () => {
 							<p>17:00</p>
 						</div>
 					</div>
-					{Object.keys(timetable).map((day) => (
+					{Object.keys(timetable).map((day, index) => (
 						<div className={styles.column}>
-							<h1 className={styles.day}>{day}</h1>
+							<h1 className={styles.day}>{`${day.slice(0, 3)}`}</h1>
 							{timetable[day] &&
 								timetable[day].map((lesson) => (
 									<div className={styles.lesson}>
