@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimateSharedLayout } from 'framer-motion';
 import styles from '../../styles/modules/Select.module.scss';
 
 const Select = (props) => {
 	const [selectedItem, setSelectedItem] = useState(0);
+
+	useEffect(() => {
+		props.onChange(props.list[selectedItem]);
+	}, [selectedItem]);
 
 	return (
 		<AnimateSharedLayout>
@@ -15,7 +19,7 @@ const Select = (props) => {
 						<motion.div
 							key={item}
 							whileTap={
-								isActive ? { scale: 0.95 } : { opacity: 0.6 }
+								isActive ? { scale: 0.95 } : {}
 							}
 							onClick={() => setSelectedItem(index)}
 							className={styles.selectItem}>

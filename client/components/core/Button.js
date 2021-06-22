@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import styles from '../../styles/modules/Button.module.scss';
 
 const Button = (props) => {
@@ -6,7 +7,7 @@ const Button = (props) => {
 
 	return (
 		<div>
-			<button className={`${styles.button} ${styles[props.type]}`} onClick={props.onClick}>{children}</button>
+			<motion.button className={`${styles.button} ${styles[props.type]}`} onClick={props.onClick} whileTap={{ scale: 0.95 }}>{children}</motion.button>
 		</div>
 	);
 };
