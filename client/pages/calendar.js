@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import styles from '../styles/calendar/Calendar.module.scss';
 import {ChevronLeft, ChevronRight} from 'react-feather'
 
+import ViewSelect from '../components/core/select'
+
 import moment from 'moment';
 import Lesson from '../components/calendar/Lesson';
 
@@ -115,6 +117,7 @@ const Calendar = () => {
 						</p>
 						<ChevronRight onClick={nextDate}/>
 					</div>
+					<ViewSelect list={['Week', 'Month', 'Year']} onChange={(selected) => {console.log(selected)}}/>
 				</div>
 				<div className={styles.calendarCard}>
 					<div className={styles.timeCol}>
