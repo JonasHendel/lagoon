@@ -9,6 +9,7 @@ import ViewSelect from '../components/core/Select';
 
 import moment from 'moment';
 import Lesson from '../components/calendar/Lesson';
+import Event from '../components/calendar/Event';
 
 const Calendar = () => {
 	const [lessons, setLessons] = useState();
