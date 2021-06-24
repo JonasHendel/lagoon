@@ -1,11 +1,15 @@
 let mongoose = require('mongoose');
 
-let classSchema = mongoose.Schema({
-	class: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Class',
-		required: true,
-	},
+let eventSchema = mongoose.Schema({
+	// class: {
+	// 	type: mongoose.Schema.Types.ObjectId,
+	// 	ref: 'Class',
+	// 	required: true,
+	// },
+  date: {
+    type: String,
+    required: true
+  },
 	startTime: {
 		type: String,
 		required: true,
@@ -33,6 +37,6 @@ let classSchema = mongoose.Schema({
 	}
 });
 
-module.exports = mongoose.models.event || mongoose.model('Event', classSchema);
+module.exports = mongoose.models.event || mongoose.model('Event', eventSchema);
 
 

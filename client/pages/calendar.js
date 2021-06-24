@@ -1,22 +1,25 @@
 import { getData } from '../utils/fetchData';
 import { useEffect, useState } from 'react';
 import styles from '../styles/calendar/Calendar.module.scss';
-import {ChevronLeft, ChevronRight} from 'react-feather'
+import { ChevronLeft, ChevronRight } from 'react-feather';
+import Head from 'next/head';
 
-import ViewSelect from '../components/core/select'
+import ViewSelect from '../components/core/select';
 
 import moment from 'moment';
 import Lesson from '../components/calendar/Lesson';
 
 const Calendar = () => {
 	const [lessons, setLessons] = useState();
+	const [events, setEvents] = useState();
 	const [timetable, setTimetable] = useState({});
 	const [exam, setExam] = useState(false);
 	const [date, setDate] = useState(moment());
 
 	useEffect(async () => {
 		const res = await getData('calendar');
-		setLessons(res);
+		setLessons(res.lessons);
+		setEvents(res.events);
 	}, [date]);
 
 	let days = [];
@@ -48,13 +51,24 @@ const Calendar = () => {
 	};
 
 	useEffect(() => {
+		if (events) {
+			events.map((event) => {
+        console.log(moment(event.date + " " + event.startTime))
+				lessons.map((lesson) => {
+					if (moment(event.date).format('YYYY-MM-DD') === moment(date).day(lesson.day).format('YYYY-MM-DD')) {
+						console.log('same');
+					}
+				});
+			});
+		}
+	}, [events]);
+
+
+	useEffect(() => {
 		let tempTimetable = {};
 		if (lessons !== undefined) {
 			lessons.sort((a, b) => {
-				return (
-					parseInt(a.startTime.split(':')[0]) -
-					parseInt(b.startTime.split(':')[0])
-				);
+				return parseInt(a.startTime.split(':')[0]) - parseInt(b.startTime.split(':')[0]);
 			});
 			days.map((day, index) => {
 				tempTimetable[day] = [];
@@ -65,29 +79,21 @@ const Calendar = () => {
 
 					const { course, startTime } = lesson;
 
-					const lessonDate = moment(date)
-						.day(lesson.day)
-						.format('YYYY-MM-DD');
+					const lessonDate = moment(date).day(lesson.day).format('YYYY-MM-DD');
 
-					const lessonDateTime = moment(
-						lessonDate + ' ' + lesson.endTime
-					);
+					const lessonDateTime = moment(lessonDate + ' ' + lesson.endTime);
 
 					if (moment().diff(lessonDateTime) > 0) {
 						tempTimetable[day].push({
 							...lesson,
-							day: moment(date)
-								.day(lesson.day)
-								.format('YYYY-MM-DD'),
+							day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
 							course: { ...course, color: 'black' },
 							position: timeToPosition(startTime),
 						});
 					} else {
 						tempTimetable[day].push({
 							...lesson,
-							day: moment(date)
-								.day(lesson.day)
-								.format('YYYY-MM-DD'),
+							day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
 							position: timeToPosition(startTime),
 						});
 					}
@@ -107,17 +113,24 @@ const Calendar = () => {
 
 	return (
 		<>
+			<Head>
+				<title>Lagoon Calendar</title>
+			</Head>
 			<div className={styles.container}>
 				<div className={styles.selector}>
 					<div className={styles.dateSelect}>
-						<ChevronLeft onClick={previousDate}/>
+						<ChevronLeft onClick={previousDate} />
 						<p>
-							{moment(date).day(1).format('MMMM DD ')}-
-							{moment(date).day(5).format(' DD, YYYY')}
+							{moment(date).day(1).format('MMMM DD ')}-{moment(date).day(5).format(' DD, YYYY')}
 						</p>
-						<ChevronRight onClick={nextDate}/>
+						<ChevronRight onClick={nextDate} />
 					</div>
-					<ViewSelect list={['Week', 'Month', 'Year']} onChange={(selected) => {console.log(selected)}}/>
+					<ViewSelect
+						list={['Week', 'Month', 'Year']}
+						onChange={(selected) => {
+							console.log(selected);
+						}}
+					/>
 				</div>
 				<div className={styles.calendarCard}>
 					<div className={styles.timeCol}>
@@ -148,16 +161,35 @@ const Calendar = () => {
 							{timetable[day] &&
 								timetable[day].map((lesson) => (
 									<div className={styles[lesson.position]}>
-										<Lesson
-											color={lesson.course.color}
-											name={lesson.course.name}
-											duration={`${lesson.startTime} - ${lesson.endTime}`}
-											teacher={lesson.course.teacher}
-											location={lesson.location}
-											exam={exam}
-										/>
+										{events &&
+											events.map((event) => {
+												if (moment(event.date + " " + event.startTime).format('YYYY-MM-DD-HH-MM') === moment(lesson.day + " " + lesson.startTime).format('YYYY-MM-DD-HH-MM')) {
+                          return(<Lesson
+															color='lagoon'
+															name={event.eventName}
+															duration={`${event.startTime} - ${event.endTime}`}
+															teacher={event.teacher}
+															location={lesson.location}
+															exam={exam}
+														/>)
+												} else {
+                          console.log(moment(event.date + " " + event.startTime).format('YYYY-MM-DD-HH-mm'))
+                          console.log(moment(lesson.day + " " + lesson.startTime).format('YYYY-MM-DD-HH-mm'))
+													return (
+														<Lesson
+															color={lesson.course.color}
+															name={lesson.course.name}
+															duration={`${lesson.startTime} - ${lesson.endTime}`}
+															teacher={lesson.course.teacher}
+															location={lesson.location}
+															exam={exam}
+														/>
+													);
+												}
+											})}
 									</div>
-								))}
+								)
+                )}
 						</div>
 					))}
 				</div>
