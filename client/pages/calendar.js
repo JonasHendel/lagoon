@@ -115,89 +115,91 @@ const Calendar = () => {
 			<Head>
 				<title>Lagoon Calendar</title>
 			</Head>
-			<div className={styles.container}>
-				<div className={styles.selector}>
-					<div className={styles.dateSelect}>
-						<ArrowLeft onClick={previousDate} size={25} />
-						<p className={styles.selectText}>
-							{moment(date).day(1).format('MMMM DD ')}-{moment(date).day(5).format(' DD, YYYY')}
-						</p>
-						<ArrowRight onClick={nextDate} size={25} />
+			<div className={styles.calendarWrap}>
+				<div className={styles.container}>
+					<div className={styles.selector}>
+						<div className={styles.dateSelect}>
+							<ArrowLeft onClick={previousDate} size={25} />
+							<p className={styles.selectText}>
+								{moment(date).day(1).format('MMMM DD ')}-{moment(date).day(5).format(' DD, YYYY')}
+							</p>
+							<ArrowRight onClick={nextDate} size={25} />
+						</div>
+						<ViewSelect
+							list={['Week', 'Month', 'Year']}
+							onChange={(selected) => {
+								console.log(selected);
+							}}
+						/>
 					</div>
-					<ViewSelect
-						list={['Week', 'Month', 'Year']}
-						onChange={(selected) => {
-							console.log(selected);
-						}}
-					/>
-				</div>
-				<div className={styles.calendarCard}>
-					<div className={styles.timeCol}>
-						<div className={styles.one}>
-							<p>08:00</p>
-							<p>09:30</p>
+					<div className={styles.calendarCard}>
+						<div className={styles.timeCol}>
+							<div className={styles.one}>
+								<p>08:00</p>
+								<p>09:30</p>
+							</div>
+							<div className={styles.two}>
+								<p>09:45</p>
+								<p>11:15</p>
+							</div>
+							<div className={styles.three}>
+								<p>11:55</p>
+								<p>13:25</p>
+							</div>
+							<div className={styles.four}>
+								<p>13:40</p>
+								<p>15:10</p>
+							</div>
+							<div className={styles.five}>
+								<p>15:30</p>
+								<p>17:00</p>
+							</div>
 						</div>
-						<div className={styles.two}>
-							<p>09:45</p>
-							<p>11:15</p>
-						</div>
-						<div className={styles.three}>
-							<p>11:55</p>
-							<p>13:25</p>
-						</div>
-						<div className={styles.four}>
-							<p>13:40</p>
-							<p>15:10</p>
-						</div>
-						<div className={styles.five}>
-							<p>15:30</p>
-							<p>17:00</p>
-						</div>
-					</div>
-					{Object.keys(timetable).map((day, index) => (
-						<div className={styles.column}>
-							{day === moment().format('YYYY-MM-DD') ? (
-								<div className={styles.day}>
-									<h1>{moment(day).format('ddd')} <span class={styles.currentDay}>{moment(day).format('DD')}</span></h1>
-								</div>
-							) : (
-								<div className={styles.day}>
-									<h1>{moment(day).format('ddd DD')}</h1>
-								</div>
-							)}
-							{timetable[day] &&
-								timetable[day].map((lesson) => (
-									<div className={styles[lesson.position]}>
-										{events &&
-											events.map((event) => {
-												if (moment(event.date + ' ' + event.startTime).format('YYYY-MM-DD-HH-MM') === moment(lesson.day + ' ' + lesson.startTime).format('YYYY-MM-DD-HH-MM')) {
-													return (
-														<Lesson
-															color='lagoon'
-															name={event.eventName}
-															duration={`${event.startTime} - ${event.endTime}`}
-															teacher={event.teacher}
-															location={lesson.location}
-															exam={exam}
-														/>
-													);
-												} else {
-													return (
-														<Lesson
-															color={lesson.course.color}
-															name={lesson.course.name}
-															duration={`${lesson.startTime} - ${lesson.endTime}`}
-															teacher={lesson.course.teacher}
-															location={lesson.location}
-															exam={exam}
-														/>
-													);
-												}
-											})}
+						{Object.keys(timetable).map((day, index) => (
+							<div className={styles.column}>
+								{day === moment().format('YYYY-MM-DD') ? (
+									<div className={styles.day}>
+										<h1>{moment(day).format('ddd')} <span class={styles.currentDay}>{moment(day).format('DD')}</span></h1>
 									</div>
-								))}
-						</div>
-					))}
+								) : (
+									<div className={styles.day}>
+										<h1>{moment(day).format('ddd DD')}</h1>
+									</div>
+								)}
+								{timetable[day] &&
+									timetable[day].map((lesson) => (
+										<div className={styles[lesson.position]}>
+											{events &&
+												events.map((event) => {
+													if (moment(event.date + ' ' + event.startTime).format('YYYY-MM-DD-HH-MM') === moment(lesson.day + ' ' + lesson.startTime).format('YYYY-MM-DD-HH-MM')) {
+														return (
+															<Lesson
+																color='lagoon'
+																name={event.eventName}
+																duration={`${event.startTime} - ${event.endTime}`}
+																teacher={event.teacher}
+																location={lesson.location}
+																exam={exam}
+															/>
+														);
+													} else {
+														return (
+															<Lesson
+																color={lesson.course.color}
+																name={lesson.course.name}
+																duration={`${lesson.startTime} - ${lesson.endTime}`}
+																teacher={lesson.course.teacher}
+																location={lesson.location}
+																exam={exam}
+															/>
+														);
+													}
+												})}
+										</div>
+									))}
+							</div>
+						))}
+					</div>
 				</div>
 			</div>
 		</>

@@ -100,41 +100,7 @@
 	width: 100px;
 }
 
-.timeCol .one {
-	height: 118px;
-	text-align: right;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-
-.timeCol .two {
-	height: 118px;
-	text-align: right;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-
-.timeCol .three {
-	height: 118px;
-	text-align: right;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.timeCol .four {
-	height: 118px;
-	text-align: right;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.timeCol .five {
+.timeCol .one, .two, .three, .four, .five {
 	height: 118px;
 	text-align: right;
 	display: flex;
