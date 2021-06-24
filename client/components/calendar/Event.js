@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from '../../styles/calendar/Lesson.module.scss';
 import { User, MapPin } from 'react-feather';
 import { motion } from 'framer-motion';
-
-const Lesson = (props) => {
-	let color = props.exam && props.exam === true ? 'lagoon' : props.color;
+import moment from 'moment';
 
 
+const Event = (props) => {
+
+  const {date} = props
+
+  const [color, setColor] = useState('event')
+
+  useEffect(()=>{
+    if (moment().diff(date) > 0) {
+      setColor('black')
+    }
+  },[date])
 	return (
 		<motion.div whileTap={{ scale: 0.97}} className={`${styles.lesson} ${styles[color]}`}>
 			<span className={styles.duration}>{props.duration}</span>
@@ -28,4 +37,4 @@ const Lesson = (props) => {
 	);
 };
 
-export default Lesson;
+export default Event;

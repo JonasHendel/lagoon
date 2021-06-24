@@ -9,6 +9,7 @@ import ViewSelect from '../components/core/select';
 
 import moment from 'moment';
 import Lesson from '../components/calendar/Lesson';
+import Event from '../components/calendar/Event';
 
 const Calendar = () => {
 	const [lessons, setLessons] = useState();
@@ -173,8 +174,8 @@ const Calendar = () => {
 											events.map((event) => {
 												if (moment(event.date + ' ' + event.startTime).format('YYYY-MM-DD-HH-MM') === moment(lesson.day + ' ' + lesson.startTime).format('YYYY-MM-DD-HH-MM')) {
 													return (
-														<Lesson
-															color='lagoon'
+														<Event
+                              date={event.date}
 															name={event.eventName}
 															duration={`${event.startTime} - ${event.endTime}`}
 															teacher={event.teacher}

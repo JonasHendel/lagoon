@@ -50,14 +50,30 @@
 	color: $lagoon-dark-30;
 }
 
+.event {
+  background: $lagoon-dark-40;
+  color: $lagoon;
+}
+
 .lesson {
-  cursor: pointer;
+	cursor: pointer;
 	display: flex;
 	flex-direction: column;
 	padding: 18px;
 	font-weight: 600;
 	width: 230px;
-  height: 118px;
+	height: 118px;
+	border-radius: 4px;
+}
+
+.event {
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	padding: 18px;
+	font-weight: 600;
+	width: 230px;
+	height: 118px;
 	border-radius: 4px;
 }
 
