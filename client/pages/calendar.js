@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from 'react-feather';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 
-import ViewSelect from '../components/core/select';
+import ViewSelect from '../components/core/Select';
 
 import moment from 'moment';
 import Lesson from '../components/calendar/Lesson';
