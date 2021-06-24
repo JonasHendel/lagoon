@@ -32,6 +32,17 @@ const Calendar = () => {
 		}
 	});
 
+	const timeToAbs = (time) => {
+		const columnHeight = 710;
+		const totalMins = (17 - 8) * 60;
+
+		const timeFrame = [0, totalMins]
+
+		console.log(columnHeight / totalMins);
+
+	}
+	timeToAbs("8:00");
+
 	const timeToPosition = (time) => {
 		switch (time) {
 			case '8:00':
@@ -160,7 +171,7 @@ const Calendar = () => {
 							<div className={styles.column}>
 								{day === moment().format('YYYY-MM-DD') ? (
 									<div className={styles.day}>
-										<h1>{moment(day).format('ddd')} <span class={styles.currentDay}>{moment(day).format('DD')}</span></h1>
+										<h1>{moment(day).format('ddd')} <span className={styles.currentDay}>{moment(day).format('DD')}</span></h1>
 									</div>
 								) : (
 									<div className={styles.day}>
