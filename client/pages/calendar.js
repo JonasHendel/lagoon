@@ -1,7 +1,7 @@
 import { getData } from '../utils/fetchData';
 import { useEffect, useState } from 'react';
 import styles from '../styles/calendar/Calendar.module.scss';
-import { ChevronLeft, ChevronRight } from 'react-feather';
+import { ArrowLeft, ArrowRight } from 'react-feather';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 
@@ -57,7 +57,6 @@ const Calendar = () => {
 				console.log(moment(event.date + ' ' + event.startTime));
 				lessons.map((lesson) => {
 					if (moment(event.date).format('YYYY-MM-DD') === moment(date).day(lesson.day).format('YYYY-MM-DD')) {
-						console.log('same');
 					}
 				});
 			});
@@ -119,11 +118,11 @@ const Calendar = () => {
 			<div className={styles.container}>
 				<div className={styles.selector}>
 					<div className={styles.dateSelect}>
-						<ChevronLeft onClick={previousDate} size={36} />
-						<p className='font-bold text-3xl'>
+						<ArrowLeft onClick={previousDate} size={25} />
+						<p className={styles.selectText}>
 							{moment(date).day(1).format('MMMM DD ')}-{moment(date).day(5).format(' DD, YYYY')}
 						</p>
-						<ChevronRight onClick={nextDate} size={36} />
+						<ArrowRight onClick={nextDate} size={25} />
 					</div>
 					<ViewSelect
 						list={['Week', 'Month', 'Year']}
@@ -159,7 +158,7 @@ const Calendar = () => {
 						<div className={styles.column}>
 							{day === moment().format('YYYY-MM-DD') ? (
 								<div className={styles.day}>
-									<h1 className={styles.thisDay}>{moment(day).format('ddd DD')}</h1>
+									<h1>{moment(day).format('ddd')} <span class={styles.currentDay}>{moment(day).format('DD')}</span></h1>
 								</div>
 							) : (
 								<div className={styles.day}>
