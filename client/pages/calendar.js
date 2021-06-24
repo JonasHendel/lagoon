@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import styles from '../styles/calendar/Calendar.module.scss';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import Head from 'next/head';
+import { motion } from 'framer-motion';
 
 import ViewSelect from '../components/core/select';
 
@@ -26,7 +27,7 @@ const Calendar = () => {
 
 	useEffect(() => {
 		for (let i = 1; i <= 5; i++) {
-			days.push(moment(date).day(i).format('ddd-DD'));
+			days.push(moment(date).day(i).format('YYYY-MM-DD'));
 		}
 	});
 
@@ -53,7 +54,7 @@ const Calendar = () => {
 	useEffect(() => {
 		if (events) {
 			events.map((event) => {
-        console.log(moment(event.date + " " + event.startTime))
+				console.log(moment(event.date + ' ' + event.startTime));
 				lessons.map((lesson) => {
 					if (moment(event.date).format('YYYY-MM-DD') === moment(date).day(lesson.day).format('YYYY-MM-DD')) {
 						console.log('same');
@@ -62,7 +63,6 @@ const Calendar = () => {
 			});
 		}
 	}, [events]);
-
 
 	useEffect(() => {
 		let tempTimetable = {};
@@ -119,11 +119,11 @@ const Calendar = () => {
 			<div className={styles.container}>
 				<div className={styles.selector}>
 					<div className={styles.dateSelect}>
-						<ChevronLeft onClick={previousDate} />
-						<p>
+						<ChevronLeft onClick={previousDate} size={36} />
+						<p className='font-bold text-3xl'>
 							{moment(date).day(1).format('MMMM DD ')}-{moment(date).day(5).format(' DD, YYYY')}
 						</p>
-						<ChevronRight onClick={nextDate} />
+						<ChevronRight onClick={nextDate} size={36} />
 					</div>
 					<ViewSelect
 						list={['Week', 'Month', 'Year']}
@@ -157,24 +157,32 @@ const Calendar = () => {
 					</div>
 					{Object.keys(timetable).map((day, index) => (
 						<div className={styles.column}>
-							<h1 className={styles.day}>{`${day}`}</h1>
+							{day === moment().format('YYYY-MM-DD') ? (
+								<div className={styles.day}>
+									<h1 className={styles.thisDay}>{moment(day).format('ddd DD')}</h1>
+								</div>
+							) : (
+								<div className={styles.day}>
+									<h1>{moment(day).format('ddd DD')}</h1>
+								</div>
+							)}
 							{timetable[day] &&
 								timetable[day].map((lesson) => (
 									<div className={styles[lesson.position]}>
 										{events &&
 											events.map((event) => {
-												if (moment(event.date + " " + event.startTime).format('YYYY-MM-DD-HH-MM') === moment(lesson.day + " " + lesson.startTime).format('YYYY-MM-DD-HH-MM')) {
-                          return(<Lesson
+												if (moment(event.date + ' ' + event.startTime).format('YYYY-MM-DD-HH-MM') === moment(lesson.day + ' ' + lesson.startTime).format('YYYY-MM-DD-HH-MM')) {
+													return (
+														<Lesson
 															color='lagoon'
 															name={event.eventName}
 															duration={`${event.startTime} - ${event.endTime}`}
 															teacher={event.teacher}
 															location={lesson.location}
 															exam={exam}
-														/>)
+														/>
+													);
 												} else {
-                          console.log(moment(event.date + " " + event.startTime).format('YYYY-MM-DD-HH-mm'))
-                          console.log(moment(lesson.day + " " + lesson.startTime).format('YYYY-MM-DD-HH-mm'))
 													return (
 														<Lesson
 															color={lesson.course.color}
@@ -188,8 +196,7 @@ const Calendar = () => {
 												}
 											})}
 									</div>
-								)
-                )}
+								))}
 						</div>
 					))}
 				</div>

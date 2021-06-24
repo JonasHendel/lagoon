@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from '../../styles/calendar/Lesson.module.scss';
 import { User, MapPin } from 'react-feather';
+import { motion } from 'framer-motion';
 
 const Lesson = (props) => {
 	let color = props.exam && props.exam === true ? 'lagoon' : props.color;
 	return (
-		<div className={`${styles.lesson} ${styles[color]}`}>
+		<motion.div whileTap={{ scale: 0.97}} className={`${styles.lesson} ${styles[color]}`}>
 			<span className={styles.duration}>{props.duration}</span>
 			<h1 className={styles.name}>
 				{props.name}
@@ -21,7 +22,7 @@ const Lesson = (props) => {
 					<span>{props.location}</span>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 
