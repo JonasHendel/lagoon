@@ -144,6 +144,8 @@
 }
 
 .selectText {
+  user-select: none;
+  -webkit-user-select: none;
 	font-weight: 700;
 	font-size: 1.5em;
 	margin: 0em 0.75em;

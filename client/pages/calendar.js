@@ -11,6 +11,7 @@ import moment from 'moment';
 import Lesson from '../components/calendar/Lesson';
 import Event from '../components/calendar/Event';
 
+
 const Calendar = () => {
 	const [lessons, setLessons] = useState();
 	const [events, setEvents] = useState();
@@ -32,13 +33,14 @@ const Calendar = () => {
 		}
 	});
 
+
 	const timeToAbs = (time) => {
 		const columnHeight = 710;
 		const totalMins = (17 - 8) * 60;
 
 		const timeFrame = [0, totalMins]
 
-		console.log(columnHeight / totalMins);
+		// console.log(columnHeight / totalMins);
 
 	}
 	timeToAbs("8:00");
@@ -62,18 +64,6 @@ const Calendar = () => {
 				break;
 		}
 	};
-
-	useEffect(() => {
-		if (events) {
-			events.map((event) => {
-				console.log(moment(event.date + ' ' + event.startTime));
-				lessons.map((lesson) => {
-					if (moment(event.date).format('YYYY-MM-DD') === moment(date).day(lesson.day).format('YYYY-MM-DD')) {
-					}
-				});
-			});
-		}
-	}, [events]);
 
 	useEffect(() => {
 		let tempTimetable = {};
@@ -131,11 +121,16 @@ const Calendar = () => {
 				<div className={styles.container}>
 					<div className={styles.selector}>
 						<div className={styles.dateSelect}>
+            <div className="cursor-pointer">
 							<ArrowLeft onClick={previousDate} size={25} />
+            </div>
 							<p className={styles.selectText}>
 								{moment(date).day(1).format('MMMM DD ')}-{moment(date).day(5).format(' DD, YYYY')}
 							</p>
+            <div className="cursor-pointer">
+
 							<ArrowRight onClick={nextDate} size={25} />
+              </div>
 						</div>
 						<ViewSelect
 							list={['Week', 'Month', 'Year']}
@@ -171,7 +166,7 @@ const Calendar = () => {
 							<div className={styles.column}>
 								{day === moment().format('YYYY-MM-DD') ? (
 									<div className={styles.day}>
-										<h1>{moment(day).format('ddd')} <span className={styles.currentDay}>{moment(day).format('DD')}</span></h1>
+										<h1>{moment(day).format('ddd')} <span className={styles.currentDay}>{moment(day).format('DD')}</span></h1> {/* Highlights current date with red box */}
 									</div>
 								) : (
 									<div className={styles.day}>
@@ -183,12 +178,12 @@ const Calendar = () => {
 										<div className={styles[lesson.position]}>
 											{events &&
 												events.map((event) => {
-													if (moment(event.date + ' ' + event.startTime).format('YYYY-MM-DD-HH-MM') === moment(lesson.day + ' ' + lesson.startTime).format('YYYY-MM-DD-HH-MM')) {
+													if (moment(lesson.day + ' ' + lesson.startTime).isBetween(event.startTime, event.endTime, undefined, '[]')) {
 														return (
                               <Event
                                 date={event.date}
 																name={event.eventName}
-																duration={`${event.startTime} - ${event.endTime}`}
+																duration={`${moment(event.startTime).format('DD-MM-YY HH:mm')} - ${moment(event.endTime).format('DD-MM-YY HH:mm')}`}
 																teacher={event.teacher}
 																location={lesson.location}
 																exam={exam}

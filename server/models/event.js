@@ -6,10 +6,6 @@ let eventSchema = mongoose.Schema({
 	// 	ref: 'Class',
 	// 	required: true,
 	// },
-  date: {
-    type: String,
-    required: true
-  },
 	startTime: {
 		type: String,
 		required: true,

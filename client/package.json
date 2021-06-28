@@ -13,6 +13,7 @@
     "framer-motion": "^4.1.17",
     "js-cookie": "^2.2.1",
     "moment": "^2.29.1",
+    "moment-range": "^4.0.2",
     "next": "^10.2.3",
     "react": "17.0.2",
     "react-feather": "^2.0.9",

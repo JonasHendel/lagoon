@@ -56,6 +56,8 @@
 }
 
 .lesson {
+  user-select: none;
+  -webkit-user-select: none;
 	cursor: pointer;
 	display: flex;
 	flex-direction: column;
