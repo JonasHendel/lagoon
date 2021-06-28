@@ -48,7 +48,7 @@ const WeekView = ({timetable, events}) => {
 							<div className={styles[lesson.position]}>
 								{events &&
 									events.map((event) => {
-										if (moment(lesson.day + ' ' + lesson.startTime).isBetween(event.startTime, event.endTime, undefined, '[]')) {
+										if (moment(lesson.day + ' ' + lesson.startTime).isBetween(event.startTime, event.endTime, 'days', '[]')) {
 											return (
 												<Event
 													date={event.date}
