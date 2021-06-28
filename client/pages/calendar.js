@@ -1,14 +1,14 @@
-import { getData } from '../utils/fetchData';
-import { useEffect, useState } from 'react';
-import styles from '../styles/calendar/Calendar.module.scss';
-import { ArrowLeft, ArrowRight } from 'react-feather';
 import Head from 'next/head';
-import { motion } from 'framer-motion';
-
-import ViewSelect from '../components/core/Select';
-
+import { useEffect, useState } from 'react';
 import moment from 'moment';
+
+import { getData } from '../utils/fetchData';
+import styles from '../styles/calendar/Calendar.module.scss';
+import DateSelect from '../components/calendar/DateSelect';
+import ViewSelect from '../components/core/Select';
 import WeekView from '../components/calendar/WeekView';
+import MonthView from '../components/calendar/MonthView';
+import YearView from '../components/calendar/YearView';
 
 
 const Calendar = () => {
@@ -16,6 +16,7 @@ const Calendar = () => {
 	const [events, setEvents] = useState();
 	const [timetable, setTimetable] = useState({});
 	const [date, setDate] = useState(moment());
+	const [view, setView] = useState('Month');
 
 	useEffect(async () => {
 		const res = await getData('calendar');
@@ -31,17 +32,15 @@ const Calendar = () => {
 		}
 	});
 
-
 	const timeToAbs = (time) => {
 		const columnHeight = 710;
 		const totalMins = (17 - 8) * 60;
 
-		const timeFrame = [0, totalMins]
+		const timeFrame = [0, totalMins];
 
 		// console.log(columnHeight / totalMins);
-
-	}
-	timeToAbs("8:00");
+	};
+	timeToAbs('8:00');
 
 	const timeToPosition = (time) => {
 		switch (time) {
@@ -102,13 +101,6 @@ const Calendar = () => {
 		}
 	}, [lessons]);
 
-	const nextDate = () => {
-		setDate(moment(date).add(7, 'days').day(1));
-	};
-
-	const previousDate = () => {
-		setDate(moment(date).add(-7, 'days').day(1));
-	};
 
 	return (
 		<>
@@ -118,26 +110,18 @@ const Calendar = () => {
 			<div className={styles.calendarWrap}>
 				<div className={styles.container}>
 					<div className={styles.selector}>
-						<div className={styles.dateSelect}>
-            <div className="cursor-pointer">
-							<ArrowLeft onClick={previousDate} size={25} />
-            </div>
-							<p className={styles.selectText}>
-								{moment(date).day(1).format('MMMM DD ')}-{moment(date).day(5).format(' DD, YYYY')}
-							</p>
-            <div className="cursor-pointer">
-
-							<ArrowRight onClick={nextDate} size={25} />
-              </div>
-						</div>
+          <DateSelect date={date} setDate={setDate} view={view}/>
 						<ViewSelect
 							list={['Week', 'Month', 'Year']}
 							onChange={(selected) => {
-								console.log(selected);
+                setDate(moment())
+								setView(selected);
 							}}
 						/>
 					</div>
-            <WeekView timetable={timetable} events={events}/>
+					{view === 'Week' && <WeekView timetable={timetable} events={events}/>}
+					{view === 'Month' && <MonthView events={events} date={date}/>}
+					{view === 'Year' && <YearView date={date}/>}
 				</div>
 			</div>
 		</>
