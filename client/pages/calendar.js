@@ -92,7 +92,7 @@ const Calendar = () => {
             <WeekView timetable={timetable} events={events} />
           )}
           {view === 'Month' && <MonthView events={events} date={date} />}
-          {view === 'Year' && <YearView date={date} />}
+          {view === 'Year' && <YearView date={date} events={events} />}
         </div>
       </div>
     </>

@@ -94,7 +94,7 @@ const WeekView = ({ timetable, events }) => {
                       ) {
                         return (
                           <Event
-                            date={event.date}
+                            date={event.endTime}
                             name={event.eventName}
                             duration={`${moment(event.startTime).format(
                               'HH:mm'

@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import moment from 'moment';
+import styles from '../../styles/calendar/Month.module.scss';
+
+import Day from './MonthDay';
 
 const MonthView = ({ events, date }) => {
   const [days, setDays] = useState();
   const [weekDays, setWeekDays] = useState();
+  const [startOfMonth, setStartOfMonth] = useState();
   var daysInMonth = moment(date).daysInMonth();
 
   let arrDays = [];
@@ -32,6 +36,8 @@ const MonthView = ({ events, date }) => {
       delay = first + 6;
     }
 
+    setStartOfMonth(firstDate);
+
     while (delay) {
       arrDays.push(moment(firstDate).add(-delay, 'days'));
       delay--;
@@ -43,19 +49,27 @@ const MonthView = ({ events, date }) => {
 
   return (
     <div>
-      <div className="flex w-800 justify-between">
-        {weekDays &&
-          weekDays.map((weekday) => (
-            <div>
-              <h1>{weekday}</h1>
-              {days &&
-                days.map((day) => {
-                  if (day.format('dddd') === weekday) {
-                    return <h1>{moment(day).format('DD')}</h1>;
-                  }
-                })}
-            </div>
-          ))}
+      <div className={styles.card}>
+          {weekDays &&
+            weekDays.map((weekday) => (
+              <>
+                <div className={styles.column}>
+                  <p className={styles.weekDay}>{weekday}</p>
+                  {days &&
+                    days.map((day) => {
+                      if (day.format('dddd') === weekday) {
+                        return (
+                          <Day
+                            day={day}
+                            events={events}
+                            startOfMonth={startOfMonth}
+                          />
+                        );
+                      }
+                    })}
+                </div>
+              </>
+            ))}
       </div>
     </div>
   );
