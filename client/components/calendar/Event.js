@@ -9,15 +9,15 @@ const Event = (props) => {
 
   const {date} = props
 
-  const [color, setColor] = useState('event')
+  const [color, setColor] = useState('lagoon')
 
   useEffect(()=>{
     if (moment().diff(date) > 0) {
-      setColor('black')
+    	setColor('black');
     }
   },[date])
 	return (
-		<motion.div whileTap={{ scale: 0.97}} className={`${styles.lesson} ${styles[color]}`}>
+		<motion.div whileTap={{ scale: 0.97}} className={`${styles.lesson} ${styles[color]}`} style={{height: props.height}}>
 			<span className={styles.duration}>{props.duration}</span>
 			<h1 className={styles.name}>
 				{props.name}

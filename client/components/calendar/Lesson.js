@@ -8,7 +8,7 @@ const Lesson = (props) => {
 
 
 	return (
-		<motion.div whileTap={{ scale: 0.97}} className={`${styles.lesson} ${styles[color]}`}>
+		<motion.div whileTap={{ scale: 0.97}} className={`${styles.lesson} ${styles[color]}`} style={{height: props.height}}>
 			<span className={styles.duration}>{props.duration}</span>
 			<h1 className={styles.name}>
 				{props.name}

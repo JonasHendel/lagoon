@@ -50,49 +50,31 @@
 	color: $lagoon-dark-30;
 }
 
-.event {
-  background: $lagoon-dark-40;
-  color: $lagoon;
-}
-
 .lesson {
-  user-select: none;
-  -webkit-user-select: none;
+	user-select: none;
+	-webkit-user-select: none;
 	cursor: pointer;
 	display: flex;
 	flex-direction: column;
-	padding: 18px;
+	padding: 6%;
 	font-weight: 600;
-	width: 230px;
-	height: 118px;
-	border-radius: 4px;
-}
-
-.event {
-	cursor: pointer;
-	display: flex;
-	flex-direction: column;
-	padding: 18px;
-	font-weight: 600;
-	width: 230px;
-	height: 118px;
 	border-radius: 4px;
 }
 
 .name {
-	font-size: 18px;
-	line-height: 18px;
+	font-size: 1.1em;
+	line-height: 1.1em;
 	margin-top: 0em;
 }
 
 .duration {
-	font-size: 9px;
+	font-size: 0.65em;
 	letter-spacing: 0.25px;
 }
 
 .infos {
-	margin-top: 1.25em;
-	font-size: 12px;
+	margin-top: 4%;
+	font-size: 0.75em;
 	font-weight: 500;
 }
 

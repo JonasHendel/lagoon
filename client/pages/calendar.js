@@ -32,37 +32,6 @@ const Calendar = () => {
 		}
 	});
 
-
-	const timeToAbs = (time) => {
-		const columnHeight = 710;
-		const totalMins = (17 - 8) * 60;
-
-		const timeFrame = [0, totalMins];
-
-		// console.log(columnHeight / totalMins);
-	};
-	timeToAbs('8:00');
-
-	const timeToPosition = (time) => {
-		switch (time) {
-			case '8:00':
-				return 'one';
-				break;
-			case '9:45':
-				return 'two';
-				break;
-			case '11:55':
-				return 'three';
-				break;
-			case '13:40':
-				return 'four';
-				break;
-			case '15:30':
-				return 'five';
-				break;
-		}
-	};
-
 	useEffect(() => {
 		let tempTimetable = {};
 		if (lessons !== undefined) {
@@ -86,14 +55,12 @@ const Calendar = () => {
 						tempTimetable[day].push({
 							...lesson,
 							day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
-							course: { ...course, color: 'black' },
-							position: timeToPosition(startTime),
+							course: { ...course, color: 'black' }
 						});
 					} else {
 						tempTimetable[day].push({
 							...lesson,
-							day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
-							position: timeToPosition(startTime),
+							day: moment(date).day(lesson.day).format('YYYY-MM-DD')
 						});
 					}
 				});
