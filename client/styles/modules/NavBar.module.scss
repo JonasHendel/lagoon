@@ -1,27 +1,27 @@
 @import '../colors';
 
 .container {
-	width: 100vw;
-	height: 80px;
-	background-color: $white;
-	border-bottom: $black-20 solid 2px;
-	position: sticky;
-	top: 0;
-	z-index: 100;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  width: 100vw;
+  height: 80px;
+  background-color: $white;
+  border-bottom: $black-20 solid 2px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navItem {
-	color: $black-50;
-	transition: 0.1s ease-in;
+  color: $black-50;
+  transition: 0.1s ease-in;
 
-	&:hover {
-		color: $black-100;
-	}
+  &:hover {
+    color: $black-100;
+  }
 }
 
 .active {
-	color: $black-100;
+  color: $black-100;
 }

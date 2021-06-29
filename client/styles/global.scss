@@ -7,15 +7,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@500&display=swap');
 
 ::selection {
-	background: $lagoon;
-	color: $black-100;
+  background: $lagoon;
+  color: $black-100;
 }
 
-body, html {
-	height: 100%;
+body,
+html {
+  height: 100%;
 }
 
 body {
-	background: $black-10;
-	font-family: 'Prompt', sans-serif;
+  background: $black-10;
+  font-family: 'Prompt', sans-serif;
 }

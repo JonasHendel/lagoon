@@ -1,152 +1,149 @@
 @import '../colors';
 
 .container {
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .selector {
-	margin-top: 20px;
-	width: 1420px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  margin-top: 20px;
+  width: 1420px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .dateSelect {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
 }
 
 .calendarCard {
-	width: 1420px;
-	margin-top: 20px;
-	justify-content: center;
-	display: flex;
-	background-color: $white;
-	padding: 20px;
-	border-radius: 9px;
-	box-shadow: 6px 6px 42px 2px rgba($black-100, 0.15);
+  width: 1420px;
+  margin-top: 20px;
+  justify-content: center;
+  display: flex;
+  background-color: $white;
+  padding: 20px;
+  border-radius: 9px;
+  box-shadow: 6px 6px 42px 2px rgba($black-100, 0.15);
 }
 
 .column {
-	display: flex;
-	position: relative;
-	flex-direction: column;
-	background: $gray;
-	padding: 20px 7px;
-	margin: 0px 5px;
-	border-radius: 4px;
-	width: 244px;
-	height: 710px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  background: $gray;
+  padding: 20px 7px;
+  margin: 0px 5px;
+  border-radius: 4px;
+  width: 244px;
+  height: 710px;
 }
 
 .day {
-	text-align: center;
-	margin-bottom: 20px;
-	font-size: x-large;
-	display: flex;
-	justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: x-large;
+  display: flex;
+  justify-content: center;
 }
 
 .currentDay {
-	text-align: center;
-	background: $red-100;
-	padding: 0px 7.5px;
-	border-radius: 7px;
-	color: $white;
+  text-align: center;
+  background: $red-100;
+  padding: 0px 7.5px;
+  border-radius: 7px;
+  color: $white;
 }
-
 
 .timeCol {
-	display: flex;
-	position: relative;
-	flex-direction: column;
-	align-items: flex-end;
-	padding: 20px 7px;
-	margin: 0px 5px;
-	border-radius: 4px;
-	margin-right: 17.5px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 20px 7px;
+  margin: 0px 5px;
+  border-radius: 4px;
+  margin-right: 17.5px;
 }
 
-.timeCol .one{
-	height: 118px;
-	text-align: right;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+.timeCol .one {
+  height: 118px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
 
 .timeCol .two {
-	height: 118px;
-	text-align: right;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+  height: 118px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-
 .timeCol .three {
-	height: 118px;
-	text-align: right;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+  height: 118px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .timeCol .four {
-	height: 118px;
-	text-align: right;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+  height: 118px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .timeCol .five {
-	height: 118px;
-	text-align: right;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+  height: 118px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .selectText {
-	user-select: none;
-	-webkit-user-select: none;
-	font-weight: 700;
-	font-size: 1.5em;
-	margin: 0em 0.75em;
+  user-select: none;
+  -webkit-user-select: none;
+  font-weight: 700;
+  font-size: 1.5em;
+  margin: 0em 0.75em;
 }
 
 .dayContainer {
-	position: relative;
-	height: 100%;
+  position: relative;
+  height: 100%;
 }
 
 .itemWrap {
-	position: absolute;
-	width: 100%;
+  position: absolute;
+  width: 100%;
 }
 
 .absolute {
-	position: absolute;
+  position: absolute;
 }
 
 .timeWrap {
-	width: 100%;
-	height: 100%;
-	position: relative;
-	text-align: left;
-	color: $black-50;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  text-align: left;
+  color: $black-50;
 }
 
 .hidden {
-	user-select: none;
-	-webkit-user-select: none;
-	opacity: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  opacity: 0;
 }

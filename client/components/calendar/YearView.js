@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react"
-import moment from 'moment'
+import { useEffect, useState } from 'react';
+import moment from 'moment';
 
-const YearView = ({date}) => {
-  const [days, setDays] = useState()
+const YearView = ({ date }) => {
+  const [days, setDays] = useState();
 
-  // Map Monthviews in small 
+  // Map Monthviews in small
 
+  return <h1>YearView</h1>;
+};
 
-  return (
-    <h1>YearView</h1>
-  )
-}
-
-export default YearView
+export default YearView;

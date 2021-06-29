@@ -1,0 +1,23 @@
+{
+  "name": "lagoon",
+  "version": "1.0.0",
+  "description": "### [Planning on Milanote](https://app.milanote.com/1LU1RR1i1AEg2Q/lagoon?p=TKSk1cTXmKa)",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonashendel/lagoon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonashendel/lagoon/issues"
+  },
+  "homepage": "https://github.com/jonashendel/lagoon#readme",
+  "devDependencies": {
+    "prettier": "2.3.2"
+  }
+}
