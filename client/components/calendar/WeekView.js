@@ -16,7 +16,9 @@ const WeekView = ({ timetable, events }) => {
   const minuteHeight = height / totalMins;
 
   useLayoutEffect(() => {
-    setHeight(ref.current.clientHeight);
+    if(ref.current){
+      setHeight(ref.current.clientHeight);
+    }
   });
 
   // Current built-in time constraint: 8:00 - 17:00

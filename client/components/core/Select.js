@@ -3,7 +3,7 @@ import { motion, AnimateSharedLayout } from 'framer-motion';
 import styles from '../../styles/modules/Select.module.scss';
 
 const Select = (props) => {
-  const [selectedItem, setSelectedItem] = useState(1); // Default View 0 for Week; 1 for Month; 2 for Year
+  const [selectedItem, setSelectedItem] = useState(0); // Default View 0 for Week; 1 for Month; 2 for Year
 
   useEffect(() => {
     props.onChange(props.list[selectedItem]);
