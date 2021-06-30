@@ -4,10 +4,13 @@ import Lesson from './Lesson';
 import Event from './Event';
 
 import styles from '../../styles/calendar/Calendar.module.scss';
+import { useContext } from 'react';
+import { DataContext } from '../../store/GlobalState';
 
 const WeekView = ({ timetable, events }) => {
   const [height, setHeight] = useState(0);
   const ref = useRef(null);
+
 
   const totalMins = (16 - 8) * 60;
   const minuteHeight = height / totalMins;
@@ -94,6 +97,7 @@ const WeekView = ({ timetable, events }) => {
                       ) {
                         return (
                           <Event
+                            event={event} 
                             date={event.endTime}
                             name={event.eventName}
                             duration={`${moment(event.startTime).format(

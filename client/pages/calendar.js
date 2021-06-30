@@ -9,6 +9,8 @@ import ViewSelect from '../components/core/Select';
 import WeekView from '../components/calendar/WeekView';
 import MonthView from '../components/calendar/MonthView';
 import YearView from '../components/calendar/YearView';
+import { useContext } from 'react';
+import { DataContext } from '../store/GlobalState';
 
 const Calendar = () => {
   const [lessons, setLessons] = useState();
@@ -25,6 +27,7 @@ const Calendar = () => {
 
   let days = [];
 
+
   useEffect(() => {
     for (let i = 1; i <= 5; i++) {
       days.push(moment(date).day(i).format('YYYY-MM-DD'));
@@ -33,7 +36,7 @@ const Calendar = () => {
 
   useEffect(() => {
     let tempTimetable = {};
-    if (lessons !== undefined) {
+    if (lessons) {
       lessons.sort((a, b) => {
         return (
           parseInt(a.startTime.split(':')[0]) -

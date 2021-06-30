@@ -31,6 +31,13 @@ let eventSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+
+  },
+  // resources: {
+        // ref bla blab blac
+  // }
 });
 
 module.exports = mongoose.models.event || mongoose.model('Event', eventSchema);

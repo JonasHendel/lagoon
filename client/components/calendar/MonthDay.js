@@ -1,8 +1,12 @@
 import styles from '../../styles/calendar/Month.module.scss';
 import moment from 'moment';
 import { useState } from 'react';
+import { useContext } from 'react';
+import {DataContext} from '../../store/GlobalState'
+import { motion } from 'framer-motion';
 
 const MonthDay = ({ day, startOfMonth, events }) => {
+  const {state, dispatch} = useContext(DataContext)
   return (
     <>
       {day.diff(moment(startOfMonth)) < 0 ? (
@@ -39,9 +43,10 @@ const MonthDay = ({ day, startOfMonth, events }) => {
                   )
                 ) {
                   return (
-                    <div className={styles.event}>
+                    <motion.div whileTap={{ scale: 0.97 }} className={styles.event} onClick={()=>dispatch({type: 'CALENDAR_DETAIL', payload: event})}>
+     
                       <p>{event.eventName}</p>
-                    </div>
+                    </motion.div>
                   );
                 }
               })}

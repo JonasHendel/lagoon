@@ -1,0 +1,55 @@
+@import '../_colors.scss';
+
+.modal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalBody {
+  background: lighten($lagoon, 10%);
+  color: $lagoon-dark-30;
+  height: 500px;
+  width: 500px;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 2em;
+  margin: 15px 0px;
+}
+
+.locationTeacher {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90%;
+  margin-bottom: 15px;
+}
+
+.info {
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.description {
+  width: 60%;
+  text-align: center;
+  margin-top: 20px;
+}
