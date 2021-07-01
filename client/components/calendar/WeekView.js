@@ -6,17 +6,17 @@ import Event from './Event';
 import styles from '../../styles/calendar/Calendar.module.scss';
 import { useContext } from 'react';
 import { DataContext } from '../../store/GlobalState';
+import { useEffect } from 'react';
 
 const WeekView = ({ timetable, events }) => {
   const [height, setHeight] = useState(0);
   const ref = useRef(null);
 
-
   const totalMins = (16 - 8) * 60;
   const minuteHeight = height / totalMins;
 
   useLayoutEffect(() => {
-    if(ref.current){
+    if (ref.current) {
       setHeight(ref.current.clientHeight);
     }
   });
@@ -49,6 +49,7 @@ const WeekView = ({ timetable, events }) => {
     '16:00',
   ];
 
+  console.log(timetable);
   return (
     <div className={styles.calendarCard}>
       <div className={styles.timeCol}>
@@ -87,42 +88,17 @@ const WeekView = ({ timetable, events }) => {
                 <div
                   className={styles.itemWrap}
                   style={{ top: timeToPosition(lesson.startTime) }}>
-                  {events &&
-                    events.map((event) => {
-                      if (
-                        moment(lesson.day + ' ' + lesson.startTime).isBetween(
-                          event.startTime,
-                          event.endTime,
-                          'days',
-                          '[]'
-                        )
-                      ) {
-                        return (
-                          <Event
-                            event={event} 
-                            date={event.endTime}
-                            name={event.eventName}
-                            duration={`${moment(event.startTime).format(
-                              'HH:mm'
-                            )} - ${moment(event.endTime).format('HH:mm')}`}
-                            teacher={event.teacher}
-                            location={lesson.location}
-                            height={durationToHeight(90)}
-                          />
-                        );
-                      } else {
-                        return (
-                          <Lesson
-                            color={lesson.course.color}
-                            name={lesson.course.name}
-                            duration={`${lesson.startTime} - ${lesson.endTime}`}
-                            teacher={lesson.course.teacher}
-                            location={lesson.location}
-                            height={durationToHeight(90)}
-                          />
-                        );
+                    <Lesson
+                      detail={lesson}
+                      color={lesson.course ? lesson.course.color : lesson.color}
+                      name={lesson.course ? lesson.course.name : lesson.name}
+                      duration={`${lesson.startTime} - ${lesson.endTime}`}
+                      teacher={
+                        lesson.course ? lesson.course.teacher : lesson.teacher
                       }
-                    })}
+                      location={lesson.location}
+                      height={durationToHeight(lesson.duration)}
+                    />
                 </div>
               ))}
           </div>

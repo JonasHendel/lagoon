@@ -26,6 +26,7 @@ const DetailModal = () => {
     setOpen(false);
   };
 
+
   if (!open) {
     return null;
   }
@@ -41,7 +42,7 @@ const DetailModal = () => {
         animate={{ scale: [0.7, 1.05, 1] }}
         transition={{ duration: 0.3 }}
         className={styles.modalBody}>
-        <h1 className={styles.title}>{detail.eventName}</h1>
+        <h1 className={styles.title}>{detail.name}</h1>
           <div className={styles.info}>
             <User className={styles.icon} size={20} />
             <p>{detail.teacher}</p>

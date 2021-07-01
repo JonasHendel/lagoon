@@ -1,15 +1,27 @@
 import React from 'react';
 import styles from '../../styles/calendar/Lesson.module.scss';
+import { useContext } from 'react';
+import { DataContext } from '../../store/GlobalState';
 import { User, MapPin } from 'react-feather';
 import { motion } from 'framer-motion';
 
 const Lesson = (props) => {
   let color = props.exam && props.exam === true ? 'lagoon' : props.color;
+  const { state, dispatch } = useContext(DataContext);
+
+  console.log(props.detail);
+
+  const handleClick = () => {
+    if(props.detail.type === 'event'){
+        dispatch({ type: 'CALENDAR_DETAIL', payload: props.detail })
+    }
+  };
 
   return (
     <motion.div
       whileTap={{ scale: 0.97 }}
       className={`${styles.lesson} ${styles[color]}`}
+      onClick={handleClick}
       style={{ height: props.height }}>
       <span className={styles.duration}>{props.duration}</span>
       <h1 className={styles.name}>

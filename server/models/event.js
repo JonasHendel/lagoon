@@ -27,7 +27,7 @@ let eventSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  eventName: {
+  name: {
     type: String,
     required: true,
   },

@@ -44,8 +44,7 @@ const MonthDay = ({ day, startOfMonth, events }) => {
                 ) {
                   return (
                     <motion.div whileTap={{ scale: 0.97 }} className={styles.event} onClick={()=>dispatch({type: 'CALENDAR_DETAIL', payload: event})}>
-     
-                      <p>{event.eventName}</p>
+                      <p>{event.name}</p>
                     </motion.div>
                   );
                 }

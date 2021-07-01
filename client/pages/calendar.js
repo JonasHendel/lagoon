@@ -18,6 +18,7 @@ const Calendar = () => {
   const [timetable, setTimetable] = useState({});
   const [date, setDate] = useState(moment());
   const [view, setView] = useState('Month');
+  const [duration, setDuration] = useState(90);
 
   useEffect(async () => {
     const res = await getData('calendar');
@@ -27,7 +28,6 @@ const Calendar = () => {
 
   let days = [];
 
-
   useEffect(() => {
     for (let i = 1; i <= 5; i++) {
       days.push(moment(date).day(i).format('YYYY-MM-DD'));
@@ -36,7 +36,7 @@ const Calendar = () => {
 
   useEffect(() => {
     let tempTimetable = {};
-    if (lessons) {
+    if (lessons && events) {
       lessons.sort((a, b) => {
         return (
           parseInt(a.startTime.split(':')[0]) -
@@ -56,18 +56,62 @@ const Calendar = () => {
 
           const lessonDateTime = moment(lessonDate + ' ' + lesson.endTime);
 
-          if (moment().diff(lessonDateTime) > 0) {
-            tempTimetable[day].push({
-              ...lesson,
-              day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
-              course: { ...course, color: 'black' },
-            });
-          } else {
-            tempTimetable[day].push({
-              ...lesson,
-              day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
-            });
-          }
+          events.map((event) => {
+            console.log(
+              moment(event.startTime).diff(
+                moment(event.startTime).set('hour', 16),
+                'minutes'
+              )
+            );
+            if (
+              moment(lessonDate + ' ' + lesson.endTime).isBetween(
+                moment(event.startTime),
+                moment(event.endTime),
+                'hours',
+                '[]'
+              )
+            ) {
+              tempTimetable[day].push({
+                ...event,
+                color: 'black',
+                day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
+                duration:
+                  day === moment(event.endTime).format('YYYY-MM-DD')
+                    ? moment(event.endTime).diff(
+                        moment(event.endTime).set('hour', 8),
+                        'minutes'
+                      )
+                    : day === moment(event.startTime).format('YYYY-MM-DD')
+                    ? moment(event.startTime)
+                        .set('hour', 16)
+                        .diff(moment(event.startTime), 'minutes')
+                    : moment(event.startTime)
+                        .set('hour', 16)
+                        .diff(moment(event.startTime).set('hour', 8), 'minutes'),
+                startTime:
+                  day === moment(event.startTime).format('YYYY-MM-DD')
+                    ? moment(event.startTime).format('HH:mm')
+                    : '08:00',
+                endTime: moment(event.endTime),
+                type: 'event',
+              });
+            } else {
+              if (moment().diff(lessonDateTime) > 0) {
+                tempTimetable[day].push({
+                  ...lesson,
+                  day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
+                  course: { ...course, color: 'black' },
+                  duration: 90,
+                });
+              } else {
+                tempTimetable[day].push({
+                  ...lesson,
+                  day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
+                  duration: 90,
+                });
+              }
+            }
+          });
         });
       });
       setTimetable(tempTimetable);
