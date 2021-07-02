@@ -43,7 +43,6 @@ const MonthView = ({ events, date }) => {
       delay--;
     }
 
-    console.log(arrDays);
     setDays(arrDays.reverse());
   }, [date]);
 

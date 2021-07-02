@@ -73,7 +73,7 @@ const Calendar = () => {
             ) {
               tempTimetable[day].push({
                 ...event,
-                color: 'black',
+                color: moment().diff(event.endTime) > 0 ? 'black' : 'lagoon',
                 day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
                 duration:
                   day === moment(event.endTime).format('YYYY-MM-DD')
@@ -87,7 +87,10 @@ const Calendar = () => {
                         .diff(moment(event.startTime), 'minutes')
                     : moment(event.startTime)
                         .set('hour', 16)
-                        .diff(moment(event.startTime).set('hour', 8), 'minutes'),
+                        .diff(
+                          moment(event.startTime).set('hour', 8),
+                          'minutes'
+                        ),
                 startTime:
                   day === moment(event.startTime).format('YYYY-MM-DD')
                     ? moment(event.startTime).format('HH:mm')
@@ -96,20 +99,12 @@ const Calendar = () => {
                 type: 'event',
               });
             } else {
-              if (moment().diff(lessonDateTime) > 0) {
                 tempTimetable[day].push({
                   ...lesson,
                   day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
-                  course: { ...course, color: 'black' },
+                  course: { ...course, color: moment().diff(lessonDateTime) > 0 ? 'black' : lesson.course.color},
                   duration: 90,
                 });
-              } else {
-                tempTimetable[day].push({
-                  ...lesson,
-                  day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
-                  duration: 90,
-                });
-              }
             }
           });
         });

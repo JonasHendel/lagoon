@@ -1,5 +1,14 @@
 @import '../colors';
 
+.black {
+  background: $black-20;
+  color: $black-50;
+}
+
+.lagoon {
+  background: lighten($lagoon, 10%);
+  color: $lagoon-dark-30;
+}
 .card {
   width: 84vw;
   min-height: 700px;
@@ -59,7 +68,6 @@
 .event {
   display: flex;
   justify-content: center;
-  background: $lagoon;
   border-radius: 5px;
   padding: 2px 0px;
   margin: 0px 6px;

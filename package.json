@@ -4,7 +4,9 @@
   "description": "### [Planning on Milanote](https://app.milanote.com/1LU1RR1i1AEg2Q/lagoon?p=TKSk1cTXmKa)",
   "main": "index.js",
   "scripts": {
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "client": "npm run --prefix client dev",
+    "server": "cd server && nodemon index.js"
   },
   "repository": {
     "type": "git",
