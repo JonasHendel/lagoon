@@ -9,19 +9,23 @@ const Lesson = (props) => {
   let color = props.exam && props.exam === true ? 'lagoon' : props.color;
   const { state, dispatch } = useContext(DataContext);
 
-  console.log(props.detail);
+  const {edit} = state
 
-  const handleClick = () => {
+  const showLesson = () => {
     if(props.detail.type === 'event'){
         dispatch({ type: 'CALENDAR_DETAIL', payload: props.detail })
     }
   };
 
+  const editLesson = () => {
+        dispatch({ type: 'ADD_EVENT', payload: props.detail })
+  }
+
   return (
     <motion.div
       whileTap={{ scale: 0.97 }}
       className={`${styles.lesson} ${styles[color]}`}
-      onClick={handleClick}
+      onClick={edit ? editLesson : showLesson}
       style={{ height: props.height }}>
       <span className={styles.duration}>{props.duration}</span>
       <h1 className={styles.name}>

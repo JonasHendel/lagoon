@@ -19,8 +19,9 @@ let eventSchema = mongoose.Schema({
     required: true,
   },
   teacher: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    // type: mongoose.Schema.Types.ObjectId,
+    // ref: 'User',
+    type: String,
     required: true,
   },
   eventType: {

@@ -49,7 +49,20 @@ const WeekView = ({ timetable, events }) => {
     '16:00',
   ];
 
-  console.log(timetable);
+  const getPos = (e, day) => {
+    const clickPosition = e.clientY - col.current.offsetTop;
+
+    const tempTime = clickPosition / minuteHeight / 60 + 7;
+
+    const time = Math.round(tempTime * 4) / 4;
+
+    const timeArr = time.toString().split('.');
+
+    const hour = timeArr[0];
+    const min = timeArr[1];
+    
+  };
+  const col = useRef(null);
   return (
     <div className={styles.calendarCard}>
       <div className={styles.timeCol}>
@@ -67,7 +80,10 @@ const WeekView = ({ timetable, events }) => {
         </div>
       </div>
       {Object.keys(timetable).map((day, index) => (
-        <div className={styles.column}>
+        <div
+          className={styles.column}
+          onClick={(e) => getPos(e, day)}
+          ref={col}>
           {day === moment().format('YYYY-MM-DD') ? (
             <div className={styles.day}>
               <h1>
@@ -88,17 +104,17 @@ const WeekView = ({ timetable, events }) => {
                 <div
                   className={styles.itemWrap}
                   style={{ top: timeToPosition(lesson.startTime) }}>
-                    <Lesson
-                      detail={lesson}
-                      color={lesson.course ? lesson.course.color : lesson.color}
-                      name={lesson.course ? lesson.course.name : lesson.name}
-                      duration={`${lesson.startTime} - ${lesson.endTime}`}
-                      teacher={
-                        lesson.course ? lesson.course.teacher : lesson.teacher
-                      }
-                      location={lesson.location}
-                      height={durationToHeight(lesson.duration)}
-                    />
+                  <Lesson
+                    detail={lesson}
+                    color={lesson.course ? lesson.course.color : lesson.color}
+                    name={lesson.course ? lesson.course.name : lesson.name}
+                    duration={`${lesson.startTime} - ${lesson.endTime}`}
+                    teacher={
+                      lesson.course ? lesson.course.teacher : lesson.teacher
+                    }
+                    location={lesson.location}
+                    height={durationToHeight(lesson.duration)}
+                  />
                 </div>
               ))}
           </div>

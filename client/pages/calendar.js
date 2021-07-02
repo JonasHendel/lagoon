@@ -32,9 +32,6 @@ const Calendar = () => {
     for (let i = 1; i <= 5; i++) {
       days.push(moment(date).day(i).format('YYYY-MM-DD'));
     }
-  });
-
-  useEffect(() => {
     let tempTimetable = {};
     if (lessons && events) {
       lessons.sort((a, b) => {
@@ -43,28 +40,30 @@ const Calendar = () => {
           parseInt(b.startTime.split(':')[0])
         );
       });
+
       days.map((day, index) => {
         tempTimetable[day] = [];
         lessons.map((lesson) => {
           if (lesson.day !== index + 1) {
-            return;
+            return null;
           }
 
-          const { course, startTime } = lesson;
+          const { course } = lesson;
 
-          const lessonDate = moment(date).day(lesson.day).format('YYYY-MM-DD');
-
-          const lessonDateTime = moment(lessonDate + ' ' + lesson.endTime);
+          const lessonDateStartTime = moment(
+            moment(date).day(lesson.day).format('YYYY-MM-DD') +
+              ' ' +
+              lesson.startTime
+          );
+          const lessonDateEndTime = moment(
+            moment(date).day(lesson.day).format('YYYY-MM-DD') +
+              ' ' +
+              lesson.endTime
+          );
 
           events.map((event) => {
-            console.log(
-              moment(event.startTime).diff(
-                moment(event.startTime).set('hour', 16),
-                'minutes'
-              )
-            );
             if (
-              moment(lessonDate + ' ' + lesson.endTime).isBetween(
+              moment(lessonDateEndTime).isBetween(
                 moment(event.startTime),
                 moment(event.endTime),
                 'hours',
@@ -95,16 +94,26 @@ const Calendar = () => {
                   day === moment(event.startTime).format('YYYY-MM-DD')
                     ? moment(event.startTime).format('HH:mm')
                     : '08:00',
+                startTimeUnformatted: moment(event.startTime),
                 endTime: moment(event.endTime),
                 type: 'event',
               });
             } else {
-                tempTimetable[day].push({
-                  ...lesson,
-                  day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
-                  course: { ...course, color: moment().diff(lessonDateTime) > 0 ? 'black' : lesson.course.color},
-                  duration: 90,
-                });
+              tempTimetable[day].push({
+                ...lesson,
+                day: moment(date).day(lesson.day).format('YYYY-MM-DD'),
+                course: {
+                  ...course,
+                  color:
+                    moment().diff(lessonDateEndTime) > 0
+                      ? 'black'
+                      : lesson.course.color,
+                },
+                duration: moment(lessonDateEndTime).diff(
+                  lessonDateStartTime,
+                  'minutes'
+                ),
+              });
             }
           });
         });

@@ -8,9 +8,9 @@ const MonthView = ({ events, date }) => {
   const [days, setDays] = useState();
   const [weekDays, setWeekDays] = useState();
   const [startOfMonth, setStartOfMonth] = useState();
-  var daysInMonth = moment(date).daysInMonth();
 
-  let arrDays = [];
+  let daysInMonth = moment(date).daysInMonth();
+  let arrMonthDays = [];
   let arrWeekDays = [];
 
   useEffect(() => {
@@ -18,57 +18,54 @@ const MonthView = ({ events, date }) => {
       arrWeekDays.push(moment(date).day(i).format('dddd'));
     }
     setWeekDays(arrWeekDays);
-  }, []);
 
-  useEffect(() => {
     while (daysInMonth) {
       var current = moment(date).date(daysInMonth);
-      arrDays.push(current);
+      arrMonthDays.push(current);
       daysInMonth--;
     }
-    const first = moment(date).startOf('month').day();
+
     const firstDate = moment(date).startOf('month');
-
-    let delay;
-    if (first !== 0) {
-      delay = first - 1;
-    } else {
-      delay = first + 6;
-    }
-
     setStartOfMonth(firstDate);
 
+    let delay;
+    if (firstDate.day() !== 0) {
+      delay = firstDate.day() - 1;
+    } else {
+      delay = firstDate.day() + 6;
+    }
+
     while (delay) {
-      arrDays.push(moment(firstDate).add(-delay, 'days'));
+      arrMonthDays.push(moment(firstDate).add(-delay, 'days'));
       delay--;
     }
 
-    setDays(arrDays.reverse());
+    setDays(arrMonthDays.reverse());
   }, [date]);
 
   return (
     <div>
       <div className={styles.card}>
-          {weekDays &&
-            weekDays.map((weekday) => (
-              <>
-                <div className={styles.column}>
-                  <p className={styles.weekDay}>{weekday}</p>
-                  {days &&
-                    days.map((day) => {
-                      if (day.format('dddd') === weekday) {
-                        return (
-                          <Day
-                            day={day}
-                            events={events}
-                            startOfMonth={startOfMonth}
-                          />
-                        );
-                      }
-                    })}
-                </div>
-              </>
-            ))}
+        {weekDays &&
+          weekDays.map((weekday) => (
+            <>
+              <div className={styles.column}>
+                <p className={styles.weekDay}>{weekday}</p>
+                {days &&
+                  days.map((day) => {
+                    if (day.format('dddd') === weekday) {
+                      return (
+                        <Day
+                          day={day}
+                          events={events}
+                          startOfMonth={startOfMonth}
+                        />
+                      );
+                    }
+                  })}
+              </div>
+            </>
+          ))}
       </div>
     </div>
   );

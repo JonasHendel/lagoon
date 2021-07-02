@@ -12,10 +12,15 @@ const reducers = (state, action) => {
         ...state,
         detail: action.payload,
       };
-    case ACTIONS.ADD_LESSONS:
+    case ACTIONS.EDIT_CALENDAR:
       return {
         ...state,
-        lessons: action.payload,
+        edit: action.payload,
+      };
+    case ACTIONS.ADD_EVENT:
+      return {
+        ...state,
+        event: action.payload,
       };
     default:
       return state;

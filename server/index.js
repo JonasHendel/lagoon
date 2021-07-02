@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const database = require('./config/database');
 const fs = require('fs');
+var bodyParser = require('body-parser')
 
 const app = express();
 
@@ -18,6 +19,8 @@ db.on('error', function (err) {
 });
 
 app.use(cors());
+
+app.use(bodyParser.json())
 
 fs.readdir('./routes/', (err, files) => {
   if (err) {
