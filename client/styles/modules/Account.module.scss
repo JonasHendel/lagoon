@@ -1,0 +1,21 @@
+@import '../colors';
+
+.account {
+  background: $black-20;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profilePicture {
+  height: 1.75em;
+  width: auto;
+  margin-right: 0.5em;
+}
+
+.name {
+  font-size: 1.15em;
+  margin-right: 0.5em;
+}

@@ -9,17 +9,17 @@ const Lesson = (props) => {
   let color = props.exam && props.exam === true ? 'lagoon' : props.color;
   const { state, dispatch } = useContext(DataContext);
 
-  const {edit} = state
+  const { edit } = state;
 
   const showLesson = () => {
-    if(props.detail.type === 'event'){
-        dispatch({ type: 'CALENDAR_DETAIL', payload: props.detail })
+    if (props.detail.type === 'event') {
+      dispatch({ type: 'CALENDAR_DETAIL', payload: props.detail });
     }
   };
 
   const editLesson = () => {
-        dispatch({ type: 'ADD_EVENT', payload: props.detail })
-  }
+    dispatch({ type: 'ADD_EVENT', payload: props.detail });
+  };
 
   return (
     <motion.div

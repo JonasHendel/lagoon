@@ -1,24 +1,38 @@
 @import '../colors';
 
-.container {
-  width: 100vw;
-  height: 80px;
-  background-color: $white;
-  border-bottom: $black-20 solid 2px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+.navbar {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  padding: 0.5em 2em;
+  background: $white;
+  border-bottom: $black-20 solid 2px;
+}
+
+.navbar .navigation {
+  display: flex;
   align-items: center;
 }
 
+.navbar .logo {
+  height: 50px;
+  padding: 10px;
+  width: auto;
+  margin-right: 2em;
+}
+
+.navItems {
+  color: $black-60;
+}
+
 .navItem {
-  color: $black-50;
-  transition: 0.1s ease-in;
+  font-size: 1.25em;
+  margin-right: 1em;
+  cursor: pointer;
+  transition: 0.25s ease-in;
 
   &:hover {
-    color: $black-100;
+    color: $black-70;
   }
 }
 

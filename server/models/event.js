@@ -34,10 +34,9 @@ let eventSchema = mongoose.Schema({
   },
   description: {
     type: String,
-
   },
   // resources: {
-        // ref bla blab blac
+  // ref bla blab blac
   // }
 });
 

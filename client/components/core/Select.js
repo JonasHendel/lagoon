@@ -7,10 +7,9 @@ import { DataContext } from '../../store/GlobalState';
 const Select = (props) => {
   const [selectedItem, setSelectedItem] = useState(0); // Default View 0 for Week; 1 for Month; 2 for Year
 
-  const {state, dispatch} = useContext(DataContext)
-  
-  const {edit} = state
+  const { state, dispatch } = useContext(DataContext);
 
+  const { edit } = state;
 
   useEffect(() => {
     props.onChange(props.list[selectedItem]);
@@ -19,7 +18,11 @@ const Select = (props) => {
   return (
     <AnimateSharedLayout>
       <div className={styles.select}>
-      <button className={edit ? styles.editTrue : styles.editFalse} onClick={()=>dispatch({type: 'EDIT_CALENDAR', payload: !edit})}>Edit</button>
+        <button
+          className={edit ? styles.editTrue : styles.editFalse}
+          onClick={() => dispatch({ type: 'EDIT_CALENDAR', payload: !edit })}>
+          Edit
+        </button>
         {props.list.map((item, index) => {
           const isActive = index === selectedItem;
           return (
