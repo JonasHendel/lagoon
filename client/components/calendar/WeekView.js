@@ -33,7 +33,6 @@ const WeekView = ({ timetable, events }) => {
   };
 
   const durationToHeight = (duration) => {
-    console.log(height);
     return duration * minuteHeight;
   };
 
