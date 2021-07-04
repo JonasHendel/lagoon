@@ -23,11 +23,9 @@ router.get('/', async (req, res) => {
       { "$match": { "course.students": "Jonas" } },
     ]);
 
-    console.log(lessons)
-
     const events = await Events.find();
 
-    res.json({lessons });
+    res.json({events, lessons });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
