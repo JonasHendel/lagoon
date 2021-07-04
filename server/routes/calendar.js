@@ -22,6 +22,7 @@ router.get('/', async (req, res) => {
     ]);
 
 
+
     const events = await Events.find();
 
     res.json({events, lessons });
