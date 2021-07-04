@@ -8,8 +8,6 @@ let Events = require('../models/event');
 
 router.get('/', async (req, res) => {
   try {
-    // const lessons = await Lessons.find().populate('course');
-
     const lessons = await Lessons.aggregate([
       {
         $lookup: {
@@ -22,6 +20,8 @@ router.get('/', async (req, res) => {
       {$unwind: '$course'},
       { "$match": { "course.students": "Jonas" } },
     ]);
+
+
 
     const events = await Events.find();
 

@@ -23,7 +23,7 @@ const EditModal = () => {
     teacher: '',
     location: '',
     type: '',
-    description: ''
+    description: '',
   };
 
   const [eventInfo, setEventInfo] = useState(initialState);
@@ -32,7 +32,7 @@ const EditModal = () => {
     if (Object.keys(event).length !== 0) {
       setOpen(true);
     }
-    setEventInfo(event)
+    setEventInfo(event);
   }, [event]);
 
   const closeDetail = () => {
@@ -41,13 +41,13 @@ const EditModal = () => {
   };
 
   const handleChange = (e) => {
-    const {name, value} = e.target
-    setEventInfo({...eventInfo, [name]: value})
-  }
+    const { name, value } = e.target;
+    setEventInfo({ ...eventInfo, [name]: value });
+  };
 
   const createEvent = async () => {
-    await postData('calendar', {...eventInfo})
-  }
+    await postData('calendar', { ...eventInfo });
+  };
 
   if (!open) {
     return null;
@@ -67,27 +67,54 @@ const EditModal = () => {
         transition={{ duration: 0.3 }}
         className={styles.modalBody}>
         <h1>Edit</h1>
-        <input className={styles.title} value={eventInfo.name} name="name" onChange={handleChange}/>
+        <input
+          className={styles.title}
+          value={eventInfo.name}
+          name="name"
+          onChange={handleChange}
+        />
         <div className={styles.info}>
           <User className={styles.icon} size={20} />
-        <input value={eventInfo.teacher} name="teacher" onChange={handleChange}/>
+          <input
+            value={eventInfo.teacher}
+            name="teacher"
+            onChange={handleChange}
+          />
         </div>
         <div className={styles.info}>
           <MapPin className={styles.icon} size={20} />
-        <input value={eventInfo.location} name="location" onChange={handleChange}/>
+          <input
+            value={eventInfo.location}
+            name="location"
+            onChange={handleChange}
+          />
         </div>
         <p>
-          {moment(course ? course.startTime : event.startTimeUnformatted).format(
-            'HH:mm DD.MM.YYYY'
-          )}{' '}
+          {moment(
+            course ? course.startTime : event.startTimeUnformatted
+          ).format('HH:mm DD.MM.YYYY')}{' '}
           -{' '}
           {moment(course ? course.endTime : event.endTime).format(
             'HH:mm DD.MM.YYYY'
           )}
         </p>
-        <input type="datetime-local" name="startTime" value={eventInfo.startTime} onChange={handleChange} />
-        <input type="datetime-local" name="endTime" value={eventInfo.endTime} onChange={handleChange} />
-        <textarea value={eventInfo.description} name="description" onChange={handleChange}/>
+        <input
+          type="datetime-local"
+          name="startTime"
+          value={eventInfo.startTime}
+          onChange={handleChange}
+        />
+        <input
+          type="datetime-local"
+          name="endTime"
+          value={eventInfo.endTime}
+          onChange={handleChange}
+        />
+        <textarea
+          value={eventInfo.description}
+          name="description"
+          onChange={handleChange}
+        />
         <button onClick={createEvent}>Create Event</button>
       </motion.div>
     </motion.div>

@@ -8,8 +8,8 @@ import CalendarAdd from './calendar/AddEvent';
 const Layout = ({ children }) => {
   return (
     <div>
-      <CalendarAdd/>
-      <CalendarDetail/>
+      <CalendarAdd />
+      <CalendarDetail />
       <NavBar />
       {children}
     </div>

@@ -26,7 +26,6 @@ const DetailModal = () => {
     setOpen(false);
   };
 
-
   if (!open) {
     return null;
   }
@@ -38,18 +37,20 @@ const DetailModal = () => {
       onClick={closeDetail}
       className={styles.modal}>
       <motion.div
-        onClick={(e)=>{e.stopPropagation()}}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
         animate={{ scale: [0.7, 1.05, 1] }}
         transition={{ duration: 0.3 }}
         className={styles.modalBody}>
         <h1 className={styles.title}>{detail.name}</h1>
-          <div className={styles.info}>
-            <User className={styles.icon} size={20} />
-            <p>{detail.teacher}</p>
-          </div>
-          <div className={styles.info}>
-            <MapPin className={styles.icon} size={20} />
-            <p>{detail.location}</p>
+        <div className={styles.info}>
+          <User className={styles.icon} size={20} />
+          <p>{detail.teacher}</p>
+        </div>
+        <div className={styles.info}>
+          <MapPin className={styles.icon} size={20} />
+          <p>{detail.location}</p>
         </div>
         <p>
           {moment(detail.startTime).format('HH:mm DD.MM.YYYY')} -{' '}

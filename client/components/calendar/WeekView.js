@@ -60,8 +60,8 @@ const WeekView = ({ timetable, events }) => {
 
     const hour = timeArr[0];
     const min = timeArr[1];
-    
   };
+
   const col = useRef(null);
   return (
     <div className={styles.calendarCard}>
@@ -113,7 +113,7 @@ const WeekView = ({ timetable, events }) => {
                       lesson.course ? lesson.course.teacher : lesson.teacher
                     }
                     location={lesson.location}
-                    height={durationToHeight(lesson.duration)}
+                    height={durationToHeight(90)}
                   />
                 </div>
               ))}
