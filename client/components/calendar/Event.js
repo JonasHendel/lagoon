@@ -11,7 +11,7 @@ const Event = (props) => {
 
   const [color, setColor] = useState('lagoon');
 
-  const {state, dispatch} = useContext(DataContext)
+  const { state, dispatch } = useContext(DataContext);
 
   useEffect(() => {
     if (moment().diff(date) > 0) {
@@ -20,7 +20,9 @@ const Event = (props) => {
   }, [date]);
   return (
     <motion.div
-    onClick={()=>dispatch({type: 'CALENDAR_DETAIL', payload: props.event})}
+      onClick={() =>
+        dispatch({ type: 'CALENDAR_DETAIL', payload: props.event })
+      }
       whileTap={{ scale: 0.97 }}
       className={`${styles.lesson} ${styles[color]}`}
       style={{ height: props.height }}>

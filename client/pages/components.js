@@ -8,13 +8,12 @@ import Lesson from '../components/calendar/Lesson';
 import { useContext } from 'react';
 import { DataContext } from '../store/GlobalState';
 
-
 const Components = () => {
-  const {state, dispatch} = useContext(DataContext)
+  const { state, dispatch } = useContext(DataContext);
 
-  const {lessons, events} = state
+  const { lessons, events } = state;
 
-  console.log(lessons)
+  console.log(lessons);
   return (
     <>
       <div className="p-10">
