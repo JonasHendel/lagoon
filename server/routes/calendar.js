@@ -8,12 +8,24 @@ let Events = require('../models/event');
 
 router.get('/', async (req, res) => {
   try {
-    console.log('get');
-    const lessons = await Lessons.find().populate('course');
+    const lessons = await Lessons.aggregate([
+      {
+        $lookup: {
+          from: 'courses',
+          localField: 'course',
+          foreignField: '_id',
+          as: 'course',
+        },
+      },
+      {$unwind: '$course'},
+      { "$match": { "course.students": "Jonas" } },
+    ]);
+
+
 
     const events = await Events.find();
 
-    res.json({ events, lessons });
+    res.json({events, lessons });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
