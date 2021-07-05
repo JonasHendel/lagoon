@@ -33,9 +33,7 @@ export default function navbar() {
           ))}
         </div>
       </div>
-      <div class={styles.account}>
-        <Account />
-      </div>
+      <Account />
     </div>
   );
 }

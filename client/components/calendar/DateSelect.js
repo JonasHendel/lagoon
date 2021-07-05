@@ -1,10 +1,16 @@
 import styles from '../../styles/calendar/Calendar.module.scss';
 import { ArrowLeft, ArrowRight } from 'react-feather';
 import moment from 'moment';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect } from 'react';
 
 const DateSelect = ({ date, setDate, view }) => {
+  const dateAnimation = useAnimation()
+
   const nextDate = () => {
+    dateAnimation.start(i => ({
+      x: [-50, 50, 0],
+    }))
     switch (view) {
       case 'Week':
         setDate(moment(date).add(7, 'days').day(1));
@@ -18,7 +24,12 @@ const DateSelect = ({ date, setDate, view }) => {
     }
   };
 
+
+  
   const previousDate = () => {
+    dateAnimation.start(i => ({
+      x: [50,-50, 0],
+    }))
     switch (view) {
       case 'Week':
         setDate(moment(date).add(-7, 'days').day(1));
@@ -39,7 +50,8 @@ const DateSelect = ({ date, setDate, view }) => {
       {view === 'Week' && (
         <motion.p
           className={styles.selectText}
-          transition={{ ease: 'easeOut', duration: 2 }}>
+          animate={dateAnimation}
+          transition={{duration: 0.4}}>
           {moment(date).day(1).format('MMMM DD ')}-
           {moment(date).day(5).format(' DD, YYYY')}
         </motion.p>
