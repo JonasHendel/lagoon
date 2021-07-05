@@ -46,7 +46,11 @@ const MonthView = ({ events, date }) => {
 
   return (
     <AnimatePresence>
-      <motion.div initial={{ x: -500, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: 500, opacity: 0 }}>
+      <motion.div
+        initial={{ x: -500, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: 500, opacity: 0 }}
+        transition={{ duration: 0.3 }}>
         <div className={styles.card}>
           {weekDays &&
             weekDays.map((weekday) => (

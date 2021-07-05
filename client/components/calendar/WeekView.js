@@ -70,7 +70,8 @@ const WeekView = ({ timetable, events }) => {
         className={styles.calendarCard}
         initial={{ x: 500, opacity: 0 }}
         animate={{ x: 0, opacity: 1}}
-        exit={{ x: -500, opacity: 0}}>
+        exit={{ x: -500, opacity: 0}}
+        transition={{duration: 0.3}}>
         <div className={styles.timeCol}>
           <div className={styles.day}>
             <h1 className={styles.hidden}>ok</h1>
