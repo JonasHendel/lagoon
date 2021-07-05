@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-let lessonsSchema = mongoose.Schema({
+let lessonSchema = mongoose.Schema({
   course: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Course',
@@ -27,5 +27,4 @@ let lessonsSchema = mongoose.Schema({
   },
 });
 
-module.exports =
-  mongoose.models.lesson || mongoose.model('Lesson', lessonsSchema);
+module.exports = mongoose.models.lesson || mongoose.model('Lesson', lessonSchema);

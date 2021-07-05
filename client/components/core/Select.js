@@ -18,11 +18,11 @@ const Select = (props) => {
   return (
     <AnimateSharedLayout>
       <div className={styles.select}>
-        <button
+        <div
           className={edit ? styles.editTrue : styles.editFalse}
           onClick={() => dispatch({ type: 'EDIT_CALENDAR', payload: !edit })}>
           Edit
-        </button>
+        </div>
         {props.list.map((item, index) => {
           const isActive = index === selectedItem;
           return (

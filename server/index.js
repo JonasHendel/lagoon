@@ -27,6 +27,8 @@ fs.readdir('./routes/', (err, files) => {
     console.log(err);
   }
 
+  console.log(files)
+
   let routeFiles = files.filter((f) => f.split('.').pop() === 'js');
 
   console.log('Loading routes:');

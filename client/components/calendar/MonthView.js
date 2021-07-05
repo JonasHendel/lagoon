@@ -3,6 +3,7 @@ import moment from 'moment';
 import styles from '../../styles/calendar/Month.module.scss';
 
 import Day from './MonthDay';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const MonthView = ({ events, date }) => {
   const [days, setDays] = useState();
@@ -44,30 +45,32 @@ const MonthView = ({ events, date }) => {
   }, [date]);
 
   return (
-    <div>
-      <div className={styles.card}>
-        {weekDays &&
-          weekDays.map((weekday) => (
-            <>
-              <div className={styles.column}>
-                <p className={styles.weekDay}>{weekday}</p>
-                {days &&
-                  days.map((day) => {
-                    if (day.format('dddd') === weekday) {
-                      return (
-                        <Day
-                          day={day}
-                          events={events}
-                          startOfMonth={startOfMonth}
-                        />
-                      );
-                    }
-                  })}
-              </div>
-            </>
-          ))}
-      </div>
-    </div>
+    <AnimatePresence>
+      <motion.div initial={{ x: -500, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: 500, opacity: 0 }}>
+        <div className={styles.card}>
+          {weekDays &&
+            weekDays.map((weekday) => (
+              <>
+                <div className={styles.column}>
+                  <p className={styles.weekDay}>{weekday}</p>
+                  {days &&
+                    days.map((day) => {
+                      if (day.format('dddd') === weekday) {
+                        return (
+                          <Day
+                            day={day}
+                            events={events}
+                            startOfMonth={startOfMonth}
+                          />
+                        );
+                      }
+                    })}
+                </div>
+              </>
+            ))}
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

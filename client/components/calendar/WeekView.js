@@ -7,6 +7,7 @@ import styles from '../../styles/calendar/Calendar.module.scss';
 import { useContext } from 'react';
 import { DataContext } from '../../store/GlobalState';
 import { useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const WeekView = ({ timetable, events }) => {
   const [height, setHeight] = useState(0);
@@ -64,63 +65,69 @@ const WeekView = ({ timetable, events }) => {
 
   const col = useRef(null);
   return (
-    <div className={styles.calendarCard}>
-      <div className={styles.timeCol}>
-        <div className={styles.day}>
-          <h1 className={styles.hidden}>ok</h1>
-        </div>
-        <div className={styles.timeWrap}>
-          {timeRange.map((time) => (
-            <span
-              className={styles.absolute}
-              style={{ top: timeToPosition(time) }}>
-              {time}
-            </span>
-          ))}
-        </div>
-      </div>
-      {Object.keys(timetable).map((day, index) => (
-        <div
-          className={styles.column}
-          onClick={(e) => getPos(e, day)}
-          ref={col}>
-          {day === moment().format('YYYY-MM-DD') ? (
-            <div className={styles.day}>
-              <h1>
-                {moment(day).format('ddd')}{' '}
-                <span className={styles.currentDay}>
-                  {moment(day).format('DD')}
-                </span>
-              </h1>
-            </div>
-          ) : (
-            <div className={styles.day}>
-              <h1>{moment(day).format('ddd DD')}</h1>
-            </div>
-          )}
-          <div className={styles.dayContainer} ref={ref}>
-            {timetable[day] &&
-              timetable[day].map((lesson) => (
-                <div
-                  className={styles.itemWrap}
-                  style={{ top: timeToPosition(lesson.startTime) }}>
-                  <Lesson
-                    detail={lesson}
-                    color={lesson.course ? lesson.course.color : lesson.color}
-                    name={lesson.course ? lesson.course.name : lesson.name}
-                    duration={`${lesson.startTime} - ${lesson.endTime}`}
-                    teacher={
-                      lesson.course ? lesson.course.teacher : lesson.teacher
-                    }
-                    location={lesson.location}
-                    height={durationToHeight(90)}
-                  />
-                </div>
-              ))}
+    <AnimatePresence>
+      <motion.div
+        className={styles.calendarCard}
+        initial={{ x: 500, opacity: 0 }}
+        animate={{ x: 0, opacity: 1}}
+        exit={{ x: -500, opacity: 0}}>
+        <div className={styles.timeCol}>
+          <div className={styles.day}>
+            <h1 className={styles.hidden}>ok</h1>
+          </div>
+          <div className={styles.timeWrap}>
+            {timeRange.map((time) => (
+              <span
+                className={styles.absolute}
+                style={{ top: timeToPosition(time) }}>
+                {time}
+              </span>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
+        {Object.keys(timetable).map((day, index) => (
+          <div
+            className={styles.column}
+            onClick={(e) => getPos(e, day)}
+            ref={col}>
+            {day === moment().format('YYYY-MM-DD') ? (
+              <div className={styles.day}>
+                <h1>
+                  {moment(day).format('ddd')}{' '}
+                  <span className={styles.currentDay}>
+                    {moment(day).format('DD')}
+                  </span>
+                </h1>
+              </div>
+            ) : (
+              <div className={styles.day}>
+                <h1>{moment(day).format('ddd DD')}</h1>
+              </div>
+            )}
+            <div className={styles.dayContainer} ref={ref}>
+              {timetable[day] &&
+                timetable[day].map((lesson) => (
+                  <div
+                    className={styles.itemWrap}
+                    style={{ top: timeToPosition(lesson.startTime) }}>
+                    <Lesson
+                      detail={lesson}
+                      color={lesson.course ? lesson.course.color : lesson.color}
+                      name={lesson.course ? lesson.course.name : lesson.name}
+                      duration={`${lesson.startTime} - ${lesson.endTime}`}
+                      teacher={
+                        lesson.course ? lesson.course.teacher : lesson.teacher
+                      }
+                      location={lesson.location}
+                      height={durationToHeight(90)}
+                    />
+                  </div>
+                ))}
+            </div>
+          </div>
+        ))}
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
