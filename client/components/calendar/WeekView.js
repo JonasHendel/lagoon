@@ -64,6 +64,7 @@ const WeekView = ({ timetable, events }) => {
   };
 
   const col = useRef(null);
+
   return (
     <AnimatePresence>
       <motion.div

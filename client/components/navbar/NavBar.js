@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Account from './Account';
 import styles from '../../styles/modules/NavBar.module.scss';
+import { useContext } from 'react';
+import { DataContext } from '../../store/GlobalState';
 
 let navItems = [
   { name: 'Dashboard', href: '/' },
@@ -11,6 +13,8 @@ let navItems = [
 ];
 
 export default function navbar() {
+  const {state, dispatch} = useContext(DataContext)
+  const {auth} = state
   const router = useRouter();
 
   const isActive = (href) => {
@@ -33,7 +37,12 @@ export default function navbar() {
           ))}
         </div>
       </div>
-      <Account />
+      {Object.keys(auth).length === 0 ? (
+        <Link href="/login">
+          <a>Login</a>
+        </Link>
+      ): (<Account />)}
+      
     </div>
   );
 }

@@ -3,9 +3,16 @@ import { motion } from 'framer-motion';
 import { useOuterClick } from '../../utils/outerclick';
 import { ChevronDown } from 'react-feather';
 import styles from '../../styles/modules/Account.module.scss';
+import { useContext } from 'react';
+import { DataContext } from '../../store/GlobalState';
+import Cookie from 'js-cookie';
 
 export default function account() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const { state, dispatch } = useContext(DataContext);
+
+  const { auth } = state;
 
   let toggleDropdown = () => {
     setDropdownOpen((status) => !status);
@@ -14,6 +21,13 @@ export default function account() {
   const accountRef = useOuterClick((click) => {
     setDropdownOpen(false);
   });
+
+  const handleLogout = () => {
+    Cookie.remove('refreshtoken');
+    localStorage.removeItem('firstLogin');
+    dispatch({ type: 'AUTH', payload: {} });
+    dispatch({ type: 'NOTIFY', payload: { success: 'Logged out!' } });
+  };
 
   const dropdownVariants = {
     enter: {
@@ -40,7 +54,7 @@ export default function account() {
     <div ref={accountRef} className={styles.accountWrap}>
       <div className={styles.account} onClick={toggleDropdown}>
         <img className={styles.profilePicture} src="./icon.svg" />
-        <span className={styles.name}>Aron Buzinkay</span>
+        <span className={styles.name}>{auth.user.name}</span>
         <ChevronDown />
       </div>
       <motion.div
@@ -56,7 +70,9 @@ export default function account() {
             <span className={styles.accountItem}>Settings</span>
           </div>
           <div className={styles.accountActions}>
-            <span className={styles.signout}>Sign Out</span>
+            <span onClick={handleLogout} className={styles.signout}>
+              Sign Out
+            </span>
           </div>
         </div>
       </motion.div>
