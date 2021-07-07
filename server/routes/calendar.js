@@ -21,13 +21,11 @@ router.get('/', async (req, res) => {
     //   { "$match": { "course.students": "Jonas" } },
     // ]);
 
-    const lessons = await Lessons.find().populate('course')
-
-
+    const lessons = await Lessons.find().populate('course');
 
     const events = await Events.find();
 
-    res.json({events, lessons });
+    res.json({ events, lessons });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
@@ -71,6 +69,5 @@ router.post('/', async (req, res) => {
     res.status(500).json({ err: err.message });
   }
 });
-
 
 module.exports = router;

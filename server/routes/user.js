@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Users = require('../models/user');
 const bcrypt = require('bcrypt');
-const validate = require('../utils/validate')
-const { createAccessToken, createRefreshToken } = require('../utils/generateToken')
-const jwt = require('jsonwebtoken')
-require('dotenv').config()
+const validate = require('../utils/validate');
+const {
+  createAccessToken,
+  createRefreshToken,
+} = require('../utils/generateToken');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 router.post('/create', async (req, res) => {
   try {
@@ -57,7 +60,7 @@ router.patch('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
 
     const { email, password } = req.body;
 
@@ -70,7 +73,6 @@ router.post('/login', async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ err: 'Incorrect password.' });
     }
-
 
     const access_token = createAccessToken({ id: user._id });
     const refresh_token = createRefreshToken({ id: user._id });
@@ -92,25 +94,27 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.post('/accessToken', async (req, res)=>{
+router.post('/accessToken', async (req, res) => {
   try {
-    console.log('access token log')
-    const {rf_token} = req.body
-    if(!rf_token){
-      return res.status(400).json({ err: 'Please login!'})
+    console.log('access token log');
+    const { rf_token } = req.body;
+    if (!rf_token) {
+      return res.status(400).json({ err: 'Please login!' });
     }
 
-    const result = jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET)
-    if(!result){
-      return res.status(400).json({ err: 'Your token is incorrect or has expired' })
+    const result = jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET);
+    if (!result) {
+      return res
+        .status(400)
+        .json({ err: 'Your token is incorrect or has expired' });
     }
 
-    const user = await Users.findById(result.id)
-    if(!user){
-      return res.status(400).json({err: 'User does not exist'})
+    const user = await Users.findById(result.id);
+    if (!user) {
+      return res.status(400).json({ err: 'User does not exist' });
     }
 
-    const access_token = createAccessToken({id: user._id})
+    const access_token = createAccessToken({ id: user._id });
 
     res.json({
       access_token,
@@ -119,14 +123,13 @@ router.post('/accessToken', async (req, res)=>{
         email: user.email,
         role: user.role,
         avatar: user.avatar,
-        root: user.root
-      }
-      })
-
+        root: user.root,
+      },
+    });
   } catch (err) {
-    console.log(err.message)
-      return res.status(500).json({ err: err.message}) 
+    console.log(err.message);
+    return res.status(500).json({ err: err.message });
   }
-})
+});
 
 module.exports = router;

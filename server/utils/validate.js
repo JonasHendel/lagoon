@@ -22,4 +22,4 @@ const validate = (email, password, cf_password, code) => {
   }
 };
 
-module.exports = validate
+module.exports = validate;

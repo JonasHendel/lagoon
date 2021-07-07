@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const moment = require('moment');
@@ -7,7 +6,7 @@ let Users = require('../models/user');
 
 router.get('/all', async (req, res) => {
   try {
-    const users = await Users.find()
+    const users = await Users.find();
 
     res.json(users);
   } catch (err) {

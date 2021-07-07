@@ -13,8 +13,8 @@ let navItems = [
 ];
 
 export default function navbar() {
-  const {state, dispatch} = useContext(DataContext)
-  const {auth} = state
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
   const router = useRouter();
 
   const isActive = (href) => {
@@ -41,8 +41,9 @@ export default function navbar() {
         <Link href="/login">
           <a>Login</a>
         </Link>
-      ): (<Account />)}
-      
+      ) : (
+        <Account />
+      )}
     </div>
   );
 }

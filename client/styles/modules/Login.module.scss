@@ -1,0 +1,130 @@
+@import '../colors';
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: $white;
+  border-radius: 4px;
+  box-shadow: 4px 1px 25px 3px rgba($black-100, 0.1);
+  width: 45vw;
+  display: flex;
+}
+
+.decor {
+  width: 65%;
+}
+
+.decor img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left bottom;
+  border-radius: 4px 0px 0px 4px;
+}
+
+.login {
+  padding: 75px 30px;
+  width: 35%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.header img {
+  height: 45px;
+  width: auto;
+  margin-right: 1em;
+}
+
+.header span {
+  font-size: 1.75em;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.inputs label {
+  margin-bottom: 0.75em;
+  font-size: 0.9em;
+  color: $black-100;
+}
+
+.actions .register {
+  margin-top: 1.5em;
+  font-size: 0.85em;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+}
+
+.actions .register a {
+  margin-left: 0.3em;
+  color: darken($lagoon, 50%);
+  text-decoration: underline;
+
+  &:visited {
+    color: darken($lagoon, 50%);
+  }
+}
+
+@media (max-width: 1448px) {
+  .login {
+    width: 40%;
+    padding: 50px 30px;
+  }
+
+  .decor {
+    width: 70%;
+  }
+}
+
+@media (max-width: 1341px) {
+  .card {
+    width: 30vw;
+  }
+
+  .login {
+    width: 100%;
+  }
+
+  .decor {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 50vw;
+  }
+
+  .login {
+    width: 100%;
+  }
+
+  .decor {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .card {
+    width: 85vw;
+  }
+
+  .login {
+    width: 100%;
+    padding: 30px;
+  }
+
+  .decor {
+    display: none;
+  }
+}

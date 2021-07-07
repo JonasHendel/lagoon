@@ -27,4 +27,5 @@ let lessonSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.models.lesson || mongoose.model('Lesson', lessonSchema);
+module.exports =
+  mongoose.models.lesson || mongoose.model('Lesson', lessonSchema);
