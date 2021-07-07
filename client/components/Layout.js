@@ -13,12 +13,12 @@ const Layout = ({ children }) => {
   const noNav = ['/login', '/register'];
 
   useEffect(() => {
-    setNavBarVisible(noNav.includes(router.path));
+    setNavBarVisible(noNav.includes(router.pathname));
   })
   
   return (
     <div>
-      {navBarVisible && 
+      {!navBarVisible && 
         <div>
           <CalendarAdd />
           <CalendarDetail />
