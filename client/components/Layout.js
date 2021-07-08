@@ -6,7 +6,7 @@ import CalendarDetail from './calendar/Detail';
 import CalendarAdd from './calendar/AddEvent';
 
 const Layout = ({ children }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const [navBarVisible, setNavBarVisible] = useState(true);
 
@@ -14,17 +14,17 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     setNavBarVisible(noNav.includes(router.pathname));
-  })
-  
+  });
+
   return (
     <div>
-      {!navBarVisible && 
+      {!navBarVisible && (
         <div>
           <CalendarAdd />
           <CalendarDetail />
           <NavBar />
         </div>
-      }
+      )}
       {children}
     </div>
   );

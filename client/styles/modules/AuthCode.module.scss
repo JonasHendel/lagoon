@@ -1,0 +1,22 @@
+@import '../colors';
+
+.authCode {
+  display: flex;
+}
+
+.section {
+  display: flex;
+
+  &:not(:last-of-type) {
+    margin-right: 0.5em;
+  }
+}
+
+.number {
+  font-family: 'Source Code Pro';
+  font-size: 1.75em;
+  width: 1ch;
+  height: 1.75ch;
+  box-sizing: content-box;
+  margin-right: 0.3em;
+}

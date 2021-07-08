@@ -5,11 +5,12 @@ const Input = (props) => {
   return (
     <div>
       <input
-        className={`${styles.input} ${styles[props.type]}`}
+        className={`${styles.input} ${props.type} ${props.className}`}
         type={props.type}
         name={props.name}
         placeholder={props.placeholder}
         onChange={props.onChange}
+        onKeyUp={props.onKeyUp}
         value={props.value}
       />
     </div>

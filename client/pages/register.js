@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { patchData } from '../utils/fetchData';
+import styles from '../styles/modules/Register.module.scss';
+
+import Input from './../components/core/Input';
+import AuthCode from './../components/auth/AuthCode';
 
 const validateEmail = (email) => {
   const re =
@@ -37,37 +41,26 @@ const Register = () => {
 
   return (
     <div>
-      <h1>Register</h1>
-      <form onSubmit={registerUser}>
-        <input
-          type="email"
-          name="email"
-          value={user.email}
-          placeholder="E-mail"
-          onChange={handleChange}
-        />
-        <input
-          name="code"
-          value={user.code}
-          placeholder="Code"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          value={user.password}
-          placeholder="Password"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="cf_password"
-          value={user.cf_password}
-          placeholder="Confirm password"
-          onChange={handleChange}
-        />
-        <button type="submit">Register</button>
-      </form>
+      <div className={styles.card}>
+        <div className={styles.welcome}>
+          <div className={styles.cover}>
+            <img src="./intro.jpg" />
+          </div>
+          <div className={styles.content}>
+            <div className={styles.welcomeMessage}>
+              <h1>Welcome to Lagoon!</h1>
+              <span>
+                To get started enter the code given to you by your teacher in
+                the fields below.
+              </span>
+            </div>
+          </div>
+          <div className={styles.code}>
+            <span>Registration Code</span>
+            <AuthCode />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

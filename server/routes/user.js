@@ -18,7 +18,7 @@ router.post('/create', async (req, res) => {
       name,
       role,
       grade,
-      code: '1' + Math.random().toString(36).substr(2, 9),
+      code: Math.floor(100000 + Math.random() * 900000).toString(),
     });
     await newUser.save();
     res.json({ success: 'User was created' });

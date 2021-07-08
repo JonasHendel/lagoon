@@ -1,0 +1,51 @@
+@import '../_colors';
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: $white;
+  border-radius: 4px;
+  box-shadow: 4px 1px 25px 3px rgba($black-100, 0.1);
+  width: 35vw;
+  display: flex;
+}
+
+.content {
+  padding: 1em 2em;
+}
+
+.cover {
+  width: 100%;
+  height: 60%;
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center left;
+  border-radius: 4px 4px 0px 0px;
+}
+
+.welcomeMessage h1 {
+  font-size: 2em;
+  line-height: 1em;
+}
+
+.welcomeMessage span {
+  font-size: 0.9em;
+  color: $black-90;
+}
+
+.code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.code span {
+  font-size: 1.25em;
+  margin-bottom: 0.2em;
+}
