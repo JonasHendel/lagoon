@@ -15,24 +15,6 @@ export default function Home() {
   }
   return (
     <div className="min-h-screen">
-      <button
-        onClick={() => {
-          console.log(state);
-        }}>
-        state
-      </button>
-      <button
-        onClick={() => {
-          dispatch(increment());
-        }}>
-        Increment
-      </button>
-      <button
-        onClick={() => {
-          dispatch(setAuth('test'));
-        }}>
-        auth
-      </button>
     </div>
   );
 }

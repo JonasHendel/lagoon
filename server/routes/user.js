@@ -82,10 +82,10 @@ router.post('/login', async (req, res) => {
       access_token,
       refresh_token,
       user: {
+        id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
-        avatar: user.avatar,
         root: user.root,
       },
     });

@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimateSharedLayout } from 'framer-motion';
 import styles from '../../styles/modules/Select.module.scss';
-import { useContext } from 'react';
-import { DataContext } from '../../store/GlobalState';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { changeEdit } from '../../store/features/editSlice';
 const Select = (props) => {
   const [selectedItem, setSelectedItem] = useState(0); // Default View 0 for Week; 1 for Month; 2 for Year
 
-  // const { state, dispatch } = useContext(DataContext);
+  const edit = useSelector((state) => state.edit);
 
-  // const { edit, auth } = state;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     props.onChange(props.list[selectedItem]);
@@ -20,9 +19,8 @@ const Select = (props) => {
       <div className={styles.select}>
         {/* {auth.user && auth.user.role === 'admin' && ( */}
         <div
-        // // className={edit ? styles.editTrue : styles.editFalse}
-        // onClick={() => dispatch({ type: 'EDIT_CALENDAR', payload: !edit })}
-        >
+          className={edit.value ? styles.editTrue : styles.editFalse}
+          onClick={() => dispatch(changeEdit())}>
           Edit
         </div>
         {/* )} */}

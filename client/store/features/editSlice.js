@@ -2,14 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const editSlice = createSlice({
   name: 'edit',
-  initialState: false,
+  initialState: {
+    value: false
+  },
   reducers: {
-    changeBoolean: (state) => {
-      state = !state;
+    changeEdit: (state) => {
+      state.value = !state.value;
     },
   },
 });
 
-export const { changeBoolean } = editSlice.actions;
+export const { changeEdit } = editSlice.actions;
 
 export default editSlice.reducer;

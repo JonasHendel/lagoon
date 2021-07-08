@@ -9,26 +9,26 @@ let Events = require('../models/event');
 router.get('/', async (req, res) => {
   try {
     const { userId } = await req.query;
-    const lessons = await Lessons.aggregate([
-      {
-        $lookup: {
-          from: 'courses',
-          localField: 'course',
-          foreignField: '_id',
-          as: 'course',
-        },
-      },
-      { $unwind: '$course' },
-      {
-        $match: {
-          'course.students': mongoose.Types.ObjectId(
-            userId.toString()
-          ),
-        },
-      },
-    ]);
+    // const lessons = await Lessons.aggregate([
+    //   {
+    //     $lookup: {
+    //       from: 'courses',
+    //       localField: 'course',
+    //       foreignField: '_id',
+    //       as: 'course',
+    //     },
+    //   },
+    //   { $unwind: '$course' },
+    //   {
+    //     $match: {
+    //       'course.students': mongoose.Types.ObjectId(
+    //         userId.toString()
+    //       ),
+    //     },
+    //   },
+    // ]);
 
-    // const lessons = await Lessons.find().populate('course');
+    const lessons = await Lessons.find().populate('course');
 
     const events = await Events.find();
 

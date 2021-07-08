@@ -13,7 +13,7 @@ const WeekView = ({ timetable, events }) => {
   const [height, setHeight] = useState(0);
   const ref = useRef(null);
 
-  const totalMins = (16 - 8) * 60;
+  const totalMins = 480;
   const minuteHeight = height / totalMins;
 
   useLayoutEffect(() => {
@@ -81,7 +81,8 @@ const WeekView = ({ timetable, events }) => {
             {timeRange.map((time) => (
               <span
                 className={styles.absolute}
-                style={{ top: timeToPosition(time) }}>
+                style={{ top: timeToPosition(time) - 12 }}>
+                {/* 12 is height of span/2 */}
                 {time}
               </span>
             ))}

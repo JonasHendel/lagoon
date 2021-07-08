@@ -127,6 +127,8 @@ const Calendar = () => {
   if (auth.token.length <= 0) {
     return null;
   }
+
+  console.log(timetable)
   return (
     <>
       <Head>
@@ -137,14 +139,14 @@ const Calendar = () => {
           <div className={styles.selector}>
             <DateSelect date={date} setDate={setDate} view={view} />
             <ViewSelect
-              list={['Week', 'Month', 'Year']}
+              list={['Week', 'Month']}
               onChange={(selected) => {
                 setDate(moment());
                 setView(selected);
               }}
             />
           </div>
-          {view === 'Week' && Object.keys(timetable).length && (
+          {view === 'Week' && (
             <WeekView timetable={timetable} events={events} />
           )}
           {view === 'Month' && <MonthView events={events} date={date} />}
