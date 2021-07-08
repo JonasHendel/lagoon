@@ -43,6 +43,10 @@ const AuthCode = (props) => {
   }
 
   const handleKeyUp = (e) => {
+    if (e.target.value.length > 1) {
+      e.target.value = Array.from(e.target.value)[e.target.value.length - 1];
+    }
+
     let inputs = e.target.parentElement.parentElement.children;
     inputs = [...inputs].map((input) => {
       return input.children[0];
@@ -55,6 +59,18 @@ const AuthCode = (props) => {
       }
     } else if (index === inputs.length - 1) {
       e.target.blur();
+    }
+
+    let values = inputs.map((x) => {
+      return x.value;
+    });
+
+    let validNumbers = inputs.map((x) => {
+      return isNumeric(x.value);
+    });
+
+    if (props.onValueChange && !validNumbers.includes(false)) {
+      props.onValueChange(values.join(''), index);
     }
   };
 

@@ -20,10 +20,10 @@ const Calendar = () => {
   const [view, setView] = useState('Month');
 
   useEffect(async () => {
-      const res = await getData(`calendar/?userId=${auth.user.id}`);
-      setLessons(res.lessons);
-      setEvents(res.events);
-    }, [date]);
+    const res = await getData(`calendar/?userId=${auth.user.id}`);
+    setLessons(res.lessons);
+    setEvents(res.events);
+  }, [date]);
 
   let days = [];
 

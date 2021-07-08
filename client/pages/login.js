@@ -33,7 +33,9 @@ const Login = () => {
     if (Object.keys(auth).length !== 0) router.push('/');
   }, [auth]);
 
-  const login = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     dispatch({ type: 'NOTIFY', payload: { loading: true } });
 
     const res = await postData('user/login', userData);
@@ -59,18 +61,6 @@ const Login = () => {
     router.back();
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    login();
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      login();
-    }
-  };
-
   return (
     <div>
       <Head>
@@ -89,30 +79,15 @@ const Login = () => {
           <div className={styles.inputs}>
             <label>
               E-Mail
-              <Input
-                type="email"
-                onChange={handleChangeInput}
-                name="email"
-                value={email}
-                placeholder="example@domain.com"
-              />
+              <Input type="email" placeholder="example@domain.com" />
             </label>
             <label>
               Password
-              <Input
-                type="password"
-                onChange={handleChangeInput}
-                onKeyPress={handleKeyPress}
-                name="password"
-                value={password}
-                placeholder="Password"
-              />
+              <Input type="password" placeholder="Password" />
             </label>
           </div>
           <div className={styles.actions}>
-            <Button type="primary" onClick={handleSubmit}>
-              Sign in
-            </Button>
+            <Button type="primary">Sign in</Button>
 
             <div className={styles.register}>
               New here?

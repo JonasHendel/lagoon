@@ -19,12 +19,12 @@ const Select = (props) => {
     <AnimateSharedLayout>
       <div className={styles.select}>
         {/* {auth.user && auth.user.role === 'admin' && ( */}
-          <div
-            // // className={edit ? styles.editTrue : styles.editFalse}
-            // onClick={() => dispatch({ type: 'EDIT_CALENDAR', payload: !edit })}
-            >
-            Edit
-          </div>
+        <div
+        // // className={edit ? styles.editTrue : styles.editFalse}
+        // onClick={() => dispatch({ type: 'EDIT_CALENDAR', payload: !edit })}
+        >
+          Edit
+        </div>
         {/* )} */}
         {props.list.map((item, index) => {
           const isActive = index === selectedItem;

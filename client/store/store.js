@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import editReducer from './features.js/editSlice'
-import authReducer from './features.js/authSlice'
-import notifyReducer from './features.js/notifySlice'
+import editReducer from './features.js/editSlice';
+import authReducer from './features.js/authSlice';
+import notifyReducer from './features.js/notifySlice';
 
 export default configureStore({
   reducer: {
@@ -9,4 +9,4 @@ export default configureStore({
     auth: authReducer,
     notify: notifyReducer,
   },
-})
+});

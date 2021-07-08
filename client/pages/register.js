@@ -1,44 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { patchData } from '../utils/fetchData';
+import { motion } from 'framer-motion';
 import styles from '../styles/modules/Register.module.scss';
 
-import Input from './../components/core/Input';
 import AuthCode from './../components/auth/AuthCode';
 
-const validateEmail = (email) => {
-  const re =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-};
-
 const Register = () => {
-  const initialState = {
-    email: '',
-    code: '',
-    password: '',
-    cf_password: '',
-  };
-  const [user, setUser] = useState(initialState);
+  const handleCodeChange = (code, inputIndex) => {
+    if (code.length === 6 && inputIndex === 5) {
+      console.log('Selected Code is: ' + code);
+      if (code !== '123456') {
+        setAnimationPlaying(true);
 
-  const handleChange = (e) => {
-    const { value, name } = e.target;
-    setUser({ ...user, [name]: value });
-  };
-
-  const registerUser = () => {
-    if (validateEmail(user.email)) {
-      patchData('user/register', user).then((res) => {
-        if (res.err) {
-          console.log(res.err);
-        } else {
-          console.log(res);
-        }
-      });
-    } else {
-      console.log('Email is invalid');
+        setTimeout(() => {
+          setAnimationPlaying(false);
+        }, 500);
+      }
     }
   };
 
+  const [animationPlaying, setAnimationPlaying] = useState(false);
+
+  const getRandomDelay = () => -(Math.random() * 0.7 + 0.05);
+  const randomDuration = () => Math.random() * 0.07 + 0.23;
+
+  const shakeVariants = {
+    start: (i) => ({
+      translateX: [5, -5, 0],
+      transition: {
+        delay: getRandomDelay(),
+        repeat: Infinity,
+        duration: randomDuration(),
+      },
+    }),
+    reset: {
+      translateX: 0,
+    },
+  };
   return (
     <div>
       <div className={styles.card}>
@@ -57,7 +54,11 @@ const Register = () => {
           </div>
           <div className={styles.code}>
             <span>Registration Code</span>
-            <AuthCode />
+            <motion.div
+              variants={shakeVariants}
+              animate={animationPlaying ? 'start' : 'reset'}>
+              <AuthCode onValueChange={handleCodeChange} />
+            </motion.div>
           </div>
         </div>
       </div>

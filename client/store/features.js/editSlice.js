@@ -1,15 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const editSlice = createSlice({
   name: 'edit',
   initialState: false,
   reducers: {
-    changeBoolean: (state) => {
-      state = !state
+    changeBoolean: (state) => {
+      state = !state;
     },
-  }
-})
+  },
+});
 
-export const { changeBoolean } = editSlice.actions
+export const { changeBoolean } = editSlice.actions;
 
-export default editSlice.reducer 
+export default editSlice.reducer;
