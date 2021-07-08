@@ -42,7 +42,7 @@ export default function navbar() {
           <a>Login</a>
         </Link>
       ) : ( */}
-        <Account />
+      <Account />
       {/* )} */}
     </div>
   );

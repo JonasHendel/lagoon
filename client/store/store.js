@@ -11,4 +11,4 @@ export default configureStore({
     notify: notifyReducer,
     counter: counterReducer,
   },
-})
+});

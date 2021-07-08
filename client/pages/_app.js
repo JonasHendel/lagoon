@@ -3,7 +3,7 @@ import '../styles/global.scss';
 import Layout from '../components/Layout';
 
 import store from '../store/store';
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux';
 
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';

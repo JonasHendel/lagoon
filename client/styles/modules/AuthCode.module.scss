@@ -13,10 +13,11 @@
 }
 
 .number {
-  font-family: 'Source Code Pro';
-  font-size: 1.75em;
-  width: 1ch;
-  height: 1.75ch;
-  box-sizing: content-box;
+  font-family: 'Source Code Pro' !important;
+  font-size: 1.75em !important;
+  width: 1ch !important;
+  height: 1.75ch !important;
+  box-sizing: content-box !important;
   margin-right: 0.3em;
+  margin-bottom: 1em;
 }

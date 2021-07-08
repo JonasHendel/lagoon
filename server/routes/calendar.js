@@ -8,8 +8,8 @@ let Events = require('../models/event');
 
 router.get('/', async (req, res) => {
   try {
-    const {userId} = req.query
-    console.log(userId)
+    const { userId } = req.query;
+    console.log(userId);
     const lessons = await Lessons.aggregate([
       {
         $lookup: {
@@ -19,10 +19,15 @@ router.get('/', async (req, res) => {
           as: 'course',
         },
       },
-      {$unwind: '$course'},
-      { "$match": { "course.students": mongoose.Types.ObjectId("60e357c0003c4c8bfd68d352") } },
+      { $unwind: '$course' },
+      {
+        $match: {
+          'course.students': mongoose.Types.ObjectId(
+            '60e357c0003c4c8bfd68d352'
+          ),
+        },
+      },
     ]);
-
 
     // const lessons = await Lessons.find().populate('course');
 
