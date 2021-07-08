@@ -10,9 +10,9 @@ import Cookie from 'js-cookie';
 export default function account() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const { state, dispatch } = useContext(DataContext);
+  // const { state, dispatch } = useContext(DataContext);
 
-  const { auth } = state;
+  // const { auth } = state;
 
   let toggleDropdown = () => {
     setDropdownOpen((status) => !status);
@@ -54,7 +54,7 @@ export default function account() {
     <div ref={accountRef} className={styles.accountWrap}>
       <div className={styles.account} onClick={toggleDropdown}>
         <img className={styles.profilePicture} src="./icon.svg" />
-        <span className={styles.name}>{auth.user.name}</span>
+        {/* <span className={styles.name}>{auth.user.name}</span> */}
         <ChevronDown />
       </div>
       <motion.div

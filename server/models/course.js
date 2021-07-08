@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-let courseSchema = mongoose.Schema({
+let courseSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -13,6 +13,10 @@ let courseSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  students: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'User'
+  }
 });
 
 module.exports =

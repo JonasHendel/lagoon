@@ -18,13 +18,12 @@ const Calendar = () => {
   const [timetable, setTimetable] = useState({});
   const [date, setDate] = useState(moment());
   const [view, setView] = useState('Month');
-  const [duration, setDuration] = useState(90);
 
   useEffect(async () => {
-    const res = await getData('calendar');
-    setLessons(res.lessons);
-    setEvents(res.events);
-  }, [date]);
+      const res = await getData(`calendar/?userId=${auth.user.id}`);
+      setLessons(res.lessons);
+      setEvents(res.events);
+    }, [date]);
 
   let days = [];
 
@@ -139,7 +138,7 @@ const Calendar = () => {
               }}
             />
           </div>
-          {view === 'Week' && (
+          {view === 'Week' && Object.keys(timetable).length && (
             <WeekView timetable={timetable} events={events} />
           )}
           {view === 'Month' && <MonthView events={events} date={date} />}

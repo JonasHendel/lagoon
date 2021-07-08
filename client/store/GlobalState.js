@@ -13,7 +13,7 @@ export const DataProvider = ({ children }) => {
     notify: {},
     auth: {},
     detail: {},
-    edit: true,
+    edit: false,
     event: {},
   };
 

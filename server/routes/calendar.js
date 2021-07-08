@@ -1,27 +1,30 @@
 const express = require('express');
 const router = express.Router();
 const moment = require('moment');
-
+const mongoose = require('mongoose');
 let Lessons = require('../models/lesson');
 let Courses = require('../models/course');
 let Events = require('../models/event');
 
 router.get('/', async (req, res) => {
   try {
-    // const lessons = await Lessons.aggregate([
-    //   {
-    //     $lookup: {
-    //       from: 'courses',
-    //       localField: 'course',
-    //       foreignField: '_id',
-    //       as: 'course',
-    //     },
-    //   },
-    //   {$unwind: '$course'},
-    //   { "$match": { "course.students": "Jonas" } },
-    // ]);
+    const {userId} = req.query
+    console.log(userId)
+    const lessons = await Lessons.aggregate([
+      {
+        $lookup: {
+          from: 'courses',
+          localField: 'course',
+          foreignField: '_id',
+          as: 'course',
+        },
+      },
+      {$unwind: '$course'},
+      { "$match": { "course.students": mongoose.Types.ObjectId("60e357c0003c4c8bfd68d352") } },
+    ]);
 
-    const lessons = await Lessons.find().populate('course');
+
+    // const lessons = await Lessons.find().populate('course');
 
     const events = await Events.find();
 

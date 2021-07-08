@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-let eventSchema = mongoose.Schema({
+let eventSchema = new mongoose.Schema({
   // class: {
   // 	type: mongoose.Schema.Types.ObjectId,
   // 	ref: 'Class',

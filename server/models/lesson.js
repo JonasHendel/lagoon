@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-let lessonSchema = mongoose.Schema({
+let lessonSchema = new mongoose.Schema({
   course: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Course',

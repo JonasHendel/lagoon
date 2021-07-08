@@ -13,8 +13,8 @@ let navItems = [
 ];
 
 export default function navbar() {
-  const { state, dispatch } = useContext(DataContext);
-  const { auth } = state;
+  // const { state, dispatch } = useContext(DataContext);
+  // const { auth } = state;
   const router = useRouter();
 
   const isActive = (href) => {
@@ -37,13 +37,13 @@ export default function navbar() {
           ))}
         </div>
       </div>
-      {Object.keys(auth).length === 0 ? (
+      {/* {Object.keys(auth).length === 0 ? (
         <Link href="/login">
           <a>Login</a>
         </Link>
-      ) : (
+      ) : ( */}
         <Account />
-      )}
+      {/* )} */}
     </div>
   );
 }

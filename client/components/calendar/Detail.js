@@ -11,20 +11,20 @@ import styles from '../../styles/calendar/Detail.module.scss';
 const DetailModal = () => {
   const [open, setOpen] = useState(false);
 
-  const { state, dispatch } = useContext(DataContext);
+  // const { state, dispatch } = useContext(DataContext);
 
-  const { detail } = state;
+  // const { detail } = state;
 
-  useEffect(() => {
-    if (Object.keys(detail).length !== 0) {
-      setOpen(true);
-    }
-  }, [detail]);
+  // useEffect(() => {
+  //   if (Object.keys(detail).length !== 0) {
+  //     setOpen(true);
+  //   }
+  // }, [detail]);
 
-  const closeDetail = () => {
-    dispatch({ type: 'CALENDAR_DETAIL', payload: {} });
-    setOpen(false);
-  };
+  // const closeDetail = () => {
+  //   dispatch({ type: 'CALENDAR_DETAIL', payload: {} });
+  //   setOpen(false);
+  // };
 
   if (!open) {
     return null;
@@ -36,7 +36,7 @@ const DetailModal = () => {
       transition={{ duration: 0.3 }}
       onClick={closeDetail}
       className={styles.modal}>
-      <motion.div
+      {/* <motion.div
         onClick={(e) => {
           e.stopPropagation();
         }}
@@ -57,7 +57,7 @@ const DetailModal = () => {
           {moment(detail.endTime).format('HH:mm DD.MM.YYYY')}
         </p>
         <p className={styles.description}>{detail.description}</p>
-      </motion.div>
+      </motion.div> */}
     </motion.div>
   );
 };

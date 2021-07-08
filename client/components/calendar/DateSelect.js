@@ -42,7 +42,7 @@ const DateSelect = ({ date, setDate, view }) => {
   };
   return (
     <div className={styles.dateSelect}>
-      <div className="cursor-pointer">
+      <div className={styles.dateArrows}>
         <ArrowLeft onClick={previousDate} size={25} />
       </div>
       {view === 'Week' && (
@@ -63,7 +63,7 @@ const DateSelect = ({ date, setDate, view }) => {
         <p className={styles.selectText}>{moment(date).format('YYYY')}</p>
       )}
 
-      <div className="cursor-pointer">
+      <div className={styles.dateArrows}>
         <ArrowRight onClick={nextDate} size={25} />
       </div>
     </div>
