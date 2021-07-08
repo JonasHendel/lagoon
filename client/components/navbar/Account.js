@@ -3,17 +3,21 @@ import { motion } from 'framer-motion';
 import { useOuterClick } from '../../utils/outerclick';
 import { ChevronDown } from 'react-feather';
 import styles from '../../styles/modules/Account.module.scss';
-import { useContext } from 'react';
 import { DataContext } from '../../store/GlobalState';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearAuth } from '../../store/features/authSlice';
 import Cookie from 'js-cookie';
+import {useRouter} from 'next/router'
 
 export default function account() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // const { state, dispatch } = useContext(DataContext);
+  const router = useRouter()
 
-  // const { auth } = state;
+  const auth = useSelector(state => state.auth)
 
+  const dispatch = useDispatch()
+  
   let toggleDropdown = () => {
     setDropdownOpen((status) => !status);
   };
@@ -25,8 +29,9 @@ export default function account() {
   const handleLogout = () => {
     Cookie.remove('refreshtoken');
     localStorage.removeItem('firstLogin');
-    dispatch({ type: 'AUTH', payload: {} });
+    dispatch(clearAuth());
     dispatch({ type: 'NOTIFY', payload: { success: 'Logged out!' } });
+    
   };
 
   const dropdownVariants = {
@@ -54,7 +59,7 @@ export default function account() {
     <div ref={accountRef} className={styles.accountWrap}>
       <div className={styles.account} onClick={toggleDropdown}>
         <img className={styles.profilePicture} src="./icon.svg" />
-        {/* <span className={styles.name}>{auth.user.name}</span> */}
+        <span className={styles.name}>{auth.user.name}</span>
         <ChevronDown />
       </div>
       <motion.div

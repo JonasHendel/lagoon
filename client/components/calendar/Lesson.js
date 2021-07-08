@@ -4,12 +4,11 @@ import { useContext } from 'react';
 import { DataContext } from '../../store/GlobalState';
 import { User, MapPin } from 'react-feather';
 import { motion } from 'framer-motion';
+import { useSelector } from 'react-redux';
 
 const Lesson = (props) => {
   let color = props.exam && props.exam === true ? 'lagoon' : props.color;
-  const { state, dispatch } = useContext(DataContext);
-
-  const { edit } = state;
+  const edit = useSelector(state => state.edit)
 
   const showLesson = () => {
     if (props.detail.type === 'event') {

@@ -4,6 +4,7 @@ import Account from './Account';
 import styles from '../../styles/modules/NavBar.module.scss';
 import { useContext } from 'react';
 import { DataContext } from '../../store/GlobalState';
+import { useSelector } from 'react-redux';
 
 let navItems = [
   { name: 'Dashboard', href: '/' },
@@ -15,6 +16,8 @@ let navItems = [
 export default function navbar() {
   // const { state, dispatch } = useContext(DataContext);
   // const { auth } = state;
+
+  const auth = useSelector(state => state.auth)
   const router = useRouter();
 
   const isActive = (href) => {
@@ -37,13 +40,13 @@ export default function navbar() {
           ))}
         </div>
       </div>
-      {/* {Object.keys(auth).length === 0 ? (
+      {auth.token.length === 0 ? (
         <Link href="/login">
           <a>Login</a>
         </Link>
-      ) : ( */}
+      ) : (
       <Account />
-      {/* )} */}
+      )}
     </div>
   );
 }

@@ -11,6 +11,7 @@ import MonthView from '../components/calendar/MonthView';
 import YearView from '../components/calendar/YearView';
 import { useContext } from 'react';
 import { DataContext } from '../store/GlobalState';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Calendar = () => {
   const [lessons, setLessons] = useState();
@@ -18,12 +19,14 @@ const Calendar = () => {
   const [timetable, setTimetable] = useState({});
   const [date, setDate] = useState(moment());
   const [view, setView] = useState('Month');
+  const dispatch = useDispatch();
 
+  const auth = useSelector((state) => state.auth);
   useEffect(async () => {
     const res = await getData(`calendar/?userId=${auth.user.id}`);
     setLessons(res.lessons);
     setEvents(res.events);
-  }, [date]);
+  }, [auth, date]);
 
   let days = [];
 
@@ -121,6 +124,9 @@ const Calendar = () => {
     }
   }, [lessons]);
 
+  if (auth.token.length <= 0) {
+    return null;
+  }
   return (
     <>
       <Head>

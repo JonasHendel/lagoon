@@ -6,8 +6,7 @@ import { DataContext } from '../../store/GlobalState';
 import { motion } from 'framer-motion';
 
 const MonthDay = ({ day, startOfMonth, events }) => {
-  const { state, dispatch } = useContext(DataContext);
-
+  
   return (
     <>
       {day.diff(moment(startOfMonth)) < 0 ? (

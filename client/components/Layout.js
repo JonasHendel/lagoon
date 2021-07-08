@@ -5,7 +5,7 @@ import NavBar from './navbar/NavBar';
 import CalendarDetail from './calendar/Detail';
 import CalendarAdd from './calendar/AddEvent';
 import Cookies from 'js-cookie';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../store/features/authSlice';
 import { postData } from '../utils/fetchData';
 
@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const [navBarVisible, setNavBarVisible] = useState(true);
 
-  const noNav = ['/login', '/register'];
+  const noNav = ['/login', '/register'];    
 
   useEffect(() => {
     setNavBarVisible(noNav.includes(router.pathname));
@@ -23,7 +23,6 @@ const Layout = ({ children }) => {
   useEffect(async () => {
     const firstLogin = localStorage.getItem('firstLogin');
     if (firstLogin) {
-      console.log(Cookies.get('refreshtoken'));
       const res = await postData('user/accessToken', {
         rf_token: Cookies.get('refreshtoken'),
       });
@@ -37,6 +36,13 @@ const Layout = ({ children }) => {
     }
   }, []);
 
+  const auth = useSelector((state) => state.auth);
+
+  // useEffect(() => {
+  //   if (auth.token.length === 0) {
+  //     router.push('/login');
+  //   }
+  // }, [auth]);
   return (
     <div>
       {!navBarVisible && (

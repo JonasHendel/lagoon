@@ -10,8 +10,8 @@ import styles from '../styles/modules/Login.module.scss';
 import { Box } from 'react-feather';
 
 //Project files
-import { useSelector, useDispatch } from 'react-redux'
-import {setAuth} from '../store/features/authSlice'
+import { useSelector, useDispatch } from 'react-redux';
+import { setAuth } from '../store/features/authSlice';
 import { postData } from '../utils/fetchData';
 
 const Login = () => {
@@ -19,8 +19,8 @@ const Login = () => {
   const [userData, setUserData] = useState(initialState);
   const { email, password } = userData;
 
-  const auth = useSelector((state)=>state.auth)
-  const dispatch = useDispatch()
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const router = useRouter();
 
@@ -43,10 +43,12 @@ const Login = () => {
     //   return dispatch({ type: 'NOTIFY', payload: { error: res.err } });
     // }
 
-    dispatch(setAuth({
-      token: res.access_token,
-      user: res.user,
-    }))
+    dispatch(
+      setAuth({
+        token: res.access_token,
+        user: res.user,
+      })
+    );
 
     Cookie.set('refreshtoken', res.refresh_token, {
       path: '',
@@ -55,7 +57,6 @@ const Login = () => {
     localStorage.setItem('firstLogin', true);
     router.push('/');
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,15 +88,29 @@ const Login = () => {
           <div className={styles.inputs}>
             <label>
               E-Mail
-              <Input type="email" placeholder="example@domain.com" />
+              <Input
+                type="email"
+                onChange={handleChangeInput}
+                name="email"
+                value={email}
+                placeholder="example@domain.com"
+              />
             </label>
             <label>
               Password
-              <Input type="password" placeholder="Password" />
+              <Input
+                type="password"
+                onChange={handleChangeInput}
+                name="password"
+                value={password}
+                placeholder="Password"
+              />
             </label>
           </div>
           <div className={styles.actions}>
-            <Button type="primary" onClick={handleSubmit}>Sign in</Button>
+            <Button type="primary" onClick={handleSubmit}>
+              Sign in
+            </Button>
 
             <div className={styles.register}>
               New here?
