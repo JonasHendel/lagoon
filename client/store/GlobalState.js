@@ -26,7 +26,7 @@ export const DataProvider = ({ children }) => {
       postData('user/accessToken', {
         rf_token: Cookies.get('refreshtoken'),
       }).then((res) => {
-        // if(res.err) return localStorage.removeItem("firstLogin")
+        if(res.err) return localStorage.removeItem("firstLogin")
 
         dispatch({
           type: 'AUTH',

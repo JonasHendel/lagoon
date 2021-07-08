@@ -10,7 +10,8 @@ import styles from '../styles/modules/Login.module.scss';
 import { Box } from 'react-feather';
 
 //Project files
-import { DataContext } from '../store/GlobalState';
+import { useSelector, useDispatch } from 'react-redux'
+import {setAuth} from '../store/features/authSlice'
 import { postData } from '../utils/fetchData';
 
 const Login = () => {
@@ -18,46 +19,43 @@ const Login = () => {
   const [userData, setUserData] = useState(initialState);
   const { email, password } = userData;
 
-  const { state, dispatch } = useContext(DataContext);
-  const { auth } = state;
+  const auth = useSelector((state)=>state.auth)
+  const dispatch = useDispatch()
 
   const router = useRouter();
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
-    dispatch({ type: 'NOTIFY', payload: {} });
+    // dispatch({ type: 'NOTIFY', payload: {} });
   };
 
-  useEffect(() => {
-    if (Object.keys(auth).length !== 0) router.push('/');
-  }, [auth]);
+  // useEffect(() => {
+  //   if (Object.keys(auth).length !== 0) router.push('/');
+  // }, [auth]);
 
   const login = async () => {
-    dispatch({ type: 'NOTIFY', payload: { loading: true } });
+    // dispatch({ type: 'NOTIFY', payload: { loading: true } });
 
     const res = await postData('user/login', userData);
 
-    if (res.err) {
-      return dispatch({ type: 'NOTIFY', payload: { error: res.err } });
-    }
+    // if (res.err) {
+    //   return dispatch({ type: 'NOTIFY', payload: { error: res.err } });
+    // }
 
-    dispatch({ type: 'NOTIFY', payload: { success: res.msg } });
-    dispatch({
-      type: 'AUTH',
-      payload: {
-        token: res.access_token,
-        user: res.user,
-      },
-    });
+    dispatch(setAuth({
+      token: res.access_token,
+      user: res.user,
+    }))
 
     Cookie.set('refreshtoken', res.refresh_token, {
       path: '',
       expires: 7,
     });
     localStorage.setItem('firstLogin', true);
-    router.back();
+    router.push('/');
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
