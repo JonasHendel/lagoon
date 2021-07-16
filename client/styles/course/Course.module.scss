@@ -1,0 +1,21 @@
+@import '../_colors';
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  width: 84vw;
+  margin-top: 20px;
+}
+
+.posts {
+  width: 60%;
+}
+
+.upcoming {
+  width: 30%;
+}

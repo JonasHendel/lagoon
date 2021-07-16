@@ -1,0 +1,37 @@
+@import '../colors';
+
+.navbar {
+  background-color: white;
+  margin: 20px 0px 20px 0px;
+  width: 84vw;
+  border-radius: 4px;
+  box-shadow: 4px 1px 25px 3px rgba(0, 0, 0, 0.1);
+  height: 65px;
+  display: flex;
+  align-items: center;
+}
+
+.courseInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-left: 20px;
+}
+
+.infoText {
+  margin: 0 5px;
+}
+
+.linkDiv {
+  align-items: center;
+  display: flex;
+}
+
+.linkDiv a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.3em;
+  margin-left: 20px;
+}

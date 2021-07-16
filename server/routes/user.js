@@ -96,7 +96,6 @@ router.post('/login', async (req, res) => {
 
 router.post('/accessToken', async (req, res) => {
   try {
-    console.log('access token log');
     const { rf_token } = req.body;
     if (!rf_token) {
       return res.status(400).json({ err: 'Please login!' });

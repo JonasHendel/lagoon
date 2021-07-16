@@ -57,7 +57,7 @@ export default function account() {
   return (
     <div ref={accountRef} className={styles.accountWrap}>
       <div className={styles.account} onClick={toggleDropdown}>
-        <img className={styles.profilePicture} src="./icon.svg" />
+        <img className={styles.profilePicture} src="/icon.svg" />
         <span className={styles.name}>{auth.user.name}</span>
         <ChevronDown />
       </div>
