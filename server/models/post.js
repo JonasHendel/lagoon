@@ -5,10 +5,6 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const PostSchema = new Schema({
-  title: { 
-    type: String, 
-    required: true 
-  },
   course: {
     type: ObjectId,
     ref: 'Course',
