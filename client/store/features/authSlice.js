@@ -14,8 +14,8 @@ export const authSlice = createSlice({
       state.user = user;
     },
     clearAuth: (state) => {
-      state.user = {}
-      state.token = ''
+      state.user = {};
+      state.token = '';
     },
   },
 });

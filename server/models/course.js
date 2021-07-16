@@ -17,6 +17,9 @@ let courseSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     ref: 'User',
   },
+  grade: {
+    type: String,
+  },
 });
 
 module.exports =

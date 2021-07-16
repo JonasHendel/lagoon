@@ -9,6 +9,7 @@ let Events = require('../models/event');
 router.get('/', async (req, res) => {
   try {
     const { userId } = await req.query;
+
     // const lessons = await Lessons.aggregate([
     //   {
     //     $lookup: {

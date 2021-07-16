@@ -122,7 +122,7 @@ const WeekView = ({ timetable, events }) => {
                         lesson.course ? lesson.course.teacher : lesson.teacher
                       }
                       location={lesson.location}
-                      height={durationToHeight(90)}
+                      height={durationToHeight(lesson.duration)}
                     />
                   </div>
                 ))}

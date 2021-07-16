@@ -7,17 +7,17 @@ import { DataContext } from '../../store/GlobalState';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearAuth } from '../../store/features/authSlice';
 import Cookie from 'js-cookie';
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router';
 
 export default function account() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const auth = useSelector(state => state.auth)
+  const auth = useSelector((state) => state.auth);
 
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
+
   let toggleDropdown = () => {
     setDropdownOpen((status) => !status);
   };
@@ -31,7 +31,6 @@ export default function account() {
     localStorage.removeItem('firstLogin');
     dispatch(clearAuth());
     dispatch({ type: 'NOTIFY', payload: { success: 'Logged out!' } });
-    
   };
 
   const dropdownVariants = {

@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const [navBarVisible, setNavBarVisible] = useState(true);
 
-  const noNav = ['/login', '/register'];    
+  const noNav = ['/login', '/register'];
 
   useEffect(() => {
     setNavBarVisible(noNav.includes(router.pathname));
@@ -38,11 +38,11 @@ const Layout = ({ children }) => {
 
   const auth = useSelector((state) => state.auth);
 
-  // useEffect(() => {
-  //   if (auth.token.length === 0) {
-  //     router.push('/login');
-  //   }
-  // }, [auth]);
+  useEffect(() => {
+    if (Cookies.get('refreshtoken') === undefined) {
+      router.push('/login');
+    }
+  }, [auth]);
   return (
     <div>
       {!navBarVisible && (

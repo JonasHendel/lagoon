@@ -4,11 +4,13 @@ import { useContext } from 'react';
 import { DataContext } from '../../store/GlobalState';
 import { User, MapPin } from 'react-feather';
 import { motion } from 'framer-motion';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setDetail } from '../../store/features/detailSlice';
 
 const Lesson = (props) => {
   let color = props.exam && props.exam === true ? 'lagoon' : props.color;
-  const edit = useSelector(state => state.edit)
+  const edit = useSelector((state) => state.edit);
+  const dispatch = useDispatch();
 
   const showLesson = () => {
     if (props.detail.type === 'event') {
@@ -16,8 +18,14 @@ const Lesson = (props) => {
     }
   };
 
+  const { detail } = props;
+
   const editLesson = () => {
-    dispatch({ type: 'ADD_EVENT', payload: props.detail });
+    dispatch(
+      setDetail({
+        ...detail,
+      })
+    );
   };
 
   return (

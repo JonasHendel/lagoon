@@ -128,7 +128,6 @@ const Calendar = () => {
     return null;
   }
 
-  console.log(timetable)
   return (
     <>
       <Head>

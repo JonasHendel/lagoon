@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const editSlice = createSlice({
   name: 'edit',
   initialState: {
-    value: false
+    value: false,
   },
   reducers: {
     changeEdit: (state) => {

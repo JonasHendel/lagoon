@@ -108,9 +108,14 @@ const Login = () => {
             </label>
           </div>
           <div className={styles.actions}>
-            <Button type="primary" onClick={handleSubmit}>
-              Sign in
-            </Button>
+            <div className={styles.button}>
+              <Button
+                type="primary"
+                className={styles.button1}
+                onClick={handleSubmit}>
+                Sign in
+              </Button>
+            </div>
 
             <div className={styles.register}>
               New here?

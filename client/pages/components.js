@@ -9,11 +9,6 @@ import { useContext } from 'react';
 import { DataContext } from '../store/GlobalState';
 
 const Components = () => {
-  const { state, dispatch } = useContext(DataContext);
-
-  const { lessons, events } = state;
-
-  console.log(lessons);
   return (
     <>
       <div className="p-10">
@@ -44,9 +39,7 @@ const Components = () => {
         <div className={styles.selectWrap}>
           <Select
             list={['Week', 'Month', 'Year']}
-            onChange={(selected) => {
-              console.log(selected);
-            }}
+            onChange={(selected) => {}}
           />
         </div>
       </div>

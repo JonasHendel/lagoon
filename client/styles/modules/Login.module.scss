@@ -114,6 +114,11 @@
   }
 }
 
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media (max-width: 500px) {
   .card {
     width: 85vw;

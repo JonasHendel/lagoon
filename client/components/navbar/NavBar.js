@@ -17,7 +17,7 @@ export default function navbar() {
   // const { state, dispatch } = useContext(DataContext);
   // const { auth } = state;
 
-  const auth = useSelector(state => state.auth)
+  const auth = useSelector((state) => state.auth);
   const router = useRouter();
 
   const isActive = (href) => {
@@ -45,7 +45,7 @@ export default function navbar() {
           <a>Login</a>
         </Link>
       ) : (
-      <Account />
+        <Account />
       )}
     </div>
   );
