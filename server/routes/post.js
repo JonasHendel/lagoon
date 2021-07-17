@@ -9,13 +9,13 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/:id',async (req, res) => {
-  try{
+router.get('/:id', async (req, res) => {
+  try {
     console.log(req.params.id);
-    const posts = await Post.find({course: req.params.id}).populate('author');
+    const posts = await Post.find({ course: req.params.id }).populate('author');
     res.status(200).json(posts);
-  }catch(err){
-    return res.status(500).json({err: err.message});
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
   }
 });
 

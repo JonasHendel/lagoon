@@ -9,22 +9,21 @@ const Courses = () => {
     const res = await getData('courses');
     console.log(res);
     setCourses(res);
-  },[]);
-
+  }, []);
 
   if (!courses) return null;
   return (
     <>
-        {courses &&
-          courses.map((course) => (
-            <Link href={`/courses/${course._id}`}>
+      {courses &&
+        courses.map((course) => (
+          <Link href={`/courses/${course._id}`}>
             <div>
               <p>{course.name}</p>
               <p>{course.teacher}</p>
               <p>Grade: {course.grade}</p>
             </div>
-            </Link>
-          ))}
+          </Link>
+        ))}
     </>
   );
 };

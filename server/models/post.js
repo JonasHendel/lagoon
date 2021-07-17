@@ -9,25 +9,28 @@ const PostSchema = new Schema({
     type: ObjectId,
     ref: 'Course',
   },
-  content: { 
-    type: String, 
-    required: true 
+  content: {
+    type: String,
+    required: true,
   },
-  resources: { 
-    type: ObjectId, 
-    ref: 'Resource' 
+  resources: {
+    type: ObjectId,
+    ref: 'Resource',
   },
-  date: { 
-    type: Date, 
-    default: Date.now()
+  date: {
+    type: Date,
+    default: Date.now(),
   },
-  author: { 
-    type: ObjectId, 
-    ref: 'User' },
-  tags: [{ 
-    type: ObjectId, 
-    ref: 'Tag' 
-  }],
+  author: {
+    type: ObjectId,
+    ref: 'User',
+  },
+  tags: [
+    {
+      type: ObjectId,
+      ref: 'Tag',
+    },
+  ],
 });
 
 module.exports = mongoose.model('Post', PostSchema);

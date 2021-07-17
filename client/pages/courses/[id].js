@@ -39,9 +39,7 @@ const Course = () => {
           {posts &&
             posts.map((post, index) => <Post key={index} post={post} />)}
         </div>
-        <div className={styles.upcoming}>
-
-        </div>
+        <div className={styles.upcoming}></div>
       </div>
     </div>
   );

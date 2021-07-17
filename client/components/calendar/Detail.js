@@ -5,8 +5,8 @@ import { DataContext } from '../../store/GlobalState';
 import moment from 'moment';
 import { motion } from 'framer-motion';
 import { User, MapPin } from 'react-feather';
-import { useSelector,useDispatch } from 'react-redux';
-import {clearDetail} from '../../store/features/detailSlice'
+import { useSelector, useDispatch } from 'react-redux';
+import { clearDetail } from '../../store/features/detailSlice';
 
 import styles from '../../styles/calendar/Detail.module.scss';
 
@@ -14,7 +14,7 @@ const DetailModal = () => {
   const [open, setOpen] = useState(false);
 
   const detail = useSelector((state) => state.detail.value);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (Object.keys(detail).length !== 0) {

@@ -16,7 +16,10 @@ const Post = ({ post }) => {
           <p>{post.content}</p>
         </div>
         <form className={styles.commentDiv}>
-          <input className={styles.commentInput} placeholder="Add a comment.." />
+          <input
+            className={styles.commentInput}
+            placeholder="Add a comment.."
+          />
         </form>
       </div>
     </div>
