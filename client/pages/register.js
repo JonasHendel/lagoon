@@ -61,6 +61,7 @@ const Register = () => {
             </motion.div>
           </div>
         </div>
+        <div className={styles.register}>HI</div>
       </div>
     </div>
   );

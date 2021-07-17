@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Account from './Account';
+import CoursesDropdown from './CoursesDropdown';
 import styles from '../../styles/modules/NavBar.module.scss';
-import { useContext } from 'react';
-import { DataContext } from '../../store/GlobalState';
 import { useSelector } from 'react-redux';
 
 let navItems = [
@@ -23,6 +22,8 @@ export default function navbar() {
   const isActive = (href) => {
     if (href === router.pathname) {
       return styles.active;
+    } else {
+      return styles.inactive;
     }
   };
 
@@ -32,11 +33,18 @@ export default function navbar() {
         <img className={styles.logo} src="/logo.png" alt="Lagoon Logo" />
         <div className={styles.navItems}>
           {navItems.map((navItem) => (
-            <Link href={navItem.href} key={navItem.href}>
-              <span className={`${styles.navItem} ${isActive(navItem.href)}`}>
-                {navItem.name}
-              </span>
-            </Link>
+            <>
+              {navItem.name === 'Courses' ? (
+                <CoursesDropdown />
+              ) : (
+                <Link href={navItem.href} key={navItem.href}>
+                  <span
+                    className={`${styles.navItem} ${isActive(navItem.href)}`}>
+                    {navItem.name}
+                  </span>
+                </Link>
+              )}
+            </>
           ))}
         </div>
       </div>

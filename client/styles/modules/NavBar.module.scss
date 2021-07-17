@@ -22,11 +22,16 @@
 }
 
 .navItems {
-  color: $black-60;
+  display: flex;
+}
+
+.coursesDropdown {
+  font-size: 1.15em;
+  margin-right: 1em;
 }
 
 .navItem {
-  font-size: 1.25em;
+  font-size: 1.15em;
   margin-right: 1em;
   cursor: pointer;
   transition: 0.25s ease-in;
@@ -38,4 +43,8 @@
 
 .active {
   color: $black-100;
+}
+
+.inactive {
+  color: $black-60;
 }
