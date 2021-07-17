@@ -10,7 +10,7 @@ export default function CoursesDropdown(props) {
   const [dropdownRef, isHovered] = useHover();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-console.log(courses);
+  console.log(courses);
   let toggleDropdown = () => {
     setDropdownOpen((status) => !status);
   };
@@ -68,7 +68,10 @@ console.log(courses);
           {courses &&
             courses.map((course) => (
               <Link href={`/courses/${course._id}`}>
-                <div className={`${styles.course} ${styles[course.color]}`}>
+                <div
+                  className={`${styles.course} ${styles.color} ${
+                    styles[course.color]
+                  }`}>
                   <span className={styles.courseName}>{course.name}</span>
                   <span className={styles.teacher}>{course.teacher}</span>
                 </div>

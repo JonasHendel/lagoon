@@ -11,53 +11,6 @@
     cursor: pointer;
   }
 }
-.red:hover {
-  background: $red-30;
-  color: $red-100;
-}
-
-.magenta:hover {
-  background: $magenta-30;
-  color: $magenta-100;
-}
-
-.purple:hover {
-  background: $purple-30;
-  color: $purple-100;
-}
-
-.green:hover {
-  background: $green-30;
-  color: $green-100;
-}
-
-
-.blue:hover {
-  background: $blue-30;
-  color: $blue-100;
-}
-
-.blue:hover {
-  background: $blue-30;
-  color: $blue-100;
-}
-
-.cyan:hover {
-  background: $cyan-30;
-  color: $cyan-100;
-}
-
-
-.orange:hover {
-  background: $orange-30;
-  color: $orange-100;
-}
-
-
-.pumpkin:hover {
-  background: $pumpkin-30;
-  color: $pumpkin-100;
-}
 
 .dropdown {
   position: absolute;
@@ -87,7 +40,6 @@
   border: 1px solid transparent;
 
   &:hover {
-    box-shadow: 2px 1.5px 5px rgba($black-100, 0.15);
     border-radius: 3px;
     cursor: pointer;
   }
@@ -101,4 +53,58 @@
   letter-spacing: 0.5px;
   color: $black-50;
   line-height: 0.55em;
+}
+
+.teacher {
+  :hover > & {
+    color: inherit;
+  }
+}
+
+.red:hover {
+  background: $red-30;
+  color: $red-100;
+  box-shadow: 2px 1.5px 5px rgba($red-100, 0.15);
+}
+
+.magenta:hover {
+  background: $magenta-30;
+  color: $magenta-100;
+  box-shadow: 2px 1.5px 5px rgba($magenta-100, 0.15);
+}
+
+.purple:hover {
+  background: $purple-30;
+  color: $purple-100;
+  box-shadow: 2px 1.5px 5px rgba($purple-100, 0.15);
+}
+
+.green:hover {
+  background: $green-30;
+  color: darken($green-100, 10%);
+  box-shadow: 2px 1.5px 5px rgba($green-100, 0.15);
+}
+
+.blue:hover {
+  background: $blue-30;
+  color: $blue-100;
+  box-shadow: 2px 1.5px 5px rgba($blue-100, 0.15);
+}
+
+.cyan:hover {
+  background: $cyan-30;
+  color: $cyan-100;
+  box-shadow: 2px 1.5px 5px rgba($cyan-100, 0.15);
+}
+
+.orange:hover {
+  background: $orange-30;
+  color: $orange-100;
+  box-shadow: 2px 1.5px 5px rgba($orange-100, 0.15);
+}
+
+.pumpkin:hover {
+  background: $pumpkin-30;
+  color: $pumpkin-100;
+  box-shadow: 2px 1.5px 5px rgba($pumpkin-100, 0.15);
 }
