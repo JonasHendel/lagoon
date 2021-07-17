@@ -15,4 +15,4 @@ const folderSchema = new Schema({
 });
 
 module.exports =
-  mongoose.models.lesson || mongoose.model('Lesson', lessonSchema);
+  mongoose.models.folder || mongoose.model('Folder', folderSchema);
