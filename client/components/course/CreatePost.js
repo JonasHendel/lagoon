@@ -6,7 +6,8 @@ import Button from '../core/Button';
 const createPost = ({ course, author }) => {
   const [content, setContent] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     postData('post/create', { content: content, course: course._id, author });
   };
 

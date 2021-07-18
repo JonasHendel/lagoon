@@ -6,12 +6,15 @@ import CreatePost from '../../components/course/CreatePost';
 import Post from '../../components/course/Post';
 import CourseNav from '../../components/course/CourseNav';
 import styles from '../../styles/course/Course.module.scss';
+import PostPage from '../../components/course/PostPage';
+import ResourcePage from '../../components/course/ResourcePage';
 
 const Course = () => {
   const router = useRouter();
   const { id } = router.query;
   const [course, setCourse] = useState();
   const [posts, setPosts] = useState();
+  const [view, setView] = useState('Home');
   const auth = useSelector((state) => state.auth);
 
   const { user } = auth;
@@ -30,14 +33,21 @@ const Course = () => {
 
   return (
     <div className={styles.container}>
-      <CourseNav course={course} />
+      <CourseNav
+        course={course}
+        onChange={(selected) => {
+          setView(selected);
+        }}
+        list={['Home', 'Tasks', 'Resources', 'Plans']}
+      />
       <div className={styles.content}>
         <div className={styles.posts}>
-          {user.role === 'teacher' && (
-            <CreatePost course={course} author={auth.user.id} />
+          {view === 'Home' && (
+            <PostPage user={user} posts={posts} course={course} />
           )}
-          {posts &&
-            posts.map((post, index) => <Post key={index} post={post} />)}
+          {view === 'Resources' && (
+            <ResourcePage user={user} posts={posts} course={course} />
+          )}
         </div>
         <div className={styles.upcoming}></div>
       </div>

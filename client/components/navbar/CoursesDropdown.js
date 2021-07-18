@@ -10,7 +10,6 @@ export default function CoursesDropdown(props) {
   const [dropdownRef, isHovered] = useHover();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  console.log(courses);
   let toggleDropdown = () => {
     setDropdownOpen((status) => !status);
   };
