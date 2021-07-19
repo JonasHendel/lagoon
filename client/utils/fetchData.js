@@ -23,6 +23,18 @@ export const postData = async (url, post, token) => {
   const data = await res.json();
   return data;
 };
+export const postImage = async (url, post, token) => {
+  const res = await fetch(`${baseUrl}/${url}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: token,
+    },
+    body: post,
+  });
+  const data = await res.json();
+  return data;
+};
 
 export const putData = async (url, post, token) => {
   const res = await fetch(`${baseUrl}/${url}`, {
