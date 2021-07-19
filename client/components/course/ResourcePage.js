@@ -23,7 +23,6 @@ const ResourcePage = () => {
     data.append('file', file)
     console.log(data)
     axios.post("http://localhost:8000/resources/file/upload", data, { 
-      // receive two    parameter endpoint url ,form data
   })
 }
 
@@ -43,7 +42,7 @@ const ResourcePage = () => {
         </form>
       )}
       <form onSubmit={upload}>
-        <input type="file"name="file" onChange={(e)=>setFile(e.target.files[0])}/>
+        <input type="file" name="upload" onChange={(e)=>setFile(e.target.files[0])}/>
         <button type="submit">Upload</button>
       </form>
     </div>

@@ -48,23 +48,21 @@ router.post('/file/upload', async (req, res) => {
     secretAccessKey: process.env.SPACES_SECRET,
   });
 
-  console.log(req.body);
+  const upload = multer({
+    storage: multerS3({
+      s3: s3,
+      bucket: 'lagoon',
+      acl: 'public-read',
+      key: function (req, file, cb) {
+        cb(null, file.originalname);
+      }
+    })
+  }).array('file', 1);
 
-  var params = {
-    Bucket: 'lagoon',
-    Key: req.body.file,
-    Body: req.body.file,
-    ACL: 'public-read',
-    Metadata: {
-      'x-amz-meta-my-key': req.body.file,
-    },
-  };
-
-  s3.putObject(params, function (err, data) {
-    if (err) {
-      console.log(err, err.stack);
-    } else {
-      console.log('works', data);
+  upload(req, res, function (error) {
+    if (error) {
+      console.log(error);
     }
+    console.log('File uploaded successfully.');
   });
 });
