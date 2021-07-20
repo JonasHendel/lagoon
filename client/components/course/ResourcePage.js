@@ -2,25 +2,31 @@ import { useState, useEffect } from 'react';
 import { Folder, FolderPlus } from 'react-feather';
 import { getData,postImage } from '../../utils/fetchData';
 import axios from 'axios';
+import styles from '../../styles/course/Resource.module.scss'
+import courseQueries from '../../utils/courseQueries';
+import {useRouter} from 'next/router'
 
 const ResourcePage = () => {
+  const router = useRouter();
   const [folders, setFolders] = useState([]);
+  const [files, setFiles] = useState([]);
   const [addFolder, setAddFolder] = useState(false);
-  const [file, setFile ] = useState();
+  const [addFile, setAddFile ] = useState();
   useEffect(async () => {
-    const folderRes = await getData('resources/folders');
-    setFolders(folderRes);
+    const res = await getData('resources');
+    setFolders(res.folders);
+    setFiles(res.files);
   }, []);
 
   const handleClick = async (folderId) => {
-    const subfolderRes = await getData(`resources/folders/${folderId}`);
-    setFolders(subfolderRes);
+    const subfolderRes = await getData(`resources/${folderId}`);
+    setFolders(subfolderRes.folders);
   };
 
   const upload = async  (e) => {
     e.preventDefault();
     const data = new FormData() 
-    data.append('file', file)
+    data.append('file', addFile)
     console.log(data)
     axios.post("http://localhost:8000/resources/file/upload", data, { 
   })
@@ -28,12 +34,14 @@ const ResourcePage = () => {
 
   return (
     <div className="resource-page">
-      <h2>Resources</h2>
       {folders.map((folder) => (
-        <div onClick={() => handleClick(folder._id)}>
+        <div className={styles.folder} onClick={() => handleClick(folder._id)}>
           <Folder />
           <p>{folder.title}</p>
         </div>
+      ))}
+      {files.map((file) => (
+        <p>{file.title}</p>
       ))}
       <FolderPlus onClick={() => setAddFolder(true)} />
       {addFolder && (
@@ -42,7 +50,7 @@ const ResourcePage = () => {
         </form>
       )}
       <form onSubmit={upload}>
-        <input type="file" name="upload" onChange={(e)=>setFile(e.target.files[0])}/>
+        <input type="file" name="upload" onChange={(e)=>setAddFile(e.target.files[0])}/>
         <button type="submit">Upload</button>
       </form>
     </div>

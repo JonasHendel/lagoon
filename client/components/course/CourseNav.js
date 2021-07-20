@@ -6,19 +6,26 @@ import { motion, AnimateSharedLayout } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeEdit } from '../../store/features/editSlice';
 import { useRouter } from 'next/router'
+import courseQueries from '../../utils/courseQueries';
 
 const CourseNav = ({ course, onChange, list }) => {
   const router = useRouter()
-  const [selectedItem, setSelectedItem] = useState(0);
+  const [selectedItem, setSelectedItem] = useState(parseInt(router.query.page)|| 0); // if query.page is not set, default to 0
   const dispatch = useDispatch();
 
-  useEffect(()=>{setSelectedItem(0)} , [router.query]);
-
+  
+  
+  // sets page to selectedItem and changes the page
   useEffect(() => {
-    onChange(list[selectedItem]);
+    courseQueries({router, page: parseInt(selectedItem)+1})
+    onChange(list[router.query.page])
   }, [selectedItem]);
+
+
+
+
   return (
-    <div className={styles.navbar}>
+    <div className={`${styles.navbar} ${styles[course.color]}`}>
       <div className={styles.courseInfo}>
         <p className={styles.infoText}>{course.grade}</p>
         <p className={styles.infoText}>{course.name}</p>
@@ -33,7 +40,7 @@ const CourseNav = ({ course, onChange, list }) => {
                 key={item}
                 whileTap={isActive ? { scale: 0.95 } : {}}
                 onClick={() => setSelectedItem(index)}
-                className={styles.selectItem}>
+                className={isActive ? styles.activeSelectItem : styles.selectItem}>
                 {isActive && (
                   <motion.div
                     layoutId="SelectActive"

@@ -6,9 +6,7 @@ var ObjectId = Schema.ObjectId;
 const folderSchema = new Schema({
   title: { type: String, required: true },
   files: [{ type: ObjectId, ref: 'File' }],
-  parent_id: { type: ObjectId, ref: 'Folder' },
-  is_folder: { type: Boolean, default: true },
-  is_file: { type: Boolean, default: false },
+  parent_id: { type: ObjectId, ref: 'Folder', default: null },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });

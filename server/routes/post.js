@@ -19,6 +19,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
 router.post('/create', (req, res) => {
   try {
     const newPost = new Post({
@@ -28,6 +29,7 @@ router.post('/create', (req, res) => {
       author: req.body.author,
     });
     newPost.save();
+    console.log('created post')
     res
       .status(200)
       .json({ message: 'Post created successfully!', post: newPost });

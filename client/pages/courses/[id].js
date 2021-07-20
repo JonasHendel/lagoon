@@ -27,6 +27,7 @@ const Course = () => {
     }
   }, [id]);
 
+
   if (!course) {
     return null;
   }

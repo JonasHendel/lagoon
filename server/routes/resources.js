@@ -4,23 +4,26 @@ const Folders = require('../models/folder');
 const AWS = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
+const Files = require('../models/file');
 
 // get root folders
-router.get('/folders', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     let folders = await Folders.find({ parent_id: null });
-    res.json(folders);
+    let files = await Files.find({parent_id: null});
+    res.json({folders, files});
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
 });
 
 // get subfoders
-router.get('/folders/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const folderId = req.params.id;
   try {
     let folders = await Folders.find({ parent_id: folderId });
-    res.json(folders);
+    let files = await Files.find({parent_id: folderId});
+    res.json({folders, files});
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
@@ -37,8 +40,8 @@ router.post('folder/create', async (req, res) => {
 });
 module.exports = router;
 
-
 // upload file
+
 router.post('/file/upload', async (req, res) => {
   const spacesEndpoint = new AWS.Endpoint('fra1.digitaloceanspaces.com');
 
@@ -55,14 +58,38 @@ router.post('/file/upload', async (req, res) => {
       acl: 'public-read',
       key: function (req, file, cb) {
         cb(null, file.originalname);
-      }
-    })
-  }).array('file', 1);
+      },
+    }),
+  }).single('file');
 
-  upload(req, res, function (error) {
+  upload(req, res, (error) => {
     if (error) {
-      console.log(error);
+      return res.status(500).json({ err: error.message });
     }
-    console.log('File uploaded successfully.');
+    const newFile = new Files({
+      title: req.file.key,
+      url: req.file.location,
+    });
+
+    console.log(newFile);
+
+    newFile.save();
   });
+});
+
+router.get('/file', async (req, res) => {
+  const spacesEndpoint = new AWS.Endpoint('fra1.digitaloceanspaces.com');
+
+  const s3 = new AWS.S3({
+    endpoint: spacesEndpoint,
+    accessKeyId: process.env.SPACES_KEY,
+    secretAccessKey: process.env.SPACES_SECRET,
+  });
+
+  const url = s3.getSignedUrl('getObject', {
+    Bucket: 'lagoon',
+    Key: 'Screenshot 2021-04-09 at 09.24.01.png',
+    Expires: 9999999999,
+  });
+  res.send(url);
 });
