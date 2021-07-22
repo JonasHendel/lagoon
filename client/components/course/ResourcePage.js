@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Folder, FolderPlus, File, FilePlus } from 'react-feather';
-import { getData, postImage } from '../../utils/fetchData';
+import { getData, postData, postImage } from '../../utils/fetchData';
 import axios from 'axios';
 import styles from '../../styles/course/Resource.module.scss';
 import courseQueries from '../../utils/courseQueries';
@@ -17,10 +17,11 @@ const ResourcePage = ({ course, user }) => {
   const [add, setAdd] = useState();
   const [addFile, setAddFile] = useState();
   const [currentFolder, setCurrentFolder] = useState(null);
-  const [path, setPath] = useState([null]);
+  const [folderTitle, setFolderTitle] = useState('');
+  const [path, setPath] = useState(router.query.path ? router.query.path.split('/') : [null]);
 
   useEffect(async () => {
-    const res = await getData('resources');
+    const res = await getData(`resources/${course._id}`);
     dispatch(
       addResources({
         [course.name]: { folders: res.folders, files: res.files },
@@ -28,9 +29,12 @@ const ResourcePage = ({ course, user }) => {
     );
   }, []);
 
+
   useEffect(() => {
     const i = path.indexOf(currentFolder);
     setPath(path.slice(0, i + 1));
+    const pathString = null + path.join('/');
+    courseQueries({router, folderPath: pathString})
   }, [currentFolder]);
 
   const resources = useSelector((state) => state.resources.value[course.name]);
@@ -44,11 +48,16 @@ const ResourcePage = ({ course, user }) => {
     setCurrentFolder(folderId);
   };
 
-  const upload = async (e) => {
+  const uploadResource = async (e) => {
     e.preventDefault();
     const data = new FormData();
     data.append('file', addFile);
-    axios.post('http://localhost:8000/resources/file/upload', data, {});
+    axios.post(`http://localhost:8000/resources/file/upload/${course._id},${currentFolder}`, data, {});
+  };
+
+  const createFolder = async (e) => {
+    e.preventDefault()
+    await postData('resources/folder/create', {title: folderTitle, course:course._id, parent_id: currentFolder}).then(res=>console.log(res));
   };
 
   return (
@@ -99,11 +108,14 @@ const ResourcePage = ({ course, user }) => {
           <FolderPlus
             width="50px"
             height="50px"
-            onClick={() => add === 'folder' ? setAdd() : setAdd('folder')}
+            onClick={() => (add === 'folder' ? setAdd() : setAdd('folder'))}
           />
           {add === 'folder' ? (
-            <form>
-              <Input type="primary" placeholder="folder title" />
+            <form onSubmit={createFolder}>
+              <Input type="primary" value={folderTitle} onChange={(e)=>{setFolderTitle(e.target.value)}} placeholder="folder title" />
+              <Button type="submit" class="primary">
+                Upload
+              </Button>
             </form>
           ) : (
             <p>Add a folder</p>
@@ -113,10 +125,10 @@ const ResourcePage = ({ course, user }) => {
           <FilePlus
             width="50px"
             height="50px"
-            onClick={() => add === 'file' ? setAdd() : setAdd('file')}
+            onClick={() => (add === 'file' ? setAdd() : setAdd('file'))}
           />
           {add === 'file' ? (
-            <form onSubmit={upload}>
+            <form onSubmit={uploadResource}>
               <Input
                 type="file"
                 class="primary"
