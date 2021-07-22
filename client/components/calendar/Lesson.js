@@ -1,7 +1,5 @@
 import React from 'react';
 import styles from '../../styles/calendar/Lesson.module.scss';
-import { useContext } from 'react';
-import { DataContext } from '../../store/GlobalState';
 import { User, MapPin } from 'react-feather';
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';

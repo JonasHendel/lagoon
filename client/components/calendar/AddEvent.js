@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { DataContext } from '../../store/GlobalState';
 import moment from 'moment';
 import { motion } from 'framer-motion';
 import { User, MapPin } from 'react-feather';

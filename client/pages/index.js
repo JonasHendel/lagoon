@@ -1,6 +1,4 @@
-import { useContext } from 'react';
 import { useState } from 'react';
-import { DataContext } from '../store/GlobalState';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment } from '../store/features/counterSlice';
 import { setAuth } from '../store/features/authSlice';

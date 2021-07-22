@@ -7,7 +7,8 @@ const Button = (props) => {
 
   return (
     <motion.button
-      className={`${styles.button} ${styles[props.type]}`}
+      className={`${styles.button} ${styles[props.class]}`}
+      type={props.type}
       onClick={props.onClick}
       whileTap={{ scale: 0.95 }}>
       {children}

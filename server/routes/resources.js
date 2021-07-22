@@ -9,8 +9,8 @@ const Files = require('../models/file');
 // get root folders
 router.get('/', async (req, res) => {
   try {
-    let folders = await Folders.find({ parent_id: null });
-    let files = await Files.find({parent_id: null});
+    let folders = await Folders.find();
+    let files = await Files.find();
     res.json({folders, files});
   } catch (err) {
     res.status(500).json({ err: err.message });
@@ -35,6 +35,9 @@ router.post('folder/create', async (req, res) => {
     title: req.body.title,
     parent_id: req.body.parent_id,
   });
+
+  Folder.findOneAndUpdate(req.body.parent_id, { $push: { folders: newFolder._id }})
+
   newFolder.save();
   res.send(newFolder);
 });

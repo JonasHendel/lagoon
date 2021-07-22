@@ -4,6 +4,7 @@ import authReducer from './features/authSlice';
 import notifyReducer from './features/notifySlice';
 import counterReducer from './features/counterSlice';
 import detailReducer from './features/detailSlice';
+import resourceReducer from './features/resourceSlice';
 
 export default configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
     notify: notifyReducer,
     counter: counterReducer,
     detail: detailReducer,
+    resources: resourceReducer
   },
 });

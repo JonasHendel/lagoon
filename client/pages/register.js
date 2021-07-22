@@ -41,7 +41,7 @@ const Register = () => {
       <div className={styles.card}>
         <div className={styles.welcome}>
           <div className={styles.cover}>
-            <img src="./intro.jpg" />
+            <img src="./intro2.jpg" />
           </div>
           <div className={styles.content}>
             <div className={styles.welcomeMessage}>
@@ -61,7 +61,7 @@ const Register = () => {
             </motion.div>
           </div>
         </div>
-        <div className={styles.register}>HI</div>
+        {/* <div className={styles.register}>HI</div> */}
       </div>
     </div>
   );

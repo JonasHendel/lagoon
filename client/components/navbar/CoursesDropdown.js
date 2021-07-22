@@ -68,6 +68,7 @@ export default function CoursesDropdown(props) {
             courses.map((course) => (
               <Link href={`/courses/${course._id}`}>
                 <div
+                  key={course._id}
                   className={`${styles.course} ${styles.color} ${
                     styles[course.color]
                   }`}>

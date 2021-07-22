@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { useOuterClick } from '../../utils/outerclick';
 import { ChevronDown } from 'react-feather';
 import styles from '../../styles/modules/Account.module.scss';
-import { DataContext } from '../../store/GlobalState';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearAuth } from '../../store/features/authSlice';
 import Cookie from 'js-cookie';

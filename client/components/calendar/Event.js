@@ -3,15 +3,12 @@ import styles from '../../styles/calendar/Lesson.module.scss';
 import { User, MapPin } from 'react-feather';
 import { motion } from 'framer-motion';
 import moment from 'moment';
-import { useContext } from 'react';
-import { DataContext } from '../../store/GlobalState';
 
 const Event = (props) => {
   const { date } = props;
 
   const [color, setColor] = useState('lagoon');
 
-  const { state, dispatch } = useContext(DataContext);
 
   useEffect(() => {
     if (moment().diff(date) > 0) {

@@ -27,7 +27,6 @@ const Course = () => {
     }
   }, [id]);
 
-
   if (!course) {
     return null;
   }
@@ -46,11 +45,11 @@ const Course = () => {
           {view === 'Home' && (
             <PostPage user={user} posts={posts} course={course} />
           )}
-          {view === 'Resources' && (
-            <ResourcePage user={user} posts={posts} course={course} />
-          )}
         </div>
         <div className={styles.upcoming}></div>
+        {view === 'Resources' && (
+          <ResourcePage user={user} posts={posts} course={course} />
+        )}
       </div>
     </div>
   );

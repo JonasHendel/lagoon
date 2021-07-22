@@ -1,8 +1,6 @@
 import styles from '../../styles/calendar/Month.module.scss';
 import moment from 'moment';
 import { useState } from 'react';
-import { useContext } from 'react';
-import { DataContext } from '../../store/GlobalState';
 import { motion } from 'framer-motion';
 
 const MonthDay = ({ day, startOfMonth, events }) => {

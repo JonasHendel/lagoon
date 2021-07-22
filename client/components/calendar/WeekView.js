@@ -4,8 +4,6 @@ import Lesson from './Lesson';
 import Event from './Event';
 
 import styles from '../../styles/calendar/Calendar.module.scss';
-import { useContext } from 'react';
-import { DataContext } from '../../store/GlobalState';
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
