@@ -110,7 +110,7 @@ const Login = () => {
           <div className={styles.actions}>
             <div className={styles.button}>
               <Button
-                type="primary"
+                class="primary"
                 className={styles.button1}
                 onClick={handleSubmit}>
                 Sign in

@@ -23,12 +23,12 @@ const createPost = ({ course, author }) => {
           />
           <div className={styles.createPostButtonDiv}>
             <div className={styles.createPostButton}>
-              <Button type="secondary" onClick={handleSubmit}>
+              <Button class="secondary" onClick={handleSubmit}>
                 Add File
               </Button>
             </div>
             <div className={styles.createPostButton}>
-              <Button type="primary" onClick={handleSubmit}>
+              <Button class="primary" onClick={handleSubmit}>
                 Post
               </Button>
             </div>
