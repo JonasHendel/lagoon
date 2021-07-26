@@ -1,10 +1,7 @@
+@import '../_colors.scss';
 
 .resourcePage {
   width: 100%;
-}
-
-.pathDiv {
-  display: flex;
 }
 
 .resources {
@@ -25,7 +22,49 @@
 
 .resource p {
   white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 15ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 15ch;
+}
+
+.resourceNav {
+  margin-right: auto;
+  margin-left: auto;
+  width: 84vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pathDiv {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.pathItem {
+  border-radius: 5px;
+  padding: 0px 2px;
+  margin: 0px 2px;
+  &:hover {
+    color: $lagoon;
+  }
+}
+
+.buttonDiv {
+  display: flex;
+  width: 280px;
+  justify-content: space-between;
+  & button {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 2px 0px;
+    width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background: $lagoon-dark-10;
+    border-radius: 5px;
+  }
 }

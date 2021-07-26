@@ -9,6 +9,13 @@
   color: $black-100;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  outline: none;
+}
+
 body,
 html {
   height: 100%;

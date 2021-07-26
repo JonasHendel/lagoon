@@ -17,7 +17,7 @@ const createPost = ({ course, author }) => {
         <form onSubmit={handleSubmit} className={styles.postContainer}>
           <textarea
             className={styles.createPostInput}
-            placeholder="Type your post here..."
+            placeholder="Type your post here"
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />

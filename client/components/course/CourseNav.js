@@ -10,10 +10,8 @@ import courseQueries from '../../utils/courseQueries';
 
 const CourseNav = ({ course, onChange, list }) => {
   const router = useRouter()
-  const [selectedItem, setSelectedItem] = useState(parseInt(router.query.page)|| 0); // if query.page is not set, default to 0
+  const [selectedItem, setSelectedItem] = useState(parseInt(router.query.page) || 0); // if query.page is not set, default to 0
   const dispatch = useDispatch();
-
-  
   
   // sets page to selectedItem and changes the page
   useEffect(() => {

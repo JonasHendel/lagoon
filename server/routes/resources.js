@@ -67,26 +67,18 @@ router.post('/file/upload/:id', async (req, res) => {
     }),
   }).single('file');
 
-
-
   const {id} = req.params;
-
-  console.log()
 
   upload(req, res, (error) => {
     if (error) {
       return res.status(500).json({ err: error.message });
     }
-
     const newFile = new Files({
       title: req.file.key,
       url: req.file.location,
       course: id.split(',')[0],
       parent_id: id.split(',')[1],
     });
-
-    console.log(newFile);
-
     newFile.save();
   });
 });

@@ -5,10 +5,10 @@ var ObjectId = Schema.ObjectId;
 
 const folderSchema = new Schema({
   title: { type: String, required: true },
-  course: {type: ObjectId, ref: 'Course'},
+  course: { type: ObjectId, ref: 'Course' },
   files: [{ type: ObjectId, ref: 'File' }],
   folders: [{ type: ObjectId, ref: 'Folder' }],
-  parent_id: { type: ObjectId, ref: 'Folder', default: null },
+  parent_id: { type: String, default: 'root' },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });

@@ -10,15 +10,16 @@ const Post = ({ post }) => {
       <div className={styles.postContainer}>
         <div className={styles.postInfo}>
           <p className={styles.postAuthor}>{post.author.name}</p>
-          <p className={styles.postDate}>{fromNow(post.date)}</p>
+          <p className={styles.postDate} >{fromNow(post.date)}</p>
         </div>
+      <div className={styles.divider}></div>
         <div className={styles.postContent}>
           <p>{post.content}</p>
         </div>
         <form className={styles.commentDiv}>
           <input
             className={styles.commentInput}
-            placeholder="Add a comment.."
+            placeholder="Add a comment"
           />
         </form>
       </div>
