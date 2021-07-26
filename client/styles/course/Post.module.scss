@@ -15,7 +15,6 @@
 }
 
 .createPostInput {
-  margin-top: 20px;
   padding: 10px;
   height: 120px;
   width: 100%;
@@ -51,12 +50,14 @@
 
 .postInfo {
   display: flex;
+  width: 100%;
   flex-direction: column;
   margin: 20px 0px 10px 0px;
 }
 
 .postAuthor {
   font-size: 18px;
+  align-self: flex-start;
   font-weight: 500;
 }
 

@@ -6,15 +6,20 @@ import Button from '../core/Button';
 const createPost = ({ course, author }) => {
   const [content, setContent] = useState('');
 
+  const userName = useSelector(state => state.auth.user.name)
+
   const handleSubmit = (e) => {
     e.preventDefault();
     postData('post/create', { content: content, course: course._id, author });
   };
-
+  if(!userName) return null
   return (
     <>
       <div className={styles.createPost}>
         <form onSubmit={handleSubmit} className={styles.postContainer}>
+        <div className={styles.postInfo}>
+          <p className={styles.postAuthor}>{userName}</p>
+        </div>
           <textarea
             className={styles.createPostInput}
             placeholder="Type your post here"

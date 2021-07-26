@@ -1,15 +1,27 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { postData } from '../../utils/fetchData';
 import { motion } from 'framer-motion';
 import Input from '../core/Input';
 import Button from '../core/Button';
 import axios from 'axios';
+import { useDropzone } from 'react-dropzone';
 
 import styles from '../../styles/course/AddResource.module.scss';
 
-const AddResource = ({ resourceType, setResourceType, course, currentFolder }) => {
+const AddResource = ({
+  resourceType,
+  setResourceType,
+  course,
+  currentFolder,
+}) => {
   const [folderTitle, setFolderTitle] = useState();
-  const [file, setFile] = useState()
+  const [file, setFile] = useState();
+
+  const onDrop = useCallback((acceptedFiles) => {
+    setFile(acceptedFiles[0]);
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
   const addResource = async (e) => {
     if (resourceType === 'folder') {
       await postData('resources/folder/create', {
@@ -29,7 +41,6 @@ const AddResource = ({ resourceType, setResourceType, course, currentFolder }) =
       );
     }
   };
-
 
   const closeDetail = () => {
     // dispatch({ type: 'ADD_EVENT', payload: {} });
@@ -52,16 +63,18 @@ const AddResource = ({ resourceType, setResourceType, course, currentFolder }) =
         className={styles.modalBody}>
         <form className={styles.content} onSubmit={addResource}>
           <p className={styles.title}>Upload your files</p>
-          <label className={styles.fileInputLabel}>
-            <motion.div whileTap={{ scale: 0.95 }} className={styles.fileInput}>
+          <motion.div
+            whileTap={{ scale: 0.95 }}
+            className={styles.fileInput}
+            {...getRootProps()}
+            >
+            {isDragActive ? (
+              <p>Drop your file here</p>
+            ) : (
               <p>Drag and drop your files or select them by clicking here</p>
-            </motion.div>
-            <input
-              type="file"
-              name="upload"
-              onChange={(e) => setFile(e.target.files[0])}
-            />
-          </label>
+            )}
+            <input {...getInputProps()} />
+          </motion.div>
           {file !== undefined && <p>{file.name}</p>}
           <div className={styles.buttonDiv}>
             <Button type="submit" class="primary">
