@@ -43,7 +43,6 @@ const AddResource = ({
   };
 
   const closeDetail = () => {
-    // dispatch({ type: 'ADD_EVENT', payload: {} });
     setResourceType('');
   };
 
@@ -78,7 +77,7 @@ const AddResource = ({
           {file !== undefined && <p>{file.name}</p>}
           <div className={styles.buttonDiv}>
             <Button type="submit" class="primary">
-              Add files
+              Add file
             </Button>
           </div>
         </form>
