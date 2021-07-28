@@ -9,7 +9,7 @@ const DateSelect = ({ date, setDate, view }) => {
 
   const nextDate = () => {
     dateAnimation.start((i) => ({
-      x: [-50, 50, 0],
+      x: [0, 50, 0],
     }));
     switch (view) {
       case 'Week':
@@ -26,7 +26,7 @@ const DateSelect = ({ date, setDate, view }) => {
 
   const previousDate = () => {
     dateAnimation.start((i) => ({
-      x: [50, -50, 0],
+      x: [0, -50, 0],
     }));
     switch (view) {
       case 'Week':
@@ -49,15 +49,18 @@ const DateSelect = ({ date, setDate, view }) => {
         <motion.p
           className={styles.selectText}
           animate={dateAnimation}
-          transition={{ duration: 0.4 }}>
+          transition={{ duration: 0.3 }}>
           {moment(date).day(1).format('MMMM DD ')}-
           {moment(date).day(5).format(' DD, YYYY')}
         </motion.p>
       )}
       {view === 'Month' && (
-        <p className={styles.selectText}>
+        <motion.p
+          className={styles.selectText}
+          animate={dateAnimation}
+          transition={{ duration: 0.3 }}>
           {moment(date).startOf('month').format('MMMM YYYY')}
-        </p>
+        </motion.p>
       )}
       {view === 'Year' && (
         <p className={styles.selectText}>{moment(date).format('YYYY')}</p>

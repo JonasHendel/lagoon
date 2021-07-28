@@ -1,7 +1,6 @@
 import { useState, useLayoutEffect, useRef } from 'react';
 import moment, { min } from 'moment';
 import Lesson from './Lesson';
-import Event from './Event';
 
 import styles from '../../styles/calendar/Calendar.module.scss';
 import { useEffect } from 'react';

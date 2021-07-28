@@ -3,16 +3,15 @@ const router = express.Router();
 const Post = require('../models/post.js');
 
 router.get('/', (req, res) => {
-  Post.find((err, posts) => {
-    if (err) throw err;
-    res.json(posts);
-  });
+  const posts = Post.find().sort('createdAt');
+  console.log(posts);
+  res.json({posts})
 });
 
 router.get('/:id', async (req, res) => {
   try {
     console.log(req.params.id);
-    const posts = await Post.find({ course: req.params.id }).populate('author');
+    const posts = await Post.find({ course: req.params.id }).populate('author').sort('-createdAt');;
     res.status(200).json(posts);
   } catch (err) {
     return res.status(500).json({ err: err.message });

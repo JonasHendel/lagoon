@@ -61,9 +61,13 @@ router.post('/file/upload/:id', async (req, res) => {
       s3: s3,
       bucket: 'lagoon',
       acl: 'public-read',
-      key: function (req, file, cb) {
+      key: (req, file, cb) => {
+        console.log(req, file)
         cb(null, file.originalname);
       },
+      contentType: (req, file, cb) => {
+        cb(null, file.mimetype);
+      }
     }),
   }).single('file');
 
@@ -73,6 +77,7 @@ router.post('/file/upload/:id', async (req, res) => {
     if (error) {
       return res.status(500).json({ err: error.message });
     }
+    console.log(req.file)
     const newFile = new Files({
       title: req.file.key,
       url: req.file.location,
@@ -80,6 +85,8 @@ router.post('/file/upload/:id', async (req, res) => {
       parent_id: id.split(',')[1],
     });
     newFile.save();
+
+    return res.json({newFile})
   });
 });
 

@@ -17,10 +17,6 @@ const postSchema = new Schema({
     type: ObjectId,
     ref: 'Resource',
   },
-  date: {
-    type: Date,
-    default: Date.now(),
-  },
   author: {
     type: ObjectId,
     ref: 'User',
@@ -31,6 +27,7 @@ const postSchema = new Schema({
       ref: 'Tag',
     },
   ],
-});
+  
+},{ timestamps: true });
 
 module.exports = mongoose.models.post || mongoose.model('Post', postSchema);

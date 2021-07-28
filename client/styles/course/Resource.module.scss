@@ -24,12 +24,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 15ch;
+  max-width: 12ch;
 }
 
 .resourceNav {
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 20px ;
   width: 84vw;
   display: flex;
   justify-content: space-between;
@@ -44,27 +45,28 @@
 }
 
 .pathItem {
+  display: flex;
+  align-items: center;
   border-radius: 5px;
   padding: 0px 2px;
   margin: 0px 2px;
-  &:hover {
-    color: $lagoon;
-  }
+  & img {
+    margin-right: 5px;
+  };
 }
+
 
 .buttonDiv {
   display: flex;
-  width: 280px;
+  width: 400px;
   justify-content: space-between;
-  & button {
-    cursor: pointer;
-    font-weight: bold;
-    padding: 2px 0px;
-    width: 130px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    background: $lagoon;
-    border-radius: 5px;
-  }
+}
+
+.button {
+  width: 190px;
+}
+
+.file {
+  width: 100%;
+  height: 100vh;
 }

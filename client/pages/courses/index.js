@@ -5,10 +5,12 @@ import Link from 'next/link';
 const Courses = () => {
   const [courses, setCourses] = useState();
 
-  useEffect(async () => {
-    const res = await getData('courses');
-    console.log(res);
-    setCourses(res);
+  useEffect(() => {
+    const getCourses = async () => {
+      const res = await getData('courses');
+      setCourses(res);
+    };
+    getCourses();
   }, []);
 
   if (!courses) return null;

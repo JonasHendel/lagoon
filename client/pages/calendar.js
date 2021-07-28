@@ -20,10 +20,12 @@ const Calendar = () => {
   const dispatch = useDispatch();
 
   const auth = useSelector((state) => state.auth);
-  useEffect(async () => {
-    const res = await getData(`calendar/?userId=${auth.user.id}`);
+  useEffect(() => {
+    const getCalendarDetails = async () => {
+      const res = await getData(`calendar/?userId=${auth.user.id}`);
     setLessons(res.lessons);
-    setEvents(res.events);
+    setEvents(res.events);}
+    getCalendarDetails();
   }, [auth, date]);
 
   let days = [];

@@ -9,36 +9,36 @@ import { useDropzone } from 'react-dropzone';
 import styles from '../../styles/course/AddResource.module.scss';
 
 const AddResource = ({
-  resourceType,
+  setFetch,
+  fetch,
   setResourceType,
   course,
   currentFolder,
 }) => {
-  const [folderTitle, setFolderTitle] = useState();
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(undefined);
 
   const onDrop = useCallback((acceptedFiles) => {
     setFile(acceptedFiles[0]);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
+  console.log(file)
+
   const addResource = async (e) => {
-    if (resourceType === 'folder') {
-      await postData('resources/folder/create', {
-        title: folderTitle,
-        course: course._id,
-        parent_id: currentFolder,
-      }).then((res) => console.log(res));
-    }
-    if (resourceType === 'file') {
+    e.preventDefault()
+    if (file !== undefined) {
       const data = new FormData();
       data.append('file', file);
       // console.log(res);
-      axios.post(
+      await axios.post(
         `http://localhost:8000/resources/file/upload/${course._id},${currentFolder}`,
         data,
         {}
-      );
+      )
+      setResourceType('')
+      setFetch(!fetch);
+    }else {
+      console.log('No file selected')
     }
   };
 

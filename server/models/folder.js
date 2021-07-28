@@ -9,9 +9,7 @@ const folderSchema = new Schema({
   files: [{ type: ObjectId, ref: 'File' }],
   folders: [{ type: ObjectId, ref: 'Folder' }],
   parent_id: { type: String, default: 'root' },
-  created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now },
-});
+},{ timestamps: true });
 
 module.exports =
   mongoose.models.folder || mongoose.model('Folder', folderSchema);

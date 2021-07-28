@@ -5,8 +5,6 @@ import Layout from '../components/Layout';
 import store from '../store/store';
 import { Provider } from 'react-redux';
 
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps }) {
   return (

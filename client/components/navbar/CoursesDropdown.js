@@ -4,14 +4,26 @@ import { getData } from '../../utils/fetchData';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import styles from '../../styles/modules/CoursesDropdown.module.scss';
+import { useRouter } from 'next/router';
 
 export default function CoursesDropdown(props) {
+  const router = useRouter();
   const [courses, setCourses] = useState();
   const [dropdownRef, isHovered] = useHover();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   let toggleDropdown = () => {
     setDropdownOpen((status) => !status);
+  };
+
+
+  const isActive = (href) => {
+    const path = router.pathname.split('/')
+    if ('/courses' === `/${path[1]}`) {
+      return styles.active;
+    } else {
+      return styles.inactive;
+    }
   };
 
   useEffect(() => {
@@ -24,10 +36,12 @@ export default function CoursesDropdown(props) {
     }
   });
 
-  useEffect(async () => {
-    const res = await getData('courses');
-    console.log(res);
-    setCourses(res);
+  useEffect(() => {
+    const getCourses = async () => {
+      const res = await getData('courses');
+      setCourses(res);
+    }
+    getCourses()
   }, []);
 
   const dropdownVariants = {
@@ -55,8 +69,8 @@ export default function CoursesDropdown(props) {
     <div
       ref={dropdownRef}
       className={`${styles.coursesDropdown} ${props.className}`}>
-      <span className={styles.navName} onClick={toggleDropdown}>
-        Courses
+      <span className={`${styles.navName} ${isActive()}`}>
+      Courses
       </span>
       <motion.div
         className={styles.dropdown}

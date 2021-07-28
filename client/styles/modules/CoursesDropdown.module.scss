@@ -109,3 +109,12 @@
   color: $pumpkin-100;
   box-shadow: 2px 1.5px 5px rgba($pumpkin-100, 0.15);
 }
+
+.active {
+  color: $black-100;
+  font-weight: 500;
+}
+
+.inactive {
+  color: $black-60;
+}

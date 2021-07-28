@@ -1,15 +1,10 @@
-import { useEffect, useState } from 'react';
-import { getData } from '../utils/fetchData';
-import ResourceNav from '../components/course/ResourceNav'
-
 const Test = () => {
+  const file = "https://lagoon.fra1.digitaloceanspaces.com/Abtreibung%20%20Bachelorarbeit.pdf"
   return (
-    <div className="test">
-      <ResourceNav path={['folder1', 'folder2']}/>
-      
-      
+    <div>
+      <embed src={file} alt="image test" />
     </div>
-  );
-};
+  )
+}
 
-export default Test;
+export default Test

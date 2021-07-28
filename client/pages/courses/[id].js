@@ -18,13 +18,17 @@ const Course = () => {
   const auth = useSelector((state) => state.auth);
 
   const { user } = auth;
-  useEffect(async () => {
-    if (id) {
-      const coursesRes = await getData(`courses/?courseId=${id}`);
-      setCourse(coursesRes);
-      const postsRes = await getData(`post/${id}`);
-      setPosts(postsRes);
+
+  useEffect(() => {
+    const getCourse = async () => {
+      if (id) {
+        const courseRes = await getData(`courses/?courseId=${id}`);
+        setCourse(courseRes);
+        const postsRes = await getData(`post/${id}`);
+        setPosts(postsRes);
+      }
     }
+    getCourse()
   }, [id]);
 
   if (!course) {

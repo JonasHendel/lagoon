@@ -20,7 +20,8 @@ export default function navbar() {
   const router = useRouter();
 
   const isActive = (href) => {
-    if (href === router.pathname) {
+    const path = router.pathname.split('/')
+    if (href === `/${path[1]}`) {
       return styles.active;
     } else {
       return styles.inactive;

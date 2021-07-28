@@ -10,7 +10,7 @@ const Post = ({ post }) => {
       <div className={styles.postContainer}>
         <div className={styles.postInfo}>
           <p className={styles.postAuthor}>{post.author.name}</p>
-          <p className={styles.postDate} >{fromNow(post.date)}</p>
+          <p className={styles.postDate} >{fromNow(post.createdAt)}</p>
         </div>
       <div className={styles.divider}></div>
         <div className={styles.postContent}>

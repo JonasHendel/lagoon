@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Folder, FolderPlus, File, FilePlus } from 'react-feather';
+import { Folder, FolderPlus, File, FilePlus, ArrowLeft } from 'react-feather';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { current } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import Input from '../core/Input';
-import Button from '../core/Button';
 
 import { getData, postData } from '../../utils/fetchData';
 import styles from '../../styles/course/Resource.module.scss';
@@ -21,20 +20,23 @@ const ResourcePage = ({ course, user }) => {
   const [fetch, setFetch] = useState(false);
   const [resourceType, setResourceType] = useState('');
   const [folderTitle, setFolderTitle] = useState('');
+  const [viewFile, setViewFile] = useState('');
   const [path, setPath] = useState(
     router.query.path ? router.query.path.split('/') : ['root']
   );
-  const [currentFolder, setCurrentFolder] = useState(
-    path[path.length - 1] === 'root' ? 'root' : path[path.length - 1]
-  );
+  const [currentFolder, setCurrentFolder] = useState(path[path.length - 1]);
 
-  useEffect(async () => {
-    const res = await getData(`resources/${course._id}`);
-    dispatch(
-      addResources({
-        [course.name]: { folders: res.folders, files: res.files },
-      })
-    );
+  useEffect(() => {
+    const getResources = async () => {
+      const res = await getData(`resources/${course._id}`);
+      dispatch(
+        addResources({
+          [course.name]: { folders: res.folders, files: res.files },
+        })
+      );
+    };
+
+    getResources();
   }, [fetch]);
 
   useEffect(() => {
@@ -49,9 +51,7 @@ const ResourcePage = ({ course, user }) => {
     if (!path.includes(folderId)) {
       path.push(folderId);
     }
-    setCurrentFolder(
-      path[path.length - 1] === 'root' ? 'root' : path[path.length - 1]
-    );
+    setCurrentFolder(path[path.length - 1]);
   };
 
   const resources = useSelector((state) => state.resources.value[course.name]);
@@ -71,8 +71,14 @@ const ResourcePage = ({ course, user }) => {
   };
 
   return (
-    <div className={styles.resources}>
+    <div
+      className={styles.resources}
+      onClick={() => {
+        setResourceType('');
+      }}>
       <ResourceNav
+        setViewFile={setViewFile}
+        viewFile={viewFile}
         setCurrentFolder={setCurrentFolder}
         path={path}
         setResourceType={setResourceType}
@@ -80,48 +86,65 @@ const ResourcePage = ({ course, user }) => {
       />
       {resourceType === 'file' && (
         <AddResource
+          fetch={fetch}
+          setFetch={setFetch}
           currentFolder={currentFolder}
-          resourceType={resourceType}
           setResourceType={setResourceType}
           course={course}
         />
       )}
-      {folders &&
-        folders.map((folder) => {
-          if (folder.parent_id === currentFolder)
-            return (
-              <div
-                className={styles.resource}
-                onClick={() => handleClick(folder._id)}>
-                <Folder width="50px" height="50px" />
-                <p>{folder.title}</p>
-              </div>
-            );
-          else return null;
-        })}
-      {files &&
-        files.map((file) => {
-          if (file.parent_id === currentFolder) {
-            return (
-              <div className={styles.resource}>
-                <File width="50px" height="50px" />
-                <p>{file.title}</p>
-              </div>
-            );
-          }
-        })}
-      {resourceType === 'folder' && (
-        <form onSubmit={createFolder} className={styles.resource}>
-          <FolderPlus width="50px" height="50px" />
-          <Input
-            type="primary"
-            value={folderTitle}
-            onChange={(e) => {
-              setFolderTitle(e.target.value);
-            }}
-            placeholder="folder title"
-          />
-        </form>
+      {viewFile.length === 0 && (
+        <>
+          {folders &&
+            folders.map((folder) => {
+              if (folder.parent_id === currentFolder)
+                return (
+                  <div
+                    className={styles.resource}
+                    onClick={() => handleClick(folder._id)}>
+                    <img src="/folder.svg" alt="folder icon" width="50" />
+                    <p>{folder.title}</p>
+                  </div>
+                );
+              else return null;
+            })}
+          {files &&
+            files.map((file) => {
+              if (file.parent_id === currentFolder) {
+                return (
+                  <div
+                    className={styles.resource}
+                    onClick={() => setViewFile(file.url)}>
+                    <img src="/file.svg" alt="file icon" width="50" />
+                    <p>{file.title}</p>
+                  </div>
+                );
+              }
+            })}
+          {resourceType === 'folder' && (
+            <form
+              onSubmit={createFolder}
+              className={styles.resource}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}>
+              <img src="/add_folder.svg" alt="file icon" width="50" />
+              <Input
+                type="primary"
+                value={folderTitle}
+                onChange={(e) => {
+                  setFolderTitle(e.target.value);
+                }}
+                placeholder="folder title"
+              />
+            </form>
+          )}
+        </>
+      )}
+      {viewFile.length !== 0 && (
+        <>
+          <embed src={viewFile} className={styles.file} />
+        </>
       )}
     </div>
   );

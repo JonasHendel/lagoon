@@ -20,20 +20,25 @@ const Layout = ({ children }) => {
     setNavBarVisible(noNav.includes(router.pathname));
   });
 
-  useEffect(async () => {
-    const firstLogin = localStorage.getItem('firstLogin');
-    if (firstLogin) {
-      const res = await postData('user/accessToken', {
-        rf_token: Cookies.get('refreshtoken'),
-      });
-      if (res.err) return localStorage.removeItem('firstLogin');
-      dispatch(
-        setAuth({
-          token: res.access_token,
-          user: res.user,
-        })
-      );
-    }
+  useEffect(() => {
+    const firstLogin = async () => {
+      const firstLogin = localStorage.getItem('firstLogin');
+      if (firstLogin) {
+        const res = await postData('user/accessToken', {
+          rf_token: Cookies.get('refreshtoken'),
+        });
+        if (res.err) localStorage.removeItem('firstLogin');
+        else {
+          dispatch(
+            setAuth({
+              token: res.access_token,
+              user: res.user,
+            })
+          );
+        }
+      }
+    };
+    firstLogin();
   }, []);
 
   const auth = useSelector((state) => state.auth);

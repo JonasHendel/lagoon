@@ -37,12 +37,14 @@
   transition: 0.25s ease-in;
 
   &:hover {
+    font-weight: 500;
     color: $black-90;
   }
 }
 
 .active {
   color: $black-100;
+  font-weight: 500;
 }
 
 .inactive {
