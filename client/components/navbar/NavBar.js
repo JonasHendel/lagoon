@@ -12,15 +12,12 @@ let navItems = [
   { name: 'Messages', href: '/messages' },
 ];
 
-export default function navbar() {
-  // const { state, dispatch } = useContext(DataContext);
-  // const { auth } = state;
-
+const NavBar = () => {
   const auth = useSelector((state) => state.auth);
   const router = useRouter();
 
   const isActive = (href) => {
-    const path = router.pathname.split('/')
+    const path = router.pathname.split('/');
     if (href === `/${path[1]}`) {
       return styles.active;
     } else {
@@ -34,18 +31,18 @@ export default function navbar() {
         <img className={styles.logo} src="/logo.png" alt="Lagoon Logo" />
         <div className={styles.navItems}>
           {navItems.map((navItem) => (
-            <>
+            <div key={navItem.href}>
               {navItem.name === 'Courses' ? (
-                <CoursesDropdown />
+                <CoursesDropdown key="Courses" />
               ) : (
-                <Link href={navItem.href} key={navItem.href}>
+                <Link href={navItem.href}>
                   <span
                     className={`${styles.navItem} ${isActive(navItem.href)}`}>
                     {navItem.name}
                   </span>
                 </Link>
               )}
-            </>
+            </div>
           ))}
         </div>
       </div>
@@ -58,4 +55,6 @@ export default function navbar() {
       )}
     </div>
   );
-}
+};
+
+export default NavBar;

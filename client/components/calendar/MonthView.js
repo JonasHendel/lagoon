@@ -53,15 +53,15 @@ const MonthView = ({ events, date }) => {
         transition={{ duration: 0.3 }}>
         <div className={styles.card}>
           {weekDays &&
-            weekDays.map((weekday) => (
-              <>
-                <div className={styles.column}>
+            weekDays.map((weekday, index) => (
+                <div className={styles.column} key={index}>
                   <p className={styles.weekDay}>{weekday}</p>
                   {days &&
-                    days.map((day) => {
+                    days.map((day, index) => {
                       if (day.format('dddd') === weekday) {
                         return (
                           <Day
+                            key={index}
                             day={day}
                             events={events}
                             startOfMonth={startOfMonth}
@@ -70,7 +70,6 @@ const MonthView = ({ events, date }) => {
                       }
                     })}
                 </div>
-              </>
             ))}
         </div>
       </motion.div>

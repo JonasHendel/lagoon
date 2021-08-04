@@ -6,7 +6,7 @@ import { current } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import Input from '../core/Input';
 
-import { getData, postData } from '../../utils/fetchData';
+import { deleteData, getData, postData } from '../../utils/fetchData';
 import styles from '../../styles/course/Resource.module.scss';
 import courseQueries from '../../utils/courseQueries';
 import { addResources } from '../../store/features/resourceSlice';
@@ -25,6 +25,7 @@ const ResourcePage = ({ course, user }) => {
     router.query.path ? router.query.path.split('/') : ['root']
   );
   const [currentFolder, setCurrentFolder] = useState(path[path.length - 1]);
+  const [edit, setEdit] = useState(true);
 
   useEffect(() => {
     const getResources = async () => {
@@ -70,6 +71,12 @@ const ResourcePage = ({ course, user }) => {
     });
   };
 
+  const deleteFile = async ( fileId ) => {
+    await deleteData(`resources/file/${fileId}`).then((res) =>
+      console.log(res)
+    );
+  };
+
   return (
     <div
       className={styles.resources}
@@ -96,10 +103,11 @@ const ResourcePage = ({ course, user }) => {
       {viewFile.length === 0 && (
         <>
           {folders &&
-            folders.map((folder) => {
+            folders.map((folder, index) => {
               if (folder.parent_id === currentFolder)
                 return (
                   <div
+                    key={index}
                     className={styles.resource}
                     onClick={() => handleClick(folder._id)}>
                     <img src="/folder.svg" alt="folder icon" width="50" />
@@ -109,12 +117,15 @@ const ResourcePage = ({ course, user }) => {
               else return null;
             })}
           {files &&
-            files.map((file) => {
+            files.map((file, index) => {
               if (file.parent_id === currentFolder) {
                 return (
                   <div
+                    key={index}
                     className={styles.resource}
-                    onClick={() => setViewFile(file.url)}>
+                    onClick={() =>
+                      edit ? deleteFile(file._id) : setViewFile(file.url)
+                    }>
                     <img src="/file.svg" alt="file icon" width="50" />
                     <p>{file.title}</p>
                   </div>

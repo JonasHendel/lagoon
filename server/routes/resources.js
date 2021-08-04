@@ -10,9 +10,9 @@ const Files = require('../models/file');
 router.get('/:id', async (req, res) => {
   const courseId = req.params.id;
   try {
-    let folders = await Folders.find({course: courseId});
-    let files = await Files.find({course: courseId});
-    res.json({folders, files});
+    let folders = await Folders.find({ course: courseId });
+    let files = await Files.find({ course: courseId });
+    res.json({ folders, files });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
@@ -40,7 +40,7 @@ router.post('/folder/create', async (req, res) => {
   });
 
   // Folder.findOneAndUpdate(req.body.parent_id, { $push: { folders: newFolder._id }})
- console.log(newFolder);
+  console.log(newFolder);
   newFolder.save();
   res.send(newFolder);
 });
@@ -62,22 +62,22 @@ router.post('/file/upload/:id', async (req, res) => {
       bucket: 'lagoon',
       acl: 'public-read',
       key: (req, file, cb) => {
-        console.log(req, file)
+        console.log(req, file);
         cb(null, file.originalname);
       },
       contentType: (req, file, cb) => {
         cb(null, file.mimetype);
-      }
+      },
     }),
   }).single('file');
 
-  const {id} = req.params;
+  const { id } = req.params;
 
   upload(req, res, (error) => {
     if (error) {
       return res.status(500).json({ err: error.message });
     }
-    console.log(req.file)
+    console.log(req.file);
     const newFile = new Files({
       title: req.file.key,
       url: req.file.location,
@@ -86,7 +86,7 @@ router.post('/file/upload/:id', async (req, res) => {
     });
     newFile.save();
 
-    return res.json({newFile})
+    return res.json({ newFile });
   });
 });
 
@@ -105,4 +105,17 @@ router.get('/file', async (req, res) => {
     Expires: 9999999999,
   });
   res.send(url);
+});
+
+router.delete('/file/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    
+    console.log(id)
+    await Files.findByIdAndDelete(id);
+
+    res.json({ msg: 'File deleted' });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
 });

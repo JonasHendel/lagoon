@@ -25,9 +25,9 @@ const MonthDay = ({ day, startOfMonth, events }) => {
 
             {day.diff(moment(startOfMonth)) >= 0 &&
               events &&
-              events.map((event) => {
+              events.map((event, index) => {
                 {
-                  /* First one makes sure event isnt displayed on overlap next month */
+                  /* First condition makes sure event isnt displayed on overlap next month */
                 }
                 if (
                   moment(day).isBetween(
@@ -39,6 +39,7 @@ const MonthDay = ({ day, startOfMonth, events }) => {
                 ) {
                   return (
                     <motion.div
+                      key={index}
                       whileTap={{ scale: 0.97 }}
                       className={`${styles.event} ${
                         styles[

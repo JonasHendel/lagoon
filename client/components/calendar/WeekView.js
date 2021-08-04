@@ -75,8 +75,9 @@ const WeekView = ({ timetable, events }) => {
             <h1 className={styles.hidden}>ok</h1>
           </div>
           <div className={styles.timeWrap}>
-            {timeRange.map((time) => (
+            {timeRange.map((time, index) => (
               <span
+                key={index}
                 className={styles.absolute}
                 style={{ top: timeToPosition(time) - 12 }}>
                 {/* 12 is height of span/2 */}
@@ -87,6 +88,7 @@ const WeekView = ({ timetable, events }) => {
         </div>
         {Object.keys(timetable).map((day, index) => (
           <div
+            key={index}
             className={styles.column}
             onClick={(e) => getPos(e, day)}
             ref={col}>
@@ -106,10 +108,11 @@ const WeekView = ({ timetable, events }) => {
             )}
             <div className={styles.dayContainer} ref={ref}>
               {timetable[day] &&
-                timetable[day].map((lesson) => (
+                timetable[day].map((lesson, index) => (
                   <div
                     className={styles.itemWrap}
-                    style={{ top: timeToPosition(lesson.startTime) }}>
+                    style={{ top: timeToPosition(lesson.startTime) }}
+                    key={index}>
                     <Lesson
                       detail={lesson}
                       color={lesson.course ? lesson.course.color : lesson.color}

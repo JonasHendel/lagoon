@@ -60,8 +60,12 @@ const ResourceNav = ({
       <div className={styles.buttonDiv}>
         <div className={styles.button}>
           <Button
-            type="secondary"
-            whileTap={{ scale: 0.95 }}
+          class="danger"
+          >Edit</Button>
+        </div>
+        <div className={styles.button}>
+          <Button
+            class="secondary"
             onClick={(e) => {
               e.stopPropagation();
               setResourceType('folder');
@@ -72,7 +76,7 @@ const ResourceNav = ({
         </div>
         <div className={styles.button}>
           <Button
-            whileTap={{ scale: 0.95 }}
+            class="secondary"
             onClick={(e) => {
               e.stopPropagation();
               setResourceType('file');
