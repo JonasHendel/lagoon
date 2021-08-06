@@ -1,10 +1,11 @@
 let express = require('express');
 let router = express.Router();
-const Folders = require('../models/folder');
 const AWS = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const Files = require('../models/file');
+const Folders = require('../models/folder');
+const Posts = require('../models/post');
 
 // get root folders
 router.get('/:id', async (req, res) => {
@@ -18,18 +19,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// get subfoders
-// router.get('/:id', async (req, res) => {
-//   const folderId = req.params.id;
-//   try {
-//     let folders = await Folders.find({ parent_id: folderId });
-//     let files = await Files.find({parent_id: folderId});
-//     res.json({folders, files});
-//   } catch (err) {
-//     res.status(500).json({ err: err.message });
-//   }
-// });
-
 // create folder
 router.post('/folder/create', async (req, res) => {
   console.log('create folder');
@@ -37,6 +26,7 @@ router.post('/folder/create', async (req, res) => {
     title: req.body.title,
     course: req.body.course,
     parent_id: req.body.parent_id,
+    path: req.body.path,
   });
 
   // Folder.findOneAndUpdate(req.body.parent_id, { $push: { folders: newFolder._id }})
@@ -44,7 +34,6 @@ router.post('/folder/create', async (req, res) => {
   newFolder.save();
   res.send(newFolder);
 });
-module.exports = router;
 
 // upload file
 router.post('/file/upload/:id', async (req, res) => {
@@ -62,7 +51,6 @@ router.post('/file/upload/:id', async (req, res) => {
       bucket: 'lagoon',
       acl: 'public-read',
       key: (req, file, cb) => {
-        console.log(req, file);
         cb(null, file.originalname);
       },
       contentType: (req, file, cb) => {
@@ -71,23 +59,43 @@ router.post('/file/upload/:id', async (req, res) => {
     }),
   }).single('file');
 
-  const { id } = req.params;
-
   upload(req, res, (error) => {
     if (error) {
       return res.status(500).json({ err: error.message });
     }
-    console.log(req.file);
-    const newFile = new Files({
-      title: req.file.key,
-      url: req.file.location,
-      course: id.split(',')[0],
-      parent_id: id.split(',')[1],
-    });
-    newFile.save();
-
-    return res.json({ newFile });
+    return res.json(req.file);
   });
+});
+
+router.post('/create/file/post', async (req, res) => {
+  const { post, file } = req.body;
+  console.log('file', file);
+  console.log('post', post);
+
+  const newFile = await new Files({
+    title: file.title,
+    url: file.url,
+    course: file.course,
+    parent_id: file.parent_id,
+    path: file.path,
+  });
+
+  const newPostTemp = await new Posts({
+    type: post.type,
+    course: post.course,
+    text: post.text,
+    files: newFile._id,
+    author: post.author,
+  });
+  newFile.save();
+  await newPostTemp.save();
+
+  const newPost = await Posts.findById(newPostTemp._id)
+    .populate('author')
+    .populate('files')
+    .sort('-createdAt');
+
+  res.send({ newFile, newPost });
 });
 
 router.get('/file', async (req, res) => {
@@ -110,12 +118,13 @@ router.get('/file', async (req, res) => {
 router.delete('/file/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    
-    console.log(id)
-    await Files.findByIdAndDelete(id);
 
+    await Files.findByIdAndDelete(id);
+    await Posts.findOneAndDelete({ files: id });
     res.json({ msg: 'File deleted' });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
 });
+
+module.exports = router;

@@ -1,10 +1,22 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 const Test = () => {
-  const file = "https://lagoon.fra1.digitaloceanspaces.com/Abtreibung%20%20Bachelorarbeit.pdf"
+  const user = useSelector(state => state.auth.user);
+  const file =
+    'https://lagoon.fra1.digitaloceanspaces.com/Abtreibung%20%20Bachelorarbeit.pdf';
+  useEffect(() => {
+    try {
+      console.log(user)
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
   return (
     <div>
-      <embed src={file} alt="image test" />
+    <h1>Test page</h1>
     </div>
-  )
-}
+  );
+};
 
-export default Test
+export default Test;

@@ -10,7 +10,7 @@ const PostPage = ({ user, posts, course}) => {
       {user.role === 'teacher' && (
         <CreatePost course={course} author={user.id}/>
       )}
-      {posts && posts.map((post, index) => <Post key={index} post={post} />)}
+      {posts && posts.map((post, index) => <Post key={index} course={course} post={post} />)}
     </>
   );
 };

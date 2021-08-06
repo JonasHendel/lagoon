@@ -13,7 +13,7 @@ const CourseNav = ({ course, onChange, list }) => {
   const [selectedItem, setSelectedItem] = useState(parseInt(router.query.page) || 0); // if query.page is not set, default to 0
   const dispatch = useDispatch();
   
-  // sets page to selectedItem and changes the page
+  // sets page query and view state to selectedItem and changes the page
   useEffect(() => {
     courseQueries({router, page: parseInt(selectedItem)+1})
     onChange(list[router.query.page])

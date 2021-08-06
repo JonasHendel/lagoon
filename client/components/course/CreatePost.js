@@ -3,28 +3,28 @@ import { useSelector } from 'react-redux';
 import { postData } from '../../utils/fetchData';
 import styles from '../../styles/course/Post.module.scss';
 import Button from '../core/Button';
-const createPost = ({ course, author }) => {
-  const [content, setContent] = useState('');
+const createPost = ({ course }) => {
+  const [text, setText] = useState('');
 
-  const userName = useSelector(state => state.auth.user.name)
+  const user = useSelector(state => state.auth.user)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postData('post/create', { content: content, course: course._id, author });
+    postData('post/create', { type: 'text', text: text, course: course._id, author: user.id });
   };
-  if(!userName) return null
+  if(!user) return null
   return (
     <>
       <div className={styles.createPost}>
         <form onSubmit={handleSubmit} className={styles.postContainer}>
         <div className={styles.postInfo}>
-          <p className={styles.postAuthor}>{userName}</p>
+          <p className={styles.postAuthor}>{user.name}</p>
         </div>
           <textarea
             className={styles.createPostInput}
             placeholder="Type your post here"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
           />
           <div className={styles.createPostButtonDiv}>
             <div className={styles.createPostButton}>

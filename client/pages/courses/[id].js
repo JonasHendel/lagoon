@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getData } from '../../utils/fetchData';
-import { useSelector } from 'react-redux';
-import CreatePost from '../../components/course/CreatePost';
-import Post from '../../components/course/Post';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPost } from '../../store/features/postSlice';
+import { setResources } from '../../store/features/resourceSlice';
+import {setPage} from '../../store/features/querySlice'
 import CourseNav from '../../components/course/CourseNav';
 import styles from '../../styles/course/Course.module.scss';
 import PostPage from '../../components/course/PostPage';
@@ -13,47 +14,62 @@ const Course = () => {
   const router = useRouter();
   const { id } = router.query;
   const [course, setCourse] = useState();
-  const [posts, setPosts] = useState();
-  const [view, setView] = useState('Home');
   const auth = useSelector((state) => state.auth);
+  const page = useSelector((state) => state.query.page);
+
+  const dispatch = useDispatch();
 
   const { user } = auth;
 
+  // Get the resources and posts from the server and set them in the redux store
   useEffect(() => {
-    const getCourse = async () => {
+    const getCourse = async () => {
       if (id) {
         const courseRes = await getData(`courses/?courseId=${id}`);
-        setCourse(courseRes);
-        const postsRes = await getData(`post/${id}`);
-        setPosts(postsRes);
+        setCourse(courseRes)
+        getData(`resources/${courseRes._id}`).then((res) => {
+          dispatch(
+            setResources({
+              [courseRes.name]: { folders: res.folders, files: res.files },
+            })
+          );
+        });
+        getData(`post/${id}`).then((res) => {
+          dispatch(setPost({ [courseRes.name]: res  }));
+        });
       }
-    }
-    getCourse()
+    };
+    getCourse();
   }, [id]);
 
-  if (!course) {
+  const posts = useSelector(state => state.posts.courses && course && state.posts.courses[course.name]);
+
+  // check if course and posts are available, to prevent rendering while being undefined
+  if (!course || !posts) {
     return null;
   }
 
   return (
     <div className={styles.container}>
+    {/*  */}
       <CourseNav
         course={course}
         onChange={(selected) => {
-          setView(selected);
+          dispatch(setPage(selected))
         }}
         list={['Home', 'Tasks', 'Resources', 'Plans']}
       />
       <div className={styles.content}>
         <div className={styles.posts}>
-          {view === 'Home' && (
-            <PostPage user={user} posts={posts} course={course} />
-          )}
+          {page === 'Home' &&
+            
+               <PostPage user={user} posts={posts} course={course} />
+            }
         </div>
         <div className={styles.upcoming}></div>
-        {view === 'Resources' && (
-          <ResourcePage user={user} posts={posts} course={course} />
-        )}
+        {page === 'Resources' &&
+            <ResourcePage user={user} posts={posts} course={course} />
+          }
       </div>
     </div>
   );

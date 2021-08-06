@@ -1,18 +1,23 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const resourceSlice = createSlice({
-    name: 'resources',
-    initialState: {
-        value: {}
+  name: 'resources',
+  initialState: {
+    courses: {},
+  },
+  reducers: {
+    setResources: (state, action) => {
+      state.courses = action.payload;
     },
-    reducers: {
-        addResources: (state, action) => {
-          const {payload} = action
-          state.value = {...payload};
-        },
+    addFolder: (state, action) => {
+      state.courses[action.payload.course].folders = action.payload.folders;
     },
+    addFile: (state, action) => {
+      state.courses[action.payload.course].files = action.payload.files;
+    },
+  },
 });
 
-export const {addResources} = resourceSlice.actions;
+export const { setResources, addFolder, addFile } = resourceSlice.actions;
 
 export default resourceSlice.reducer;

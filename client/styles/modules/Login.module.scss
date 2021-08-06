@@ -27,6 +27,8 @@
 .login {
   padding: 75px 30px;
   width: 35%;
+  min-width: 250px;
+  padding: 50px 30px;
 }
 
 .header {
@@ -78,7 +80,6 @@
 @media (max-width: 1448px) {
   .login {
     width: 40%;
-    padding: 50px 30px;
   }
 
   .decor {
@@ -86,9 +87,9 @@
   }
 }
 
-@media (max-width: 1341px) {
+@media (max-width: 1200px) {
   .card {
-    width: 30vw;
+    width: 350px;
   }
 
   .login {
@@ -102,7 +103,7 @@
 
 @media (max-width: 768px) {
   .card {
-    width: 50vw;
+    width: 350px;
   }
 
   .login {
@@ -121,12 +122,11 @@
 
 @media (max-width: 500px) {
   .card {
-    width: 85vw;
+    width: 350px;
   }
 
   .login {
     width: 100%;
-    padding: 30px;
   }
 
   .decor {

@@ -8,6 +8,7 @@ const FileSchema = new Schema({
     type: String,
     required: true,
   },
+  path: [{type: String, required: true}],
   course: { type: ObjectId, ref: 'Course' },
   parent_id: { type: String, default: 'root' },
   created_at: { type: Date, default: Date.now },

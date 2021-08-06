@@ -21,6 +21,7 @@ export default function account() {
     setDropdownOpen((status) => !status);
   };
 
+  
   const accountRef = useOuterClick((click) => {
     setDropdownOpen(false);
   });

@@ -49,18 +49,29 @@
 }
 
 .fileInput {
+  width: 300px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   justify-content: center;
-  width: 300px;
   padding: 0px 20px;
   text-align: center;
   align-items: center;
   border: 2px dashed $blue-40;
   background: $blue-10;
-  height: 200px;
   cursor: pointer;
+}
+.postInput {
+  width: 300px;
+  height: 70px;
+  padding: 10px;
+  font: inherit;
+  resize: none;
+  border: none;
+  background: $black-10;
+  border: 1px solid $black-20;
+  border-radius: 10px;
 }
 
 .buttonDiv {

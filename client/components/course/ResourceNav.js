@@ -10,15 +10,12 @@ const ResourceNav = ({
   setResourceType,
   setViewFile,
   viewFile,
+  edit,
+  setEdit
 }) => {
   return (
     <div className={styles.resourceNav}>
       <div className={styles.pathDiv}>
-        {viewFile.length !== 0 && (
-          <div onClick={() => setViewFile('')}>
-            <ArrowLeft />
-          </div>
-        )}
         <motion.p
           whileHover={{ scale: 0.92 }}
           className={styles.pathItem}
@@ -26,6 +23,11 @@ const ResourceNav = ({
             setCurrentFolder('root');
             setViewFile('');
           }}>
+        {viewFile.length !== 0 && (
+          <div onClick={() => setViewFile('')}>
+            <ArrowLeft />
+          </div>
+        )}
           Mathe
         </motion.p>
         {path.map((folderId) =>
@@ -60,7 +62,8 @@ const ResourceNav = ({
       <div className={styles.buttonDiv}>
         <div className={styles.button}>
           <Button
-          class="danger"
+          onClick={() => setEdit(!edit)}
+          class={edit ? 'danger' : 'secondary'}
           >Edit</Button>
         </div>
         <div className={styles.button}>

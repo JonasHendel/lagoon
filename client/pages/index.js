@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment } from '../store/features/counterSlice';
 import { setAuth } from '../store/features/authSlice';
 import Cookies from 'js-cookie';
 

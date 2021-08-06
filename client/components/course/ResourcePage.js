@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Folder, FolderPlus, File, FilePlus, ArrowLeft } from 'react-feather';
-import axios from 'axios';
 import { useRouter } from 'next/router';
-import { current } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import Input from '../core/Input';
+import { useOuterClick } from '../../utils/outerclick';
 
 import { deleteData, getData, postData } from '../../utils/fetchData';
 import styles from '../../styles/course/Resource.module.scss';
 import courseQueries from '../../utils/courseQueries';
-import { addResources } from '../../store/features/resourceSlice';
+import { setResources, addFolder } from '../../store/features/resourceSlice';
+import {addFolderToPath,  setPath } from '../../store/features/querySlice';
 import ResourceNav from './ResourceNav';
 import AddResource from './AddResource';
 
@@ -17,45 +16,43 @@ const ResourcePage = ({ course, user }) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const path = useSelector((state) => state.query.path);
+
   const [fetch, setFetch] = useState(false);
   const [resourceType, setResourceType] = useState('');
   const [folderTitle, setFolderTitle] = useState('');
   const [viewFile, setViewFile] = useState('');
-  const [path, setPath] = useState(
-    router.query.path ? router.query.path.split('/') : ['root']
-  );
+  // const [path, setPath] = useState(
+  //   router.query.path ? router.query.path.split('/') : ['root']
+  // );
   const [currentFolder, setCurrentFolder] = useState(path[path.length - 1]);
-  const [edit, setEdit] = useState(true);
+  const [edit, setEdit] = useState(false);
+
+  
 
   useEffect(() => {
-    const getResources = async () => {
-      const res = await getData(`resources/${course._id}`);
-      dispatch(
-        addResources({
-          [course.name]: { folders: res.folders, files: res.files },
-        })
-      );
-    };
-
-    getResources();
-  }, [fetch]);
-
-  useEffect(() => {
+    console.log('click', path)
     const i = path.indexOf(currentFolder);
     const newPath = path.slice(0, i + 1);
     const pathString = newPath.join('/');
     courseQueries({ router, folderPath: pathString });
-    setPath(newPath);
+    dispatch(setPath(newPath));
   }, [currentFolder]);
 
   const handleClick = async (folderId) => {
     if (!path.includes(folderId)) {
-      path.push(folderId);
+      dispatch(await addFolderToPath(folderId));
     }
-    setCurrentFolder(path[path.length - 1]);
+    setCurrentFolder(folderId);
   };
 
-  const resources = useSelector((state) => state.resources.value[course.name]);
+  const createFolderRef = useOuterClick((click) => {
+    setResourceType('');
+  });
+
+  const resources = useSelector(
+    (state) => state.resources.courses[course.name]
+  );
   if (!resources) return null;
   const { files, folders } = resources;
 
@@ -65,25 +62,24 @@ const ResourcePage = ({ course, user }) => {
       title: folderTitle,
       course: course._id,
       parent_id: currentFolder,
-    }).then(() => {
+      path: path,
+    }).then((res) => {
+      dispatch(addFolder({ course: course.name, folders: [...folders, res] }));
       setResourceType('');
-      setFetch(!fetch);
     });
   };
 
-  const deleteFile = async ( fileId ) => {
+  const deleteFile = async (fileId) => {
     await deleteData(`resources/file/${fileId}`).then((res) =>
       console.log(res)
     );
   };
 
   return (
-    <div
-      className={styles.resources}
-      onClick={() => {
-        setResourceType('');
-      }}>
+    <div className={styles.resources}>
       <ResourceNav
+        edit={edit}
+        setEdit={setEdit}
         setViewFile={setViewFile}
         viewFile={viewFile}
         setCurrentFolder={setCurrentFolder}
@@ -93,8 +89,8 @@ const ResourcePage = ({ course, user }) => {
       />
       {resourceType === 'file' && (
         <AddResource
-          fetch={fetch}
-          setFetch={setFetch}
+          files={files}
+          path={path}
           currentFolder={currentFolder}
           setResourceType={setResourceType}
           course={course}
@@ -134,6 +130,7 @@ const ResourcePage = ({ course, user }) => {
             })}
           {resourceType === 'folder' && (
             <form
+              ref={createFolderRef}
               onSubmit={createFolder}
               className={styles.resource}
               onClick={(e) => {

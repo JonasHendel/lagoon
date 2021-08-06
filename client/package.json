@@ -20,6 +20,7 @@
     "react-dropzone": "^11.3.4",
     "react-feather": "^2.0.9",
     "react-redux": "^7.2.4",
+    "react-toastify": "^7.0.4",
     "sass": "^1.35.1"
   },
   "devDependencies": {
