@@ -36,3 +36,67 @@ body {
 label {
   font-weight: 500;
 }
+
+.Toastify__toast-body {
+  text-align: center;
+  font-weight: bold;
+}
+
+.Toastify__toast--success {
+  background-color: $lagoon !important;
+  color: darken($lagoon, 50%);
+}
+
+.input {
+  font-family: 'Prompt';
+  font-size: 15px;
+  padding: 7px 14px;
+  border: 1px solid $black-20;
+  border-radius: 5px;
+  transition: 0.15s ease-in;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    border-color: $lagoon-dark-10;
+  }
+
+  &:focus {
+    border-color: $lagoon-dark-10;
+    box-shadow: 0px 0px 10px rgba($lagoon-dark-10, 0.3);
+    outline: none;
+    color: $black-100;
+  }
+}
+
+.button {
+  padding: 5px 35px;
+  border-radius: 5px;
+  font-size: 1em;
+  font-family: 'Prompt';
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.primary {
+  background: $lagoon;
+  color: darken($lagoon, 50%);
+}
+
+.secondary {
+  background: $black-20;
+  color: $black-70;
+}
+
+.danger {
+  background: $red-30;
+  color: darken($red-100, 30%);
+}

@@ -1,0 +1,21 @@
+@import '../colors';
+
+.card {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20vw;
+  padding: 15px 15px 25px 15px;
+  border-radius: 9px;
+  box-shadow: 6px 6px 42px 2px rgba($black-100, 0.15);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+
+.input {
+  margin: 0 0 20px 0;
+}

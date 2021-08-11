@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
+import { success, error } from '../../store/features/notifySlice';
 import Input from '../core/Input';
 import { useOuterClick } from '../../utils/outerclick';
 
 import { deleteData, getData, postData } from '../../utils/fetchData';
 import styles from '../../styles/course/Resource.module.scss';
 import courseQueries from '../../utils/courseQueries';
-import { setResources, addFolder } from '../../store/features/resourceSlice';
-import {addFolderToPath,  setPath } from '../../store/features/querySlice';
+import { setResources, addFolder, arFile } from '../../store/features/resourceSlice';
+import { addFolderToPath, setPath } from '../../store/features/querySlice';
 import ResourceNav from './ResourceNav';
 import AddResource from './AddResource';
 
@@ -28,10 +29,7 @@ const ResourcePage = ({ course, user }) => {
   const [currentFolder, setCurrentFolder] = useState(path[path.length - 1]);
   const [edit, setEdit] = useState(false);
 
-  
-
   useEffect(() => {
-    console.log('click', path)
     const i = path.indexOf(currentFolder);
     const newPath = path.slice(0, i + 1);
     const pathString = newPath.join('/');
@@ -39,13 +37,14 @@ const ResourcePage = ({ course, user }) => {
     dispatch(setPath(newPath));
   }, [currentFolder]);
 
-  const handleClick = async (folderId) => {
+  const showFolder = async (folderId) => {
     if (!path.includes(folderId)) {
       dispatch(await addFolderToPath(folderId));
     }
     setCurrentFolder(folderId);
   };
 
+  // closes createFolder on click outside
   const createFolderRef = useOuterClick((click) => {
     setResourceType('');
   });
@@ -69,10 +68,18 @@ const ResourcePage = ({ course, user }) => {
     });
   };
 
-  const deleteFile = async (fileId) => {
-    await deleteData(`resources/file/${fileId}`).then((res) =>
-      console.log(res)
-    );
+  const deleteFolder = async (folderId) => {
+    await deleteData(`resources/folder/${folderId}`).then((res) => {
+      if (res.err) return dispatch(error(res.err));
+      dispatch(success(res.msg));
+    });
+  };
+
+  const deleteFile = async (file) => {
+    dispatch(arFile({course: course.name, files: files.filter(f => f._id !== file._id)}));
+    // await deleteData(`resources/file/${file._id}`).then((res) => {
+    //   dispatch(success(res.msg));
+    // });
   };
 
   return (
@@ -105,7 +112,9 @@ const ResourcePage = ({ course, user }) => {
                   <div
                     key={index}
                     className={styles.resource}
-                    onClick={() => handleClick(folder._id)}>
+                    onClick={() =>
+                      edit ? deleteFolder(folder._id) : showFolder(folder._id)
+                    }>
                     <img src="/folder.svg" alt="folder icon" width="50" />
                     <p>{folder.title}</p>
                   </div>
@@ -120,7 +129,7 @@ const ResourcePage = ({ course, user }) => {
                     key={index}
                     className={styles.resource}
                     onClick={() =>
-                      edit ? deleteFile(file._id) : setViewFile(file.url)
+                      edit ? deleteFile(file) : setViewFile(file.url)
                     }>
                     <img src="/file.svg" alt="file icon" width="50" />
                     <p>{file.title}</p>

@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { postData } from '../../utils/fetchData';
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
-import { addFile } from '../../store/features/resourceSlice';
+import { arFile } from '../../store/features/resourceSlice';
 import { addPost } from '../../store/features/postSlice';
 import Input from '../core/Input';
 import Button from '../core/Button';
@@ -60,7 +60,7 @@ const AddResource = ({
           },
         }).then((res) => {
           dispatch(
-            addFile({
+            arrFile({
               course: course.name,
               files: [...files, res.newFile],
             })

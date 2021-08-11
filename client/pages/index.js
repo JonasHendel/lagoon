@@ -2,11 +2,21 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAuth } from '../store/features/authSlice';
 import Cookies from 'js-cookie';
+import withAuth from '../utils/withAuth';
 
-export default function Home() {
+const Home = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
 
-  return <div className="min-h-screen"></div>;
-}
+  return (
+    <div
+      onClick={(e) => {
+        console.log(e);
+      }}
+      className="min-h-screen">
+      <h1>Lagoon</h1>
+    </div>
+  );
+};
+
+export default withAuth(Home);

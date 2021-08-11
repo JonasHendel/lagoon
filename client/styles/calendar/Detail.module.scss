@@ -1,12 +1,63 @@
 @import '../_colors.scss';
 
+.red {
+  background: $red-30;
+  color: $red-100;
+}
+
+.magenta {
+  background: $magenta-30;
+  color: $magenta-100;
+}
+
+.purple {
+  background: $purple-30;
+  color: $purple-100;
+}
+
+.green {
+  background: $green-30;
+  color: $green-100;
+}
+
+.blue {
+  background: $blue-30;
+  color: $blue-100;
+}
+
+.cyan {
+  background: $cyan-30;
+  color: $cyan-100;
+}
+
+.orange {
+  background: $orange-30;
+  color: $orange-100;
+}
+
+.pumpkin {
+  background: $pumpkin-30;
+  color: $pumpkin-100;
+}
+
+.black {
+  background: $black-20;
+  color: $black-50;
+}
+
+.lagoon {
+  background: lighten($lagoon, 10%);
+  color: $lagoon-dark-30;
+}
+
 .modal {
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,8 +65,6 @@
 }
 
 .modalBody {
-  background: lighten($lagoon, 10%);
-  color: $lagoon-dark-30;
   height: 500px;
   width: 500px;
   border-radius: 7px;

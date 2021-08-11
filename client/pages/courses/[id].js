@@ -9,6 +9,7 @@ import CourseNav from '../../components/course/CourseNav';
 import styles from '../../styles/course/Course.module.scss';
 import PostPage from '../../components/course/PostPage';
 import ResourcePage from '../../components/course/ResourcePage';
+import withAuth from '../../utils/withAuth'
 
 const Course = () => {
   const router = useRouter();
@@ -75,4 +76,4 @@ const Course = () => {
   );
 };
 
-export default Course;
+export default withAuth(Course);

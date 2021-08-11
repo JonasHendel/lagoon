@@ -1,7 +1,7 @@
 const courseQueries = ({router, page, folderPath}) => {
   const path = router.pathname
   const query = router.query
-  if(page) query.page = parseInt(page)-1
+  if(page) query.page = page
   if(folderPath) query.path = folderPath
 
 

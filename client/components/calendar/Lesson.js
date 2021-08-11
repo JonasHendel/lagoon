@@ -3,24 +3,21 @@ import styles from '../../styles/calendar/Lesson.module.scss';
 import { User, MapPin } from 'react-feather';
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
-import { setDetail } from '../../store/features/detailSlice';
+import { setLesson } from '../../store/features/editLessonSlice';
 
 const Lesson = (props) => {
   let color = props.exam && props.exam === true ? 'lagoon' : props.color;
-  const edit = useSelector((state) => state.edit);
+  const edit = useSelector((state) => state.edit.value);
   const dispatch = useDispatch();
 
-  const showLesson = () => {
-    if (props.detail.type === 'event') {
-      dispatch({ type: 'CALENDAR_DETAIL', payload: props.detail });
-    }
-  };
 
   const { detail } = props;
 
+  
   const editLesson = () => {
+    console.log(edit)
     dispatch(
-      setDetail({
+      setLesson({
         ...detail,
       })
     );
@@ -30,7 +27,7 @@ const Lesson = (props) => {
     <motion.div
       whileTap={{ scale: 0.97 }}
       className={`${styles.lesson} ${styles[color]}`}
-      onClick={edit ? editLesson : showLesson}
+      onClick={edit ? editLesson : null}
       style={{ height: props.height }}>
       <span className={styles.duration}>{props.duration}</span>
       <h1 className={styles.name}>

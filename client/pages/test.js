@@ -1,20 +1,21 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import {success} from '../store/features/notifySlice'
 
 const Test = () => {
-  const user = useSelector(state => state.auth.user);
-  const file =
-    'https://lagoon.fra1.digitaloceanspaces.com/Abtreibung%20%20Bachelorarbeit.pdf';
-  useEffect(() => {
-    try {
-      console.log(user)
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+  const dispatch = useDispatch();
+
+  const path = ['jonas', 'harvey', 'paul']
+  
+  console.log(path.filter((item)=> item !== 'harvey'))
+  const notify = () => {
+    
+  };
+
   return (
     <div>
-    <h1>Test page</h1>
+      <button onClick={()=>dispatch(success('Mindfs'))}>Notify</button>
+      <button onClick={()=>dispatch(success('Tets'))}>Notify</button>
     </div>
   );
 };

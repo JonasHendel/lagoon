@@ -9,6 +9,7 @@ import ViewSelect from '../components/core/Select';
 import WeekView from '../components/calendar/WeekView';
 import MonthView from '../components/calendar/MonthView';
 import YearView from '../components/calendar/YearView';
+import withAuth from '../utils/withAuth';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Calendar = () => {
@@ -156,4 +157,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default withAuth(Calendar);

@@ -2,7 +2,8 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import NavBar from './navbar/NavBar';
-import CalendarDetail from './calendar/Detail';
+import Notify from './core/Notify';
+import CalendarEditLesson from './calendar/EditLesson';
 import CalendarAdd from './calendar/AddEvent';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,6 +23,7 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     const firstLogin = async () => {
+      console.log('first login');
       const firstLogin = localStorage.getItem('firstLogin');
       if (firstLogin) {
         const res = await postData('user/accessToken', {
@@ -29,6 +31,7 @@ const Layout = ({ children }) => {
         });
         if (res.err) localStorage.removeItem('firstLogin');
         else {
+          localStorage.setItem('accessToken', res.access_token);
           dispatch(
             setAuth({
               token: res.access_token,
@@ -41,19 +44,18 @@ const Layout = ({ children }) => {
     firstLogin();
   }, []);
 
+  const authToken = useSelector((state) => state.auth.token);
+
   const auth = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    if (Cookies.get('refreshtoken') === undefined) {
-      router.push('/login');
-    }
-  }, [auth]);
+
   return (
     <div>
+          <Notify />
       {!navBarVisible && (
         <div>
           <CalendarAdd />
-          <CalendarDetail />
+          <CalendarEditLesson />
           <NavBar />
         </div>
       )}

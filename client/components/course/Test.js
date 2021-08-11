@@ -1,14 +1,18 @@
-import FileViewer from 'react-file-viewer';
+import { useDispatch } from 'react-redux';
+import {success} from '../../store/features/notifySlice'
+
 const FileViewer = () => {
-  const file = 'https://lagoon.fra1.digitaloceanspaces.com/astonmartin.jpg'
-  const type = 'jpg'
+  const dispatch = useDispatch();
+
+  const notify = () => {
+    dispatch(success('Test'));
+  };
+
   return (
     <div>
-        <FileViewer
-        fileType={type}
-        filePath={file}/>
+      <button onClick={notify}>Notify</button>
     </div>
-  )
-}
+  );
+};
 
-export default FileViewer
+export default FileViewer;

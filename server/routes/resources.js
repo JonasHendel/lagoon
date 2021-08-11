@@ -127,4 +127,25 @@ router.delete('/file/:id', async (req, res) => {
   }
 });
 
+router.delete('/folder/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const childFolders = await Folders.find({ parent_id: id });
+    const childFiles = await Files.find({ parent_id: id });
+    console.log('childFolders', childFolders);
+    console.log('childFiles', childFiles);
+
+    if (childFolders || childFiles) {
+      return res.json({ err: 'Files and or subfolders exist in this folder' });
+    }
+
+    // await Folders.findByIdAndDelete(id);
+
+    res.json({ msg: 'File deleted' });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+});
+
 module.exports = router;

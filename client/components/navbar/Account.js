@@ -5,8 +5,10 @@ import { ChevronDown } from 'react-feather';
 import styles from '../../styles/modules/Account.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearAuth } from '../../store/features/authSlice';
+import { success } from '../../store/features/notifySlice';
 import Cookie from 'js-cookie';
 import { useRouter } from 'next/router';
+import Avatar from 'boring-avatars';
 
 export default function account() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -21,7 +23,6 @@ export default function account() {
     setDropdownOpen((status) => !status);
   };
 
-  
   const accountRef = useOuterClick((click) => {
     setDropdownOpen(false);
   });
@@ -29,8 +30,10 @@ export default function account() {
   const handleLogout = () => {
     Cookie.remove('refreshtoken');
     localStorage.removeItem('firstLogin');
+    localStorage.removeItem('accessToken');
     dispatch(clearAuth());
-    dispatch({ type: 'NOTIFY', payload: { success: 'Logged out!' } });
+    dispatch(success('Logged out!'));
+    router.push('/login');
   };
 
   const dropdownVariants = {
@@ -57,7 +60,14 @@ export default function account() {
   return (
     <div ref={accountRef} className={styles.accountWrap}>
       <div className={styles.account} onClick={toggleDropdown}>
-        <img className={styles.profilePicture} src="/icon.svg" />
+        <div className={styles.profilePicture}>
+          <Avatar
+            size={30}
+            name={auth.user.name}
+            variant="marble"
+            colors={['#83F1D5', '#48BFE3', '#5E60CE', '#64DFDF', '#7400b8']}
+          />
+        </div>
         <span className={styles.name}>{auth.user.name}</span>
         <ChevronDown />
       </div>

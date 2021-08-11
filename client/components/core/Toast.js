@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Notify from './Notify';
 
 const Toast = ({ message, handleShow }) => {
 	
@@ -24,7 +23,7 @@ const Toast = ({ message, handleShow }) => {
 			<ToastContainer
 				limit={2}
 				pauseOnHover={false}
-				autoClose={4000}
+				autoClose={3000}
 				newestOnTop={true}
 			/>
 		</div>

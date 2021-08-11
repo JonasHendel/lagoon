@@ -5,24 +5,24 @@ import moment from 'moment';
 import { motion } from 'framer-motion';
 import { User, MapPin } from 'react-feather';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearDetail } from '../../store/features/detailSlice';
+import { clearLesson } from '../../store/features/editLessonSlice';
 
 import styles from '../../styles/calendar/Detail.module.scss';
 
-const DetailModal = () => {
+const EditLesson = () => {
   const [open, setOpen] = useState(false);
 
-  const detail = useSelector((state) => state.detail.value);
+  const lesson = useSelector((state) => state.lesson.value);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (Object.keys(detail).length !== 0) {
+    if (Object.keys(lesson).length !== 0) {
       setOpen(true);
     }
-  }, [detail]);
+  }, [lesson]);
 
   const closeDetail = () => {
-    dispatch(clearDetail());
+    dispatch(clearLesson());
     setOpen(false);
   };
 
@@ -42,23 +42,23 @@ const DetailModal = () => {
         }}
         animate={{ scale: [0.7, 1.05, 1] }}
         transition={{ duration: 0.3 }}
-        className={styles.modalBody}>
-        <h1 className={styles.title}>{detail.name}</h1>
+        className={`${styles.modalBody} ${styles[lesson.course.color]}`}>
+        <h1 className={styles.title}>{lesson.name}</h1>
         <div className={styles.info}>
           <User className={styles.icon} size={20} />
-          <p>{detail.course ? detail.course.teacher : detail.teacher}</p>
+          <p>{lesson.course ? lesson.course.teacher : lesson.teacher}</p>
         </div>
         <div className={styles.info}>
           <MapPin className={styles.icon} size={20} />
-          <p>{detail.location}</p>
+          <p>{lesson.location}</p>
         </div>
         <p>
-          {detail.startTime} - {detail.endTime}
+          {lesson.startTime} - {lesson.endTime}
         </p>
-        <p className={styles.description}>{detail.description}</p>
+        <p className={styles.description}>{lesson.description}</p>
       </motion.div>
     </motion.div>
   );
 };
 
-export default DetailModal;
+export default EditLesson;

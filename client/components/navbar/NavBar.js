@@ -4,6 +4,7 @@ import Account from './Account';
 import CoursesDropdown from './CoursesDropdown';
 import styles from '../../styles/modules/NavBar.module.scss';
 import { useSelector } from 'react-redux';
+import withAuth from '../../utils/withAuth';
 
 let navItems = [
   { name: 'Dashboard', href: '/' },
@@ -28,7 +29,7 @@ const NavBar = () => {
   return (
     <div className={styles.navbar}>
       <div className={styles.navigation}>
-        <img className={styles.logo} src="/logo.png" alt="Lagoon Logo" />
+        <img className={styles.logo} src="/logo.svg" alt="Lagoon Logo" />
         <div className={styles.navItems}>
           {navItems.map((navItem) => (
             <div key={navItem.href}>

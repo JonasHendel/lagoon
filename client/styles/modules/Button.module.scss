@@ -18,7 +18,7 @@
 }
 
 .primary {
-  background: lighten($lagoon, 10%);
+  background: $lagoon;
   color: darken($lagoon, 50%);
 }
 

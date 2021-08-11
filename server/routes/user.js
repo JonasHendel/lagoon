@@ -18,13 +18,27 @@ router.post('/create', async (req, res) => {
       name,
       role,
       grade,
-      code: Math.floor(100000 + Math.random() * 900000).toString(),
+      code: Math.floor(100000 + Math.random() * 900000),
     });
     await newUser.save();
     res.json({ success: 'User was created' });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
+});
+
+router.post('/checkcode', async (req, res) => {
+  const { code } = req.body;
+
+  console.log(code)
+
+  const user = await Users.findOne({ code: code });
+
+  if (!user) {
+    return res.status(500).json({ err: 'Code does not exist or has already been used.' });
+  }
+
+  res.json({ msg: 'Code is valid.', user});
 });
 
 router.patch('/register', async (req, res) => {
@@ -37,14 +51,6 @@ router.patch('/register', async (req, res) => {
     return res.status(400).json({ err: errMessage });
   }
 
-  const checkCode = await Users.find({ code: code });
-
-  if (checkCode.length <= 0) {
-    return res
-      .status(400)
-      .json({ err: 'Code does not exist or has already been used.' });
-  }
-
   const hashedPassword = await bcrypt.hash(password, 12);
 
   await Users.findOneAndUpdate(
@@ -52,7 +58,7 @@ router.patch('/register', async (req, res) => {
     {
       email,
       password: hashedPassword,
-      code: '2' + Math.random().toString(36).substr(2, 9),
+      code: Math.floor(100000 + Math.random() * 900000)
     }
   );
   res.status(200).json({ success: 'User was registered!' });
@@ -60,8 +66,6 @@ router.patch('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    console.log(req.body);
-
     const { email, password } = req.body;
 
     const user = await Users.findOne({ email });

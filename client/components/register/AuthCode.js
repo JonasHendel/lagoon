@@ -51,6 +51,7 @@ const AuthCode = (props) => {
     inputs = [...inputs].map((input) => {
       return input.children[0];
     });
+
     let index = inputs.indexOf(e.target);
 
     if (index < inputs.length - 1) {
@@ -75,7 +76,7 @@ const AuthCode = (props) => {
   };
 
   return (
-    <div className={styles.authCode}>
+    <form className={styles.authCode}>
       {fields.map((field, index) => (
         <Input
           type={field.type}
@@ -85,7 +86,7 @@ const AuthCode = (props) => {
           onKeyUp={handleKeyUp}
         />
       ))}
-    </div>
+    </form>
   );
 };
 

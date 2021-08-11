@@ -8,6 +8,7 @@ import Input from './../components/core/Input';
 import Button from './../components/core/Button';
 import styles from '../styles/modules/Login.module.scss';
 import { Box } from 'react-feather';
+import { success, error } from '../store/features/notifySlice';
 
 //Project files
 import { useSelector, useDispatch } from 'react-redux';
@@ -30,18 +31,18 @@ const Login = () => {
     // dispatch({ type: 'NOTIFY', payload: {} });
   };
 
-  // useEffect(() => {
-  //   if (Object.keys(auth).length !== 0) router.push('/');
-  // }, [auth]);
+  useEffect(() => {
+    if (auth.token) router.push('/');
+  }, [auth]);
 
   const login = async () => {
     // dispatch({ type: 'NOTIFY', payload: { loading: true } });
 
     const res = await postData('user/login', userData);
 
-    // if (res.err) {
-    //   return dispatch({ type: 'NOTIFY', payload: { error: res.err } });
-    // }
+    if (res.err) {
+      return dispatch(error(res.err));
+    }
 
     dispatch(
       setAuth({
@@ -50,11 +51,14 @@ const Login = () => {
       })
     );
 
+    dispatch(success('Login successful'));
+
     Cookie.set('refreshtoken', res.refresh_token, {
       path: '',
       expires: 7,
     });
     localStorage.setItem('firstLogin', true);
+    localStorage.setItem('accessToken', res.access_token);
     router.push('/');
   };
 
@@ -80,9 +84,9 @@ const Login = () => {
         <div className={styles.decor}>
           <img src="/cover.jpg" />
         </div>
-        <div className={styles.login}>
+        <form className={styles.login} onSubmit={handleSubmit}>
           <div className={styles.header}>
-            <img src="/logo.png" />
+            <img src="/logo.svg" />
             <span>Lagoon</span>
           </div>
           <div className={styles.inputs}>
@@ -109,10 +113,7 @@ const Login = () => {
           </div>
           <div className={styles.actions}>
             <div className={styles.button}>
-              <Button
-                class="primary"
-                className={styles.button1}
-                onClick={handleSubmit}>
+              <Button class="primary" type="submit" className={styles.button1}>
                 Sign in
               </Button>
             </div>
@@ -124,7 +125,7 @@ const Login = () => {
               </Link>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

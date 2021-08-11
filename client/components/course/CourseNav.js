@@ -5,22 +5,23 @@ import { useState, useEffect } from 'react';
 import { motion, AnimateSharedLayout } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeEdit } from '../../store/features/editSlice';
-import { useRouter } from 'next/router'
+import {setPage} from '../../store/features/querySlice'
+import { useRouter } from 'next/router';
 import courseQueries from '../../utils/courseQueries';
 
 const CourseNav = ({ course, onChange, list }) => {
-  const router = useRouter()
-  const [selectedItem, setSelectedItem] = useState(parseInt(router.query.page) || 0); // if query.page is not set, default to 0
+  const page = useSelector((state) => state.query.page);
+  const router = useRouter();
   const dispatch = useDispatch();
-  
-  // sets page query and view state to selectedItem and changes the page
-  useEffect(() => {
-    courseQueries({router, page: parseInt(selectedItem)+1})
-    onChange(list[router.query.page])
-  }, [selectedItem]);
 
+  useEffect(()=>{
+    dispatch(setPage(router.query.page || 'Home'))
+  },[])
 
-
+  const changePage = (item) => {
+    courseQueries({router, page: item})
+    dispatch(setPage(item))
+  }
 
   return (
     <div className={`${styles.navbar} ${styles[course.color]}`}>
@@ -32,13 +33,15 @@ const CourseNav = ({ course, onChange, list }) => {
         <div className={styles.select}>
           {/* {auth.user && auth.user.role === 'admin' && ( */}
           {list.map((item, index) => {
-            const isActive = index === selectedItem;
+            const isActive = item === page;
             return (
               <motion.div
                 key={item}
                 whileTap={isActive ? { scale: 0.95 } : {}}
-                onClick={() => setSelectedItem(index)}
-                className={isActive ? styles.activeSelectItem : styles.selectItem}>
+                onClick={()=>changePage(item)}
+                className={
+                  isActive ? styles.activeSelectItem : styles.selectItem
+                }>
                 {isActive && (
                   <motion.div
                     layoutId="SelectActive"
