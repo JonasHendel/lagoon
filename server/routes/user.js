@@ -30,15 +30,17 @@ router.post('/create', async (req, res) => {
 router.post('/checkcode', async (req, res) => {
   const { code } = req.body;
 
-  console.log(code)
+  console.log(code);
 
   const user = await Users.findOne({ code: code });
 
   if (!user) {
-    return res.status(500).json({ err: 'Code does not exist or has already been used.' });
+    return res
+      .status(500)
+      .json({ err: 'Code does not exist or has already been used.' });
   }
 
-  res.json({ msg: 'Code is valid.', user});
+  res.json({ msg: 'Code is valid.', user });
 });
 
 router.patch('/register', async (req, res) => {
@@ -58,7 +60,7 @@ router.patch('/register', async (req, res) => {
     {
       email,
       password: hashedPassword,
-      code: Math.floor(100000 + Math.random() * 900000)
+      code: 'used',
     }
   );
   res.status(200).json({ success: 'User was registered!' });
@@ -93,6 +95,18 @@ router.post('/login', async (req, res) => {
         root: user.root,
       },
     });
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+});
+
+router.get('/users', async (req, res) => {
+  try {
+    const users = await Users.find({});
+
+    console.log(users);
+
+    res.json(users);
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }

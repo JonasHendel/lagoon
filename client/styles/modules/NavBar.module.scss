@@ -7,6 +7,9 @@
   padding: 0.5em 2em;
   background: $white;
   border-bottom: $black-20 solid 2px;
+  position: sticky;
+  top: 0; 
+  height: 4em;
 }
 
 .navbar .navigation {
@@ -15,7 +18,7 @@
 }
 
 .navbar .logo {
-  height: 50px;
+  height:35px;
   width: auto;
   margin-right: 2em;
 }

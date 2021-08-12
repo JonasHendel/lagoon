@@ -1,53 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { postData } from '../../utils/fetchData';
+import { useEffect,useState } from 'react';
+import CreateUser from '../../components/admin/CreateUser';
+import UserTable from '../../components/admin/UserTable';
+import UserSearch from '../../components/admin/UserSearch';
+import styles from '../../styles/admin/createUser.module.scss';
 
-const CreateUser = () => {
-  const initialState = {
-    name: '',
-    role: '',
+const Create = () => {
+  const filterState = {
+    search: '',
     grade: '',
-  };
-  const [user, setUser] = useState(initialState);
+    role: '',
+    active: Boolean,
+  }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
-  };
 
-  const createUser = () => {
-    postData('user/create', user);
-  };
-
+  const [filter, setFilter] = useState(filterState);
   return (
-    <div>
-      <form onSubmit={createUser}>
-        <input
-          value={user.name}
-          name="name"
-          placeholder="name"
-          onChange={handleChange}
-        />
-        <select name="grade" onChange={handleChange}>
-          <option value="" disabled selected>
-            Select grade
-          </option>
-          <option value="Grade 11">Grade 11</option>
-          <option value="Grade 12">Grade 12</option>
-          <option value="Grade 13">Grade 13</option>
-        </select>
-        <select name="role" onChange={handleChange}>
-          <option value="" disabled selected>
-            Select role
-          </option>
-          <option value="student">student</option>
-          <option value="teacher">teacher</option>
-          <option value="parent">parent</option>
-          <option value="other">other</option>
-        </select>
-        <button type="submit">Create User</button>
-      </form>
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <div>
+          <CreateUser />
+        </div>
+        <div>
+          <UserSearch filter={filter} setFilter={setFilter} />
+          <UserTable filter={filter}/>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default CreateUser;
+export default Create;

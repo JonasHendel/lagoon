@@ -1,6 +1,10 @@
 @import 'colors';
 @import 'reset';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
@@ -99,4 +103,15 @@ label {
 .danger {
   background: $red-30;
   color: darken($red-100, 30%);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
