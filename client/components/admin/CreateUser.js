@@ -30,7 +30,7 @@ const CreateUser = () => {
         className={`input ${styles.input}`}
       />
       <select name="grade" onChange={handleChange} className={`input ${styles.input}`}>
-        <option value="" disabled selected>
+        <option value="" selected>
           Select grade
         </option>
         <option value="Grade 11">Grade 11</option>
@@ -38,7 +38,7 @@ const CreateUser = () => {
         <option value="Grade 13">Grade 13</option>
       </select>
       <select name="role" onChange={handleChange} className={`input ${styles.input}`}>
-        <option value="" disabled selected>
+        <option value="" selected>
           Select role
         </option>
         <option value="student">student</option>

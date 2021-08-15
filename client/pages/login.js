@@ -25,9 +25,11 @@ const Login = () => {
 
   const router = useRouter();
 
+  
+
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
+    setUserData((prevUserData) => ({ ...prevUserData, [name]: value }));
     // dispatch({ type: 'NOTIFY', payload: {} });
   };
 

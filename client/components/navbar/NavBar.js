@@ -37,10 +37,10 @@ const NavBar = () => {
                 <CoursesDropdown key="Courses" />
               ) : (
                 <Link href={navItem.href}>
-                  <span
+                  <a
                     className={`${styles.navItem} ${isActive(navItem.href)}`}>
                     {navItem.name}
-                  </span>
+                  </a>
                 </Link>
               )}
             </div>

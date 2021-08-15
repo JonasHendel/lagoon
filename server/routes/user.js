@@ -149,4 +149,17 @@ router.post('/accessToken', async (req, res) => {
   }
 });
 
+//update user
+
+router.patch('/update', async (req, res) => {
+  try {
+    console.log(req.body)
+    await Users.findByIdAndUpdate(req.body.editUser._id, req.body.editUser);
+    const newUser = await Users.findById(req.body.editUser._id);
+    return res.json({ success: 'User was updated!', newUser});
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+});
+
 module.exports = router;

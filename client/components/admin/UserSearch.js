@@ -23,6 +23,16 @@ const UserSearch = ({ filter, setFilter }) => {
         <option value="Grade 12">Grade 12</option>
         <option value="Grade 13">Grade 13</option>
       </select>
+      {/* <select
+        name="status"
+        onChange={e => setFilter({...filter, status: e.target.value})}
+        className={`input ${styles.searchDropdown}`}>
+        <option value="" selected>
+          Select status
+        </option>
+        <option value="active">Active Users</option>
+        <option value="inactive">Inactive Users</option>
+      </select> */}
       <select
         name="role"
         onChange={e => setFilter({...filter, role: e.target.value})}
