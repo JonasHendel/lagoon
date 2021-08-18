@@ -26,7 +26,6 @@ const EditUser = ({ editUser, setEditUser, setUsers, users }) => {
 
     setUsers(userArr);
 
-    console.log(users)
 
     setEditUser({});
   };

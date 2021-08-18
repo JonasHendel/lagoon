@@ -8,13 +8,15 @@ const Home = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
 
+  console.log(localStorage.getItem("accessToken"))
+
   return (
     <div
       onClick={(e) => {
         console.log(e);
       }}
       className="min-h-screen">
-      <h1>Lagoon</h1>
+      <h1>{localStorage.getItem("accessToken")}</h1>
     </div>
   );
 };

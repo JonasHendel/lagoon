@@ -16,11 +16,13 @@ const RegisterForm = ({user, setUser}) => {
     setUser({ ...user, [name]: value });
   };
 
-  const registerUser = () => {
+  const registerUser = (e) => {
+    e.preventDefault()
     if (validateEmail(user.email)) {
       patchData('user/register', user).then((res) => {
+        console.log(res)
         if (res.err) {
-          console.log(res.err);
+          console.error(res.err);
         } else {
           router.push('/login');
         }
@@ -35,7 +37,7 @@ const RegisterForm = ({user, setUser}) => {
       <h1>Register</h1>
       <p>{user.name}</p>
       <p>{user.grade}</p>
-      <form onSubmit={registerUser}>
+      <form onSubmit={(e)=>registerUser(e)}>
         <input
           type="email"
           name="email"

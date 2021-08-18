@@ -13,12 +13,12 @@ export const resourceSlice = createSlice({
       state.courses[action.payload.course].folders = action.payload.folders;
     },
     // add or remove file
-    arFile: (state, action) => {
+    adrFile: (state, action) => {
       state.courses[action.payload.course].files = action.payload.files;
     },
   },
 });
 
-export const { setResources, addFolder, arFile } = resourceSlice.actions;
+export const { setResources, addFolder, adrFile } = resourceSlice.actions;
 
 export default resourceSlice.reducer;

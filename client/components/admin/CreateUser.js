@@ -15,12 +15,13 @@ const CreateUser = () => {
     setUser({ ...user, [name]: value });
   };
 
-  const createUser = () => {
+  const createUser = (e) => {
+    e.preventDefault();
     postData('user/create', user);
   };
 
   return (
-    <form onSubmit={createUser} className={styles.card}>
+    <form onSubmit={(e)=>createUser(e)} className={styles.card}>
     <h3>Create User</h3>
       <input
         value={user.name}
@@ -42,6 +43,7 @@ const CreateUser = () => {
           Select role
         </option>
         <option value="student">student</option>
+        <option value="admin">admin</option>
         <option value="teacher">teacher</option>
         <option value="parent">parent</option>
         <option value="other">other</option>

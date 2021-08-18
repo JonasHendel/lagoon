@@ -1,6 +1,5 @@
 @import '../colors';
 
-
 .navbar {
   background-color: white;
   margin: 20px 0px 20px 0px;
@@ -9,6 +8,7 @@
   height: 65px;
   display: flex;
   align-items: center;
+  box-shadow: 4px 1px 25px 3px rgba(($black-30), 0.2);
 }
 
 .courseInfo {
@@ -35,7 +35,6 @@
   font-size: 1.3em;
   margin-left: 20px;
 }
-
 
 .select {
   display: flex;
@@ -91,52 +90,42 @@
   border-bottom: solid $black-100 3px;
 }
 
-
-
 .red {
-  background: $red-30;
   color: $red-100;
-  box-shadow: 4px 1px 25px 3px rgba(($red-100), 0.2);
+  border-color: $red-100;
 }
 
 .magenta {
-  background: $magenta-30;
   color: $magenta-100;
-  box-shadow: 4px 1px 25px 3px rgba(($magenta-100), 0.2);
+  border-color: $magenta-100;
 }
 
 .purple {
-  background: $purple-30;
   color: $purple-100;
-  box-shadow: 4px 1px 25px 3px rgba(($purple-100), 0.2);
+  border-color: $purple-100;
 }
 
 .green {
-  background: $green-30;
   color: $green-100;
-  box-shadow: 4px 1px 25px 3px rgba(($green-100), 0.2);
+  border-color: $green-100;
 }
 
 .blue {
-  background: $blue-30;
   color: $blue-100;
-  box-shadow: 4px 1px 25px 3px rgba(($blue-100), 0.2);
+  border-color: $blue-100;
 }
 
 .cyan {
-  background: $cyan-30;
   color: $cyan-100;
-  box-shadow: 4px 1px 25px 3px rgba(($cyan-100), 0.2);
+  border-color: $cyan-100;
 }
 
 .orange {
-  background: $orange-30;
   color: $orange-100;
-  box-shadow: 4px 1px 25px 3px rgba(($orange-100), 0.2);
+  border-color: $orange-100;
 }
 
 .pumpkin {
-  background: $pumpkin-30;
   color: $pumpkin-100;
-  box-shadow: 4px 1px 25px 3px rgba(($pumpkin-100), 0.2);
+  border-color: $pumpkin-100;
 }

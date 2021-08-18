@@ -4,17 +4,19 @@ import { getData } from '../../utils/fetchData';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPost } from '../../store/features/postSlice';
 import { setResources } from '../../store/features/resourceSlice';
-import {setPage} from '../../store/features/querySlice'
+import { setPage } from '../../store/features/querySlice';
 import CourseNav from '../../components/course/CourseNav';
 import styles from '../../styles/course/Course.module.scss';
 import PostPage from '../../components/course/PostPage';
 import ResourcePage from '../../components/course/ResourcePage';
-import withAuth from '../../utils/withAuth'
+import withAuth from '../../utils/withAuth';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Course = () => {
   const router = useRouter();
   const { id } = router.query;
   const [course, setCourse] = useState();
+  const [prevPage, setPrevPage] = useState();
   const auth = useSelector((state) => state.auth);
   const page = useSelector((state) => state.query.page);
 
@@ -27,7 +29,7 @@ const Course = () => {
     const getCourse = async () => {
       if (id) {
         const courseRes = await getData(`courses/?courseId=${id}`);
-        setCourse(courseRes)
+        setCourse(courseRes);
         getData(`resources/${courseRes._id}`).then((res) => {
           dispatch(
             setResources({
@@ -36,41 +38,85 @@ const Course = () => {
           );
         });
         getData(`post/${id}`).then((res) => {
-          dispatch(setPost({ [courseRes.name]: res  }));
+          dispatch(setPost({ [courseRes.name]: res }));
         });
       }
     };
     getCourse();
   }, [id]);
 
-  const posts = useSelector(state => state.posts.courses && course && state.posts.courses[course.name]);
+  const posts = useSelector(
+    (state) => state.posts.courses && course && state.posts.courses[course.name]
+  );
 
   // check if course and posts are available, to prevent rendering while being undefined
   if (!course || !posts) {
     return null;
   }
 
+  const animationVariants = {
+    fromResourceInitial: {
+      x: 500,
+      opacity: 0,
+    },
+    fromResourceAnimate: {
+      x: 500,
+      opacity: 0,
+      x: 0,
+      opacity: 1,
+    },
+    fromResourceExit: {
+      x: -500,
+      opacity: 0,
+    },
+  };
+
+  console.log(prevPage === 'Home')
+
   return (
     <div className={styles.container}>
-    {/*  */}
+      {/*  */}
       <CourseNav
         course={course}
-        onChange={(selected) => {
-          dispatch(setPage(selected))
-        }}
-        list={['Home', 'Tasks', 'Resources', 'Plans']}
+        setPrevPage={setPrevPage}
+        list={['Home', 'Tasks', 'Resources']}
       />
       <div className={styles.content}>
         <div className={styles.posts}>
-          {page === 'Home' &&
-            
-               <PostPage user={user} posts={posts} course={course} />
-            }
+          {page === 'Home' && (
+            <AnimatePresence>
+              <motion.div
+                initial={{ x: 500, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -500, opacity: 0 }}>
+                <PostPage user={user} posts={posts} course={course} />
+              </motion.div>
+            </AnimatePresence>
+          )}
         </div>
         <div className={styles.upcoming}></div>
-        {page === 'Resources' &&
-            <ResourcePage user={user} posts={posts} course={course} />
-          }
+        {page === 'Tasks' && (
+          <AnimatePresence>
+            <motion.div
+              initial={{ x: prevPage === 'Home' ? -500 : 500, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: prevPage === 'Home' ? 500 : -500, opacity: 0 }}
+              transition={{ duration: 0.3 }}>
+              <h1>Tasks</h1>
+            </motion.div>
+          </AnimatePresence>
+        )}
+        {page === 'Resources' && (
+          <AnimatePresence>
+            <motion.div
+              initial={{ x: -500, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 500, opacity: 0 }}
+              transition={{ duration: 0.3 }}>
+              <ResourcePage user={user} posts={posts} course={course} />
+            </motion.div>
+          </AnimatePresence>
+        )}
       </div>
     </div>
   );

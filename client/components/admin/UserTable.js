@@ -50,7 +50,7 @@ const UserTable = ({filter, setEditUser, users, editUser}) => {
           </thead>
           <tbody className={styles.tableBody}>
             {filteredUsers && filteredUsers.map((user) => (
-              <tr key={user._id} className={styles.tableRow}>
+              <tr className={styles.tableRow}>
                 <td className="px-6 py-4 whitespace-nowrap flex items-center">
                     <div className={styles.avatar}>
                       <Avatar

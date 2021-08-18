@@ -4,11 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { success, error } from '../../store/features/notifySlice';
 import Input from '../core/Input';
 import { useOuterClick } from '../../utils/outerclick';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import { deleteData, getData, postData } from '../../utils/fetchData';
 import styles from '../../styles/course/Resource.module.scss';
 import courseQueries from '../../utils/courseQueries';
-import { setResources, addFolder, arFile } from '../../store/features/resourceSlice';
+import {
+  setResources,
+  addFolder,
+  arFile,
+} from '../../store/features/resourceSlice';
 import { addFolderToPath, setPath } from '../../store/features/querySlice';
 import ResourceNav from './ResourceNav';
 import AddResource from './AddResource';
@@ -76,94 +81,110 @@ const ResourcePage = ({ course, user }) => {
   };
 
   const deleteFile = async (file) => {
-    dispatch(arFile({course: course.name, files: files.filter(f => f._id !== file._id)}));
+    dispatch(
+      arFile({
+        course: course.name,
+        files: files.filter((f) => f._id !== file._id),
+      })
+    );
     // await deleteData(`resources/file/${file._id}`).then((res) => {
     //   dispatch(success(res.msg));
     // });
   };
 
   return (
-    <div className={styles.resources}>
-      <ResourceNav
-        edit={edit}
-        setEdit={setEdit}
-        setViewFile={setViewFile}
-        viewFile={viewFile}
-        setCurrentFolder={setCurrentFolder}
-        path={path}
-        setResourceType={setResourceType}
-        folders={folders}
-      />
-      {resourceType === 'file' && (
-        <AddResource
-          files={files}
+      <div
+        className={styles.resources}>
+        <ResourceNav
+          edit={edit}
+          setEdit={setEdit}
+          setViewFile={setViewFile}
+          viewFile={viewFile}
+          setCurrentFolder={setCurrentFolder}
           path={path}
-          currentFolder={currentFolder}
           setResourceType={setResourceType}
-          course={course}
+          folders={folders}
         />
-      )}
-      {viewFile.length === 0 && (
-        <>
-          {folders &&
-            folders.map((folder, index) => {
-              if (folder.parent_id === currentFolder)
-                return (
-                  <div
-                    key={index}
-                    className={styles.resource}
-                    onClick={() =>
-                      edit ? deleteFolder(folder._id) : showFolder(folder._id)
-                    }>
-                    <img src="/folder.svg" alt="folder icon" width="50" />
-                    <p>{folder.title}</p>
-                  </div>
-                );
-              else return null;
-            })}
-          {files &&
-            files.map((file, index) => {
-              if (file.parent_id === currentFolder) {
-                return (
-                  <div
-                    key={index}
-                    className={styles.resource}
-                    onClick={() =>
-                      edit ? deleteFile(file) : setViewFile(file.url)
-                    }>
-                    <img src="/file.svg" alt="file icon" width="50" />
-                    <p>{file.title}</p>
-                  </div>
-                );
-              }
-            })}
-          {resourceType === 'folder' && (
-            <form
-              ref={createFolderRef}
-              onSubmit={createFolder}
-              className={styles.resource}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}>
-              <img src="/add_folder.svg" alt="file icon" width="50" />
-              <Input
-                type="primary"
-                value={folderTitle}
-                onChange={(e) => {
-                  setFolderTitle(e.target.value);
-                }}
-                placeholder="folder title"
-              />
-            </form>
-          )}
-        </>
-      )}
-      {viewFile.length !== 0 && (
-        <>
-          <embed src={viewFile} className={styles.file} />
-        </>
-      )}
-    </div>
+        {resourceType === 'file' && (
+          <AddResource
+            files={files}
+            path={path}
+            currentFolder={currentFolder}
+            setResourceType={setResourceType}
+            course={course}
+          />
+        )}
+        {viewFile.length === 0 && (
+          <>
+            {folders &&
+              folders.map((folder, index) => {
+                if (folder.parent_id === currentFolder)
+                  return (
+                    <motion.div
+                      key={index}
+                      className={styles.resource}
+                      onClick={() =>
+                        edit ? deleteFolder(folder._id) : showFolder(folder._id)
+                      }
+                      whileTap={{ scale: 0.95 }}>
+                      <img
+                        src={edit ? '/remove_folder.svg' : '/folder.svg'}
+                        alt="folder icon"
+                        width="50"
+                      />
+                      <p>{folder.title}</p>
+                    </motion.div>
+                  );
+                else return null;
+              })}
+            {files &&
+              files.map((file, index) => {
+                if (file.parent_id === currentFolder) {
+                  return (
+                    <motion.div
+                      key={index}
+                      className={styles.resource}
+                      onClick={() =>
+                        edit ? deleteFile(file) : setViewFile(file.url)
+                      }
+                      whileTap={{ scale: 0.95 }}>
+                      <img
+                        src={edit ? '/remove_file.svg' : '/file.svg'}
+                        alt="file icon"
+                        width="50"
+                      />
+                      <p>{file.title}</p>
+                    </motion.div>
+                  );
+                }
+              })}
+            {resourceType === 'folder' && (
+              <form
+                ref={createFolderRef}
+                onSubmit={createFolder}
+                className={styles.resource}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}>
+                <img src="/add_folder.svg" alt="file icon" width="50" />
+                <Input
+                  type="primary"
+                  value={folderTitle}
+                  onChange={(e) => {
+                    setFolderTitle(e.target.value);
+                  }}
+                  placeholder="folder title"
+                />
+              </form>
+            )}
+          </>
+        )}
+        {viewFile.length !== 0 && (
+          <>
+            <embed src={viewFile} className={styles.file} />
+          </>
+        )}
+      </div>
   );
 };
 
