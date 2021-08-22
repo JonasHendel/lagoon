@@ -31,7 +31,7 @@ const AddResource = ({
 
   console.log(currentFolder);
 
-  const posts = useSelector(state => state.posts.courses[course.name])
+  const posts = useSelector((state) => state.posts.courses[course.name]);
 
   const addResource = async (e) => {
     e.preventDefault();
@@ -39,12 +39,12 @@ const AddResource = ({
       const data = new FormData();
       data.append('file', file);
       data.append('course', JSON.stringify(course));
-      await axios({
+      axios({
         method: 'post',
         url: `http://localhost:8000/resources/file/upload/${course._id},${currentFolder}`,
         data,
       }).then(async (res) => {
-        await postData('resources/create/file/post', {
+        postData('resources/create/file/post', {
           post: {
             type: 'files',
             text: text || null,

@@ -14,10 +14,11 @@ const Register = () => {
   const [user, setUser] = useState({});
   return (
     <div>
-      {!isCodeApproved && (
+      {/* {!isCodeApproved && (
         <RegisterCode setIsCodeApproved={setIsCodeApproved} setUser={setUser} />
-      )}
-      {isCodeApproved && user && <RegisterForm user={user} setUser={setUser} />}
+      )} */}
+      {/* {isCodeApproved && user && <RegisterForm user={user} setUser={setUser} />} */}
+      <RegisterForm user={user} setUser={setUser}/>
     </div>
   );
 };

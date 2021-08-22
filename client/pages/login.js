@@ -25,8 +25,6 @@ const Login = () => {
 
   const router = useRouter();
 
-  
-
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setUserData((prevUserData) => ({ ...prevUserData, [name]: value }));
@@ -94,7 +92,8 @@ const Login = () => {
           <div className={styles.inputs}>
             <label>
               E-Mail
-              <Input
+              <input
+                className="input"
                 type="email"
                 onChange={handleChangeInput}
                 name="email"
@@ -104,7 +103,8 @@ const Login = () => {
             </label>
             <label>
               Password
-              <Input
+              <input
+                className="input"
                 type="password"
                 onChange={handleChangeInput}
                 name="password"

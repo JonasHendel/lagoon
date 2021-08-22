@@ -1,26 +1,25 @@
 import { useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import toast, {Toaster} from 'react-hot-toast'
 import 'react-toastify/dist/ReactToastify.css';
 
 const Toast = ({ message, handleShow }) => {
 	
   if (message.error === true) {
 		toast.error(message.msg, {
-			onClose: () => handleShow(),
 			position: 'top-center',
-      toastId: message.msg
+      id: message.msg
 		});
+
 	}
 	if (message.error === false) {
 		toast.success(message.msg, {
-			onClose: () => handleShow(),
 			position: 'top-center',
-      toastId: message.msg
+      id: message.msg
 		});
 	}
 	return (
 		<div>
-			<ToastContainer
+			<Toaster
 				limit={2}
 				pauseOnHover={false}
 				autoClose={3000}
