@@ -42,11 +42,28 @@ const EditLesson = () => {
         }}
         animate={{ scale: [0.7, 1.05, 1] }}
         transition={{ duration: 0.3 }}
-        className={`${styles.modalBody} ${styles[lesson.course.color]}`}>
-        <h1 className={styles.title}>{lesson.name}</h1>
+        className={`${styles.modalBody} ${
+          lesson.course ? styles[lesson.course.color] : styles.lagoon
+        }`}>
+        <input defaultValue={lesson.course.name} className="input" />
+        <select
+          name="grade"
+          className={`input ${styles.input}`}>
+          <option value="" selected>
+            Select grade
+          </option>
+          <option value="Grade 11">Grade 11</option>
+          <option value="Grade 12">Grade 12</option>
+          <option value="Grade 13">Grade 13</option>
+        </select>
         <div className={styles.info}>
           <User className={styles.icon} size={20} />
-          <p>{lesson.course ? lesson.course.teacher : lesson.teacher}</p>
+          <input
+            className="input"
+            defaultValue={
+              lesson.course ? lesson.course.teacher : lesson.teacher
+            }
+          />
         </div>
         <div className={styles.info}>
           <MapPin className={styles.icon} size={20} />

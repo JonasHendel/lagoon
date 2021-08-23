@@ -1,0 +1,36 @@
+@import '../colors';
+
+.container {
+  width: 200px;
+  cursor: pointer;
+}
+
+.toggle {
+  display: flex;
+  justify-content: space-around;
+}
+
+.options {
+  border-radius: 7px;
+  background: $white;
+  border: 1px solid $black-20;
+  z-index: 100;
+  padding: 7px;
+
+  & input {
+    margin-bottom: 5px;
+  }
+}
+
+.optionItem {
+  display: flex;
+  color: $black-100;
+  padding: 4px 4px;
+  border-radius: 4px;
+  transition: 0.1s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    background: $black-20;
+  }
+}

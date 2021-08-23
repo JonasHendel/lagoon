@@ -2,8 +2,12 @@ import styles from '../../styles/calendar/Month.module.scss';
 import moment from 'moment';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useDispatch } from 'react-redux';
+import { setLesson } from '../../store/features/editLessonSlice';
 
 const MonthDay = ({ day, startOfMonth, events }) => {
+  const dispatch = useDispatch();
+  console.log(events);
   return (
     <>
       {day.diff(moment(startOfMonth)) < 0 ? (
@@ -46,9 +50,9 @@ const MonthDay = ({ day, startOfMonth, events }) => {
                           moment().diff(event.endTime) > 0 ? 'black' : 'lagoon'
                         ]
                       }`}
-                      onClick={() =>
-                        dispatch({ type: 'CALENDAR_DETAIL', payload: event })
-                      }>
+                      onClick={() => {
+                        dispatch(setLesson(event));
+                      }}>
                       <p>{event.name}</p>
                     </motion.div>
                   );

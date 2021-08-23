@@ -162,4 +162,14 @@ router.patch('/update', async (req, res) => {
   }
 });
 
+router.get('/teachers', async (req, res) => {
+  try {
+    const users = await Users.find({ role: 'teacher' });
+
+    res.json(users);
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+})
+
 module.exports = router;
