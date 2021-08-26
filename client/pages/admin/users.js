@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import CreateUser from '../../components/admin/CreateUser';
-import UserTable from '../../components/admin/UserTable';
-import UserSearch from '../../components/admin/UserSearch';
-import EditUser from '../../components/admin/EditUser';
-import styles from '../../styles/admin/createUser.module.scss';
-import {getData} from '../../utils/fetchData'
+import CreateUser from '@/components/admin/CreateUser';
+import UserTable from '@/components/admin/UserTable';
+import UserSearch from '@/components/admin/UserSearch';
+import EditUser from '@/components/admin/EditUser';
+import styles from '@/styles/admin/createUser.module.scss';
+import {getData} from '@/utils/fetchData'
 
 const filterState = {
   search: '',

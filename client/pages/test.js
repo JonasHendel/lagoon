@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { success } from '../store/features/notifySlice';
-import { getData } from '../utils/fetchData';
-import DD from '../components/core/DropDownSearch';
+import { success } from '@/store/features/notifySlice';
+import { getData } from '@/utils/fetchData';
+import DD from '@/components/core/DropDownSearch';
 
 const Test = () => {
   const dispatch = useDispatch();

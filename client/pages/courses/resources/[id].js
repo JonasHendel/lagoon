@@ -1,4 +1,4 @@
-import CourseNav from '../../../components/course/CourseNav';
+import CourseNav from '@/components/course/CourseNav';
 
 const Resources = () => {
   return (

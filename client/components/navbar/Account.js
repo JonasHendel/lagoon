@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useOuterClick } from '../../utils/outerclick';
+import { useOuterClick } from '@/utils/outerclick';
 import { ChevronDown } from 'react-feather';
-import styles from '../../styles/modules/Account.module.scss';
+import styles from '@/styles/modules/Account.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearAuth } from '../../store/features/authSlice';
-import { success } from '../../store/features/notifySlice';
+import { clearAuth } from '@/store/features/authSlice';
+import { success } from '@/store/features/notifySlice';
 import Cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 import Avatar from 'boring-avatars';

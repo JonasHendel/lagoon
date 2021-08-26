@@ -5,8 +5,8 @@ import moment from 'moment';
 import { motion } from 'framer-motion';
 import { User, MapPin } from 'react-feather';
 
-import styles from '../../styles/calendar/Detail.module.scss';
-import { postData } from '../../utils/fetchData';
+import styles from '@/styles/calendar/Detail.module.scss';
+import { postData } from '@/utils/fetchData';
 
 const EditModal = () => {
   const [open, setOpen] = useState(false);

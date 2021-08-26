@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { getData } from '../../utils/fetchData';
+import { getData } from '@/utils/fetchData';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPost } from '../../store/features/postSlice';
-import { setResources } from '../../store/features/resourceSlice';
-import { setPage } from '../../store/features/querySlice';
-import CourseNav from '../../components/course/CourseNav';
-import styles from '../../styles/course/Course.module.scss';
-import PostPage from '../../components/course/PostPage';
-import ResourcePage from '../../components/course/ResourcePage';
-import withAuth from '../../utils/withAuth';
+import { setPost } from '@/store/features/postSlice';
+import { setResources } from '@/store/features/resourceSlice';
+import { setPage } from '@/store/features/querySlice';
+import CourseNav from '@/components/course/CourseNav';
+import styles from '@/styles/course/Course.module.scss';
+import PostPage from '@/components/course/PostPage';
+import ResourcePage from '@/components/course/ResourcePage';
+import withAuth from '@/utils/withAuth';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const Course = () => {

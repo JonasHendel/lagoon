@@ -7,8 +7,8 @@ import CalendarEditLesson from './calendar/EditLesson';
 import CalendarAdd from './calendar/AddEvent';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuth } from '../store/features/authSlice';
-import { postData } from '../utils/fetchData';
+import { setAuth } from '@/store/features/authSlice';
+import { postData } from '@/utils/fetchData';
 
 const Layout = ({ children }) => {
   const router = useRouter();

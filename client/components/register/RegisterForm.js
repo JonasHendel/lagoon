@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { patchData } from '../../utils/fetchData';
+import { patchData } from '@/utils/fetchData';
 import { useRouter } from 'next/router';
-import styles from '../../styles/modules/Register.module.scss';
+import styles from '@/styles/modules/Register.module.scss';
 import Head from 'next/head';
 
 const validateEmail = (email) => {

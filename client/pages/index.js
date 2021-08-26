@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setAuth } from '../store/features/authSlice';
+import { setAuth } from '@/store/features/authSlice';
 import Cookies from 'js-cookie';
-import withAuth from '../utils/withAuth';
+import withAuth from '@/utils/withAuth';
 
 const Home = () => {
   const state = useSelector((state) => state);

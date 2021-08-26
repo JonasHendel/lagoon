@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import styles from '../../styles/modules/Register.module.scss';
+import styles from '@/styles/modules/Register.module.scss';
 
 import AuthCode from './AuthCode';
-import { postData } from '../../utils/fetchData';
+import { postData } from '@/utils/fetchData';
 import { useDispatch } from 'react-redux';
-import {error} from '../../store/features/notifySlice'
+import {error} from '@/store/features/notifySlice'
 
 const RegisterCode = ({setIsCodeApproved, setUser}) => {
   const dispatch = useDispatch();

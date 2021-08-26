@@ -2,9 +2,9 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Account from './Account';
 import CoursesDropdown from './CoursesDropdown';
-import styles from '../../styles/modules/NavBar.module.scss';
+import styles from '@/styles/modules/NavBar.module.scss';
 import { useSelector } from 'react-redux';
-import withAuth from '../../utils/withAuth';
+import withAuth from '@/utils/withAuth';
 
 let navItems = [
   { name: 'Dashboard', href: '/' },

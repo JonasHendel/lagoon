@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import moment from 'moment';
-import styles from '../../styles/calendar/Month.module.scss';
+import styles from '@/styles/calendar/Month.module.scss';
 
 import Day from './MonthDay';
 import { AnimatePresence, motion } from 'framer-motion';

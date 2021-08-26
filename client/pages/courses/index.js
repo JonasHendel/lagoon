@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getData } from '../../utils/fetchData';
+import { getData } from '@/utils/fetchData';
 import Link from 'next/link';
 
 const Courses = () => {

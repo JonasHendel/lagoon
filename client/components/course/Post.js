@@ -1,10 +1,10 @@
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import styles from '../../styles/course/Post.module.scss';
+import styles from '@/styles/course/Post.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
-import { setPath, setPage } from '../../store/features/querySlice';
-import courseQueries from '../../utils/courseQueries';
+import { setPath, setPage } from '@/store/features/querySlice';
+import courseQueries from '@/utils/courseQueries';
 import Avatar from 'boring-avatars';
 
 const Post = ({ post, course }) => {

@@ -1,4 +1,4 @@
-import styles from '../../styles/admin/createUser.module.scss';
+import styles from '@/styles/admin/createUser.module.scss';
 
 const UserSearch = ({ filter, setFilter }) => {
   const {search} = filter

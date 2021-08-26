@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useHover } from '../../utils/hover';
-import { getData } from '../../utils/fetchData';
+import { useHover } from '@/utils/hover';
+import { getData } from '@/utils/fetchData';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import styles from '../../styles/modules/CoursesDropdown.module.scss';
+import styles from '@/styles/modules/CoursesDropdown.module.scss';
 import { useRouter } from 'next/router';
 
 export default function CoursesDropdown(props) {

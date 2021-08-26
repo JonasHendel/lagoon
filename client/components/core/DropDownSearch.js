@@ -1,4 +1,4 @@
-import styles from '../../styles/modules/DDS.module.scss';
+import styles from '@/styles/modules/DDS.module.scss';
 import { ChevronDown } from 'react-feather';
 import { useState, useEffect } from 'react';
 import {motion, AnimatePresence } from 'framer-motion';

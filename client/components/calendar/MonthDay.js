@@ -1,9 +1,9 @@
-import styles from '../../styles/calendar/Month.module.scss';
+import styles from '@/styles/calendar/Month.module.scss';
 import moment from 'moment';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
-import { setLesson } from '../../store/features/editLessonSlice';
+import { setLesson } from '@/store/features/editLessonSlice';
 
 const MonthDay = ({ day, startOfMonth, events }) => {
   const dispatch = useDispatch();

@@ -1,8 +1,8 @@
-import '../styles/global.scss';
+import '@/styles/global.scss';
 
-import Layout from '../components/Layout';
+import Layout from '@/components/Layout';
 
-import store from '../store/store';
+import store from '@/store/store';
 import { Provider } from 'react-redux';
 
 // Create a liveblocks client

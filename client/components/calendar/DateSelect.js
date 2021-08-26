@@ -1,4 +1,4 @@
-import styles from '../../styles/calendar/Calendar.module.scss';
+import styles from '@/styles/calendar/Calendar.module.scss';
 import { ArrowLeft, ArrowRight } from 'react-feather';
 import moment from 'moment';
 import { motion, useAnimation } from 'framer-motion';

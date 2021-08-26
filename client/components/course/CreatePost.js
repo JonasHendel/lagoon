@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { postData } from '../../utils/fetchData';
-import styles from '../../styles/course/Post.module.scss';
+import { postData } from '@/utils/fetchData';
+import styles from '@/styles/course/Post.module.scss';
 import Button from '../core/Button';
 import Avatar from 'boring-avatars';
 

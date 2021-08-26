@@ -1,6 +1,6 @@
 
 import { useEffect } from 'react/cjs/react.development';
-import { getData } from '../../utils/fetchData';
+import { getData } from '@/utils/fetchData';
 import CreatePost from './CreatePost';
 import Post from './Post';
 

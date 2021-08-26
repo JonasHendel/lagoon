@@ -2,14 +2,13 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 
-import { getData } from '../utils/fetchData';
-import styles from '../styles/calendar/Calendar.module.scss';
-import DateSelect from '../components/calendar/DateSelect';
-import ViewSelect from '../components/core/Select';
-import WeekView from '../components/calendar/WeekView';
-import MonthView from '../components/calendar/MonthView';
-import YearView from '../components/calendar/YearView';
-import withAuth from '../utils/withAuth';
+import { getData } from '@/utils/fetchData';
+import styles from '@/styles/calendar/Calendar.module.scss';
+import DateSelect from '@/components/calendar/DateSelect';
+import ViewSelect from '@/components/core/Select';
+import WeekView from '@/components/calendar/WeekView';
+import MonthView from '@/components/calendar/MonthView';
+import withAuth from '@/utils/withAuth';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Calendar = () => {

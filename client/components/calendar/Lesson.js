@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from '../../styles/calendar/Lesson.module.scss';
+import styles from '@/styles/calendar/Lesson.module.scss';
 import { User, MapPin } from 'react-feather';
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
-import { setLesson } from '../../store/features/editLessonSlice';
+import { setLesson } from '@/store/features/editLessonSlice';
 
 const Lesson = (props) => {
   let color = props.exam && props.exam === true ? 'lagoon' : props.color;

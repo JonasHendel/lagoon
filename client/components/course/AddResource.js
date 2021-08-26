@@ -1,15 +1,15 @@
 import { useState, useCallback } from 'react';
-import { postData } from '../../utils/fetchData';
+import { postData } from '@/utils/fetchData';
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
-import { adrFile } from '../../store/features/resourceSlice';
-import { addPost } from '../../store/features/postSlice';
+import { adrFile } from '@/store/features/resourceSlice';
+import { addPost } from '@/store/features/postSlice';
 import Input from '../core/Input';
 import Button from '../core/Button';
 import axios from 'axios';
 import { useDropzone } from 'react-dropzone';
 
-import styles from '../../styles/course/AddResource.module.scss';
+import styles from '@/styles/course/AddResource.module.scss';
 
 const AddResource = ({
   setResourceType,

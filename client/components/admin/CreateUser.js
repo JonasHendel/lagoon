@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { postData } from '../../utils/fetchData';
-import styles from '../../styles/admin/createUser.module.scss';
+import { postData } from '@/utils/fetchData';
+import styles from '@/styles/admin/createUser.module.scss';
 
 const CreateUser = () => {
   const initialState = {

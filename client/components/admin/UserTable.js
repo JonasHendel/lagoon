@@ -1,7 +1,7 @@
-import styles from '../../styles/admin/createUser.module.scss';
+import styles from '@/styles/admin/createUser.module.scss';
 import Avatar from 'boring-avatars';
 import {useState, useEffect} from 'react';
-import {getData} from '../../utils/fetchData'
+import {getData} from '@/utils/fetchData'
 
 
 const UserTable = ({filter, setEditUser, users, editUser}) => {

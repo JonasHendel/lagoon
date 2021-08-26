@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import Toast from './Toast';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearNotify } from '../../store/features/notifySlice';
+import { clearNotify } from '@/store/features/notifySlice';
 
 const Notify = () => {
   const dispatch = useDispatch();

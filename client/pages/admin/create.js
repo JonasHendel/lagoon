@@ -1,5 +1,5 @@
-import CreateUser from '../../components/admin/CreateUser';
-import styles from '../../styles/admin/create.module.scss';
+import CreateUser from '@/components/admin/CreateUser';
+import styles from '@/styles/admin/create.module.scss';
 
 const Create = () => {
   return (

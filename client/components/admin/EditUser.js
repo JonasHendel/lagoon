@@ -1,6 +1,6 @@
-import styles from '../../styles/admin/createUser.module.scss';
-import { useOuterClick } from '../../utils/outerclick';
-import { patchData } from '../../utils/fetchData';
+import styles from '@/styles/admin/createUser.module.scss';
+import { useOuterClick } from '@/utils/outerclick';
+import { patchData } from '@/utils/fetchData';
 import { useEffect, useState } from 'react/cjs/react.development';
 
 const EditUser = ({ editUser, setEditUser, setUsers, users }) => {

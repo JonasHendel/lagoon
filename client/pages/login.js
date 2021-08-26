@@ -6,14 +6,14 @@ import { useRouter } from 'next/router';
 
 import Input from './../components/core/Input';
 import Button from './../components/core/Button';
-import styles from '../styles/modules/Login.module.scss';
+import styles from '@/styles/modules/Login.module.scss';
 import { Box } from 'react-feather';
-import { success, error } from '../store/features/notifySlice';
+import { success, error } from '@/store/features/notifySlice';
 
 //Project files
 import { useSelector, useDispatch } from 'react-redux';
-import { setAuth } from '../store/features/authSlice';
-import { postData } from '../utils/fetchData';
+import { setAuth } from '@/store/features/authSlice';
+import { postData } from '@/utils/fetchData';
 
 const Login = () => {
   const initialState = { email: '', password: '' };

@@ -1,12 +1,12 @@
-import styles from '../styles/components.module.scss';
+import styles from '@/styles/components.module.scss';
 
-import Input from '../components/core/Input';
-import Button from '../components/core/Button';
-import Select from '../components/core/Select';
+import Input from '@/components/core/Input';
+import Button from '@/components/core/Button';
+import Select from '@/components/core/Select';
 
-import Lesson from '../components/calendar/Lesson';
+import Lesson from '@/components/calendar/Lesson';
 import { useContext } from 'react';
-import { DataContext } from '../store/GlobalState';
+import { DataContext } from '@/store/GlobalState';
 
 const Components = () => {
   return (

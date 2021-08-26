@@ -5,9 +5,9 @@ import moment from 'moment';
 import { motion } from 'framer-motion';
 import { User, MapPin } from 'react-feather';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearLesson } from '../../store/features/editLessonSlice';
+import { clearLesson } from '@/store/features/editLessonSlice';
 
-import styles from '../../styles/calendar/Detail.module.scss';
+import styles from '@/styles/calendar/Detail.module.scss';
 
 const EditLesson = () => {
   const [open, setOpen] = useState(false);

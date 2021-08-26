@@ -1,13 +1,13 @@
-import styles from '../../styles/course/CourseNav.module.scss';
+import styles from '@/styles/course/CourseNav.module.scss';
 import Link from 'next/link';
 import { DivideCircle } from 'react-feather';
 import { useState, useEffect } from 'react';
 import { motion, AnimateSharedLayout } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeEdit } from '../../store/features/editSlice';
-import { setPage } from '../../store/features/querySlice';
+import { changeEdit } from '@/store/features/editSlice';
+import { setPage } from '@/store/features/querySlice';
 import { useRouter } from 'next/router';
-import courseQueries from '../../utils/courseQueries';
+import courseQueries from '@/utils/courseQueries';
 
 const CourseNav = ({ course, setPrevPage, list }) => {
   const page = useSelector((state) => state.query.page);

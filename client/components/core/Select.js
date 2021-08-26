@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimateSharedLayout } from 'framer-motion';
-import styles from '../../styles/modules/Select.module.scss';
+import styles from '@/styles/modules/Select.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeEdit } from '../../store/features/editSlice';
+import { changeEdit } from '@/store/features/editSlice';
 const Select = (props) => {
   const [selectedItem, setSelectedItem] = useState(0); // Default View 0 for Week; 1 for Month; 2 for Year
 

@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { success, error } from '../../store/features/notifySlice';
+import { success, error } from '@/store/features/notifySlice';
 import Input from '../core/Input';
-import { useOuterClick } from '../../utils/outerclick';
+import { useOuterClick } from '@/utils/outerclick';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { deleteData, getData, postData } from '../../utils/fetchData';
-import styles from '../../styles/course/Resource.module.scss';
-import courseQueries from '../../utils/courseQueries';
+import { deleteData, getData, postData } from '@/utils/fetchData';
+import styles from '@/styles/course/Resource.module.scss';
+import courseQueries from '@/utils/courseQueries';
 import {
   setResources,
   addFolder,
   arFile,
-} from '../../store/features/resourceSlice';
-import { addFolderToPath, setPath } from '../../store/features/querySlice';
+} from '@/store/features/resourceSlice';
+import { addFolderToPath, setPath } from '@/store/features/querySlice';
 import ResourceNav from './ResourceNav';
 import AddResource from './AddResource';
 

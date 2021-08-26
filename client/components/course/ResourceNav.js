@@ -1,4 +1,4 @@
-import styles from '../../styles/course/Resource.module.scss';
+import styles from '@/styles/course/Resource.module.scss';
 import { ChevronRight, ArrowLeft } from 'react-feather';
 import { motion } from 'framer-motion';
 import Button from '../core/Button';

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import {success} from '../../store/features/notifySlice'
+import {success} from '@/store/features/notifySlice'
 
 const FileViewer = () => {
   const dispatch = useDispatch();

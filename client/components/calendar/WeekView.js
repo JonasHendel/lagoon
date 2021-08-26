@@ -2,7 +2,7 @@ import { useState, useLayoutEffect, useRef } from 'react';
 import moment, { min } from 'moment';
 import Lesson from './Lesson';
 
-import styles from '../../styles/calendar/Calendar.module.scss';
+import styles from '@/styles/calendar/Calendar.module.scss';
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
